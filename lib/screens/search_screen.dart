@@ -8,6 +8,7 @@ import 'package:spotiflac_android/providers/download_queue_provider.dart';
 import 'package:spotiflac_android/providers/playback_provider.dart';
 import 'package:spotiflac_android/providers/settings_provider.dart';
 import 'package:spotiflac_android/widgets/track_collection_quick_actions.dart';
+import 'package:spotiflac_android/utils/clickable_metadata.dart';
 
 class SearchScreen extends ConsumerStatefulWidget {
   final String query;
@@ -186,14 +187,19 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
       subtitle: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            track.artistName,
+          ClickableArtistName(
+            artistName: track.artistName,
+            artistId: track.artistId,
+            coverUrl: track.coverUrl,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: TextStyle(color: colorScheme.onSurfaceVariant),
           ),
-          Text(
-            track.albumName,
+          ClickableAlbumName(
+            albumName: track.albumName,
+            albumId: track.albumId,
+            artistName: track.artistName,
+            coverUrl: track.coverUrl,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: Theme.of(context).textTheme.bodySmall?.copyWith(

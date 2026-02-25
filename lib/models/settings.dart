@@ -141,6 +141,7 @@ class AppSettings {
     // Lyrics providers default order
     this.lyricsProviders = const [
       'lrclib',
+      'spotify_api',
       'musixmatch',
       'netease',
       'apple_music',

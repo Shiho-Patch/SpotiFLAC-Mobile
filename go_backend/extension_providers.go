@@ -631,7 +631,7 @@ func GetProviderPriority() []string {
 	defer providerPriorityMu.RUnlock()
 
 	if len(providerPriority) == 0 {
-		return []string{"tidal", "qobuz", "amazon"}
+		return []string{"tidal", "qobuz", "amazon", "deezer"}
 	}
 
 	result := make([]string, len(providerPriority))
@@ -1147,6 +1147,24 @@ func tryBuiltInProvider(providerID string, req DownloadRequest) (*DownloadRespon
 			}
 		}
 		err = amazonErr
+	case "deezer":
+		deezerResult, deezerErr := downloadFromDeezer(req)
+		if deezerErr == nil {
+			result = DownloadResult{
+				FilePath:    deezerResult.FilePath,
+				BitDepth:    deezerResult.BitDepth,
+				SampleRate:  deezerResult.SampleRate,
+				Title:       deezerResult.Title,
+				Artist:      deezerResult.Artist,
+				Album:       deezerResult.Album,
+				ReleaseDate: deezerResult.ReleaseDate,
+				TrackNumber: deezerResult.TrackNumber,
+				DiscNumber:  deezerResult.DiscNumber,
+				ISRC:        deezerResult.ISRC,
+				LyricsLRC:   deezerResult.LyricsLRC,
+			}
+		}
+		err = deezerErr
 	default:
 		return nil, fmt.Errorf("unknown built-in provider: %s", providerID)
 	}

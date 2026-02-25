@@ -65,7 +65,14 @@ AppSettings _$AppSettingsFromJson(Map<String, dynamic> json) => AppSettings(
       (json['lyricsProviders'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList() ??
-      const ['lrclib', 'musixmatch', 'netease', 'apple_music', 'qqmusic'],
+      const [
+        'lrclib',
+        'spotify_api',
+        'musixmatch',
+        'netease',
+        'apple_music',
+        'qqmusic',
+      ],
   lyricsIncludeTranslationNetease:
       json['lyricsIncludeTranslationNetease'] as bool? ?? false,
   lyricsIncludeRomanizationNetease:

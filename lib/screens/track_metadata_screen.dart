@@ -3043,6 +3043,7 @@ class _TrackMetadataScreenState extends ConsumerState<TrackMetadataScreen> {
   ) {
     showDialog(
       context: context,
+      useRootNavigator: false,
       builder: (context) => AlertDialog(
         title: Text(context.l10n.trackDeleteConfirmTitle),
         content: Text(context.l10n.trackDeleteConfirmMessage),

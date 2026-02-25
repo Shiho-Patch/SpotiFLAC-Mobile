@@ -28,6 +28,7 @@ import 'package:spotiflac_android/screens/track_metadata_screen.dart';
 import 'package:spotiflac_android/screens/downloaded_album_screen.dart';
 import 'package:spotiflac_android/screens/library_tracks_folder_screen.dart';
 import 'package:spotiflac_android/screens/local_album_screen.dart';
+import 'package:spotiflac_android/utils/clickable_metadata.dart';
 
 enum LibraryItemSource { downloaded, local }
 
@@ -3182,14 +3183,16 @@ class _QueueTabState extends ConsumerState<QueueTab> {
                     left: 0,
                     top: 0,
                     right: 0,
-                    child: AspectRatio(
-                      aspectRatio: 1,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: isSelected
-                              ? colorScheme.primary.withValues(alpha: 0.3)
-                              : Colors.transparent,
-                          borderRadius: BorderRadius.circular(8),
+                    child: IgnorePointer(
+                      child: AspectRatio(
+                        aspectRatio: 1,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: isSelected
+                                ? colorScheme.primary.withValues(alpha: 0.3)
+                                : Colors.transparent,
+                            borderRadius: BorderRadius.circular(8),
+                          ),
                         ),
                       ),
                     ),
@@ -3198,26 +3201,28 @@ class _QueueTabState extends ConsumerState<QueueTab> {
                   Positioned(
                     top: 4,
                     right: 4,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: isSelected
-                            ? colorScheme.primary
-                            : colorScheme.surface.withValues(alpha: 0.85),
-                        shape: BoxShape.circle,
-                        border: Border.all(
+                    child: IgnorePointer(
+                      child: Container(
+                        decoration: BoxDecoration(
                           color: isSelected
                               ? colorScheme.primary
-                              : colorScheme.outline,
-                          width: 2,
+                              : colorScheme.surface.withValues(alpha: 0.85),
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                            color: isSelected
+                                ? colorScheme.primary
+                                : colorScheme.outline,
+                            width: 2,
+                          ),
                         ),
+                        child: isSelected
+                            ? Icon(
+                                Icons.check,
+                                size: 16,
+                                color: colorScheme.onPrimary,
+                              )
+                            : const SizedBox(width: 16, height: 16),
                       ),
-                      child: isSelected
-                          ? Icon(
-                              Icons.check,
-                              size: 16,
-                              color: colorScheme.onPrimary,
-                            )
-                          : const SizedBox(width: 16, height: 16),
                     ),
                   ),
               ],
@@ -3289,28 +3294,32 @@ class _QueueTabState extends ConsumerState<QueueTab> {
             child: Row(
               children: [
                 if (_isPlaylistSelectionMode)
-                  Padding(
-                    padding: const EdgeInsets.only(left: 8),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: isSelected
-                            ? colorScheme.primary
-                            : Colors.transparent,
-                        shape: BoxShape.circle,
-                        border: Border.all(
+                  GestureDetector(
+                    onTap: () => _togglePlaylistSelection(playlist.id),
+                    behavior: HitTestBehavior.opaque,
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 8),
+                      child: Container(
+                        decoration: BoxDecoration(
                           color: isSelected
                               ? colorScheme.primary
-                              : colorScheme.outline,
-                          width: 2,
+                              : Colors.transparent,
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                            color: isSelected
+                                ? colorScheme.primary
+                                : colorScheme.outline,
+                            width: 2,
+                          ),
                         ),
+                        child: isSelected
+                            ? Icon(
+                                Icons.check,
+                                size: 18,
+                                color: colorScheme.onPrimary,
+                              )
+                            : const SizedBox(width: 18, height: 18),
                       ),
-                      child: isSelected
-                          ? Icon(
-                              Icons.check,
-                              size: 18,
-                              color: colorScheme.onPrimary,
-                            )
-                          : const SizedBox(width: 18, height: 18),
                     ),
                   ),
                 Expanded(
@@ -4000,8 +4009,9 @@ class _QueueTabState extends ConsumerState<QueueTab> {
               context,
             ).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
           ),
-          Text(
-            album.artistName,
+          ClickableArtistName(
+            artistName: album.artistName,
+            coverUrl: album.coverUrl,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: Theme.of(context).textTheme.bodySmall?.copyWith(
@@ -4106,8 +4116,8 @@ class _QueueTabState extends ConsumerState<QueueTab> {
               context,
             ).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
           ),
-          Text(
-            album.artistName,
+          ClickableArtistName(
+            artistName: album.artistName,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: Theme.of(context).textTheme.bodySmall?.copyWith(
@@ -5139,8 +5149,10 @@ class _QueueTabState extends ConsumerState<QueueTab> {
                       ),
                     ),
                     const SizedBox(height: 2),
-                    Text(
-                      item.track.artistName,
+                    ClickableArtistName(
+                      artistName: item.track.artistName,
+                      artistId: item.track.artistId,
+                      coverUrl: item.track.coverUrl,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
@@ -5656,8 +5668,9 @@ class _QueueTabState extends ConsumerState<QueueTab> {
                       ),
                     ),
                     const SizedBox(height: 2),
-                    Text(
-                      item.artistName,
+                    ClickableArtistName(
+                      artistName: item.artistName,
+                      coverUrl: item.coverUrl,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
@@ -5936,8 +5949,9 @@ class _QueueTabState extends ConsumerState<QueueTab> {
                   context,
                 ).textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w500),
               ),
-              Text(
-                item.artistName,
+              ClickableArtistName(
+                artistName: item.artistName,
+                coverUrl: item.coverUrl,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: Theme.of(context).textTheme.labelSmall?.copyWith(

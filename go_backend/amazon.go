@@ -45,7 +45,7 @@ type AfkarXYZResponse struct {
 	} `json:"data"`
 }
 
-// AmazonStreamResponse is the new response format from amazon.afkarxyz.fun/api/track/{asin}
+// AmazonStreamResponse is the new response format from amzn.afkarxyz.fun/api/track/{asin}
 type AmazonStreamResponse struct {
 	StreamURL     string `json:"streamUrl"`
 	DecryptionKey string `json:"decryptionKey"`
@@ -179,7 +179,7 @@ func (a *AmazonDownloader) doAfkarXYZRequestNew(asin string) (string, string, st
 	ctx, cancel := context.WithTimeout(context.Background(), amazonAPITimeoutMobile)
 	defer cancel()
 
-	apiURL := fmt.Sprintf("https://amazon.afkarxyz.fun/api/track/%s", asin)
+	apiURL := fmt.Sprintf("https://amzn.afkarxyz.fun/api/track/%s", asin)
 	req, err := http.NewRequestWithContext(ctx, "GET", apiURL, nil)
 	if err != nil {
 		return "", "", "", fmt.Errorf("failed to create request: %w", err)
@@ -193,13 +193,13 @@ func (a *AmazonDownloader) doAfkarXYZRequestNew(asin string) (string, string, st
 	}
 	defer resp.Body.Close()
 
-	if resp.StatusCode != 200 {
-		return "", "", "", fmt.Errorf("Amazon API returned status %d", resp.StatusCode)
+	body, readErr := io.ReadAll(resp.Body)
+	if readErr != nil {
+		return "", "", "", fmt.Errorf("failed to read response: %w", readErr)
 	}
 
-	body, err := io.ReadAll(resp.Body)
-	if err != nil {
-		return "", "", "", fmt.Errorf("failed to read response: %w", err)
+	if resp.StatusCode != 200 {
+		return "", "", "", fmt.Errorf("Amazon API returned status %d", resp.StatusCode)
 	}
 
 	var apiResp AmazonStreamResponse
@@ -219,7 +219,7 @@ func (a *AmazonDownloader) doAfkarXYZRequestLegacy(amazonURL string) (string, st
 	ctx, cancel := context.WithTimeout(context.Background(), amazonAPITimeoutMobile)
 	defer cancel()
 
-	apiURL := "https://amazon.afkarxyz.fun/convert?url=" + url.QueryEscape(amazonURL)
+	apiURL := "https://amzn.afkarxyz.fun/convert?url=" + url.QueryEscape(amazonURL)
 	req, err := http.NewRequestWithContext(ctx, "GET", apiURL, nil)
 	if err != nil {
 		return "", "", "", fmt.Errorf("failed to create legacy request: %w", err)

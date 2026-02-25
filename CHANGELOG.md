@@ -1,5 +1,34 @@
 # Changelog
 
+## [4.0.1] - 2026-02-25
+
+### Added
+- **Clickable Metadata Navigation**: Added reusable `ClickableArtistName` and `ClickableAlbumName`
+- **Love Action in Media Notification**: Added custom notification action (`toggle_love`) with new Android favorite/favorite-border status icons
+
+### Changed
+
+- **Track Metadata Model Expansion**: `Track` now carries `artistId` and `albumId`, propagated across search, queue, playback, CSV import, and extension mapping flows
+- **Full-Screen Player UX**: Top bar now supports swipe-down dismiss; artist/album text is now tappable; and in-player love toggle is available next to track metadata
+- **Playlist Picker Flow Refactor**: Reworked playlist picker sheet into stateful multi-select flow with explicit Done action and improved create-playlist handling
+- **CSV Import Interaction Flow**: Added single-flight import guard, more reliable progress dialog lifecycle, and safer local navigator usage
+- **Amazon API Host Fallback**: Amazon metadata fetch now tries `amazon.afkarxyz.fun` and falls back to `amzn.afkarxyz.fun`
+- **Qobuz URL Resolution Strategy**: Removed legacy/Jumo fallback path; now uses standard API pool (deeb)
+- **Update Checker Asset Targeting**: Update selection now prioritizes arm64/universal assets only
+- **Donate Page Supporters**: Updated highlighted donor/supporter list entries
+
+### Fixed
+
+- **FLAC External Lyrics Output**: External `.lrc` writing now works consistently for lyrics mode `external`/`both`, with SAF conversion paths avoiding duplicate writes
+- **Loved-State Notification Sync**: Playback notification controls now refresh correctly when loved state changes
+- **Queue Selection Touch Handling**: Selection overlays/check indicators no longer block tap gestures in queue and playlist selection modes
+- **Vorbis-to-ID3 Tag Mapping Robustness**: FFmpeg metadata conversion now normalizes keys and handles aliases like `TRCK` and `TPOS`
+- **Nested Dialog Navigation Safety**: Adjusted dialog navigator scope in CSV import and track-delete flows to prevent navigator mismatch issues
+- **Artist/Album Routing Reliability**: Track metadata routing now reuses resolved artist/album IDs across album/artist/home/search/queue/player surfaces
+- **Release Workflow Go Toolchain**: Pinned CI release workflow Go version to `1.25.7` for consistent build behavior
+
+---
+
 ## [4.0.0] - 2026-02-22
 
 > **Major update warning:** This release introduces a large streaming-focused refactor and broad cross-app behavior changes.

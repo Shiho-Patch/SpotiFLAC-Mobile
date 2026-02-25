@@ -109,6 +109,8 @@ class _PlaylistScreenState extends ConsumerState<PlaylistScreen> {
       artistName: (data['artists'] ?? data['artist'] ?? '').toString(),
       albumName: (data['album_name'] ?? data['album'] ?? '').toString(),
       albumArtist: data['album_artist']?.toString(),
+      artistId: data['artist_id']?.toString(),
+      albumId: data['album_id']?.toString(),
       coverUrl: (data['cover_url'] ?? data['images'])?.toString(),
       isrc: data['isrc']?.toString(),
       duration: (durationMs / 1000).round(),

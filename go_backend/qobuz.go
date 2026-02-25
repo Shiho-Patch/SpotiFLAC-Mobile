@@ -367,7 +367,6 @@ func (q *QobuzDownloader) GetAvailableAPIs() []string {
 	encodedAPIs := []string{
 		"ZGFiLnllZXQuc3UvYXBpL3N0cmVhbT90cmFja0lkPQ==",
 		"ZGFibXVzaWMueHl6L2FwaS9zdHJlYW0/dHJhY2tJZD0=",
-		"cW9idXouc3F1aWQud3RmL2FwaS9kb3dubG9hZC1tdXNpYz90cmFja19pZD0=",
 	}
 
 	var apis []string
@@ -380,30 +379,6 @@ func (q *QobuzDownloader) GetAvailableAPIs() []string {
 	}
 
 	return apis
-}
-
-func mapJumoQuality(quality string) int {
-	switch quality {
-	case "6":
-		return 6
-	case "7":
-		return 7
-	case "27":
-		return 27
-	default:
-		return 6
-	}
-}
-
-func decodeXOR(data []byte) string {
-	text := string(data)
-	runes := []rune(text)
-	result := make([]rune, len(runes))
-	for i, char := range runes {
-		key := rune((i * 17) % 128)
-		result[i] = char ^ 253 ^ key
-	}
-	return string(result)
 }
 
 func extractQobuzDownloadURLFromBody(body []byte) (string, error) {
@@ -440,64 +415,6 @@ func extractQobuzDownloadURLFromBody(body []byte) (string, error) {
 	}
 
 	return "", fmt.Errorf("no download URL in response")
-}
-
-func (q *QobuzDownloader) downloadFromJumo(trackID int64, quality string) (string, error) {
-	formatID := mapJumoQuality(quality)
-	region := "US"
-	jumoURL := fmt.Sprintf("https://jumo-dl.pages.dev/get?track_id=%d&format_id=%d&region=%s", trackID, formatID, region)
-
-	GoLog("[Qobuz] Trying Jumo API fallback...\n")
-
-	client := NewHTTPClientWithTimeout(30 * time.Second)
-	req, err := http.NewRequest("GET", jumoURL, nil)
-	if err != nil {
-		return "", err
-	}
-	req.Header.Set("User-Agent", getRandomUserAgent())
-	req.Header.Set("Referer", "https://jumo-dl.pages.dev/")
-
-	resp, err := client.Do(req)
-	if err != nil {
-		return "", err
-	}
-	defer resp.Body.Close()
-
-	if resp.StatusCode != 200 {
-		return "", fmt.Errorf("Jumo API returned HTTP %d", resp.StatusCode)
-	}
-
-	body, err := io.ReadAll(resp.Body)
-	if err != nil {
-		return "", err
-	}
-
-	var result map[string]any
-	if err := json.Unmarshal(body, &result); err != nil {
-		decoded := decodeXOR(body)
-		if err := json.Unmarshal([]byte(decoded), &result); err != nil {
-			return "", fmt.Errorf("failed to parse Jumo response (plain or XOR): %w", err)
-		}
-	}
-
-	if urlVal, ok := result["url"].(string); ok && urlVal != "" {
-		GoLog("[Qobuz] Jumo API returned URL successfully\n")
-		return urlVal, nil
-	}
-
-	if data, ok := result["data"].(map[string]any); ok {
-		if urlVal, ok := data["url"].(string); ok && urlVal != "" {
-			GoLog("[Qobuz] Jumo API returned URL successfully (from data)\n")
-			return urlVal, nil
-		}
-	}
-
-	if linkVal, ok := result["link"].(string); ok && linkVal != "" {
-		GoLog("[Qobuz] Jumo API returned URL successfully (from link)\n")
-		return linkVal, nil
-	}
-
-	return "", fmt.Errorf("URL not found in Jumo response")
 }
 
 func (q *QobuzDownloader) SearchTrackByISRC(isrc string) (*QobuzTrack, error) {
@@ -970,34 +887,43 @@ func (q *QobuzDownloader) GetDownloadURL(trackID int64, quality string) (string,
 		return "", fmt.Errorf("no Qobuz API available")
 	}
 
-	_, downloadURL, err := getQobuzDownloadURLParallel(apis, trackID, quality)
+	qualityCode := strings.TrimSpace(quality)
+	if qualityCode == "" || qualityCode == "5" {
+		qualityCode = "6"
+	}
+
+	downloadFunc := func(qual string) (string, error) {
+		_, downloadURL, err := getQobuzDownloadURLParallel(apis, trackID, qual)
+		if err != nil {
+			return "", err
+		}
+		return downloadURL, nil
+	}
+
+	downloadURL, err := downloadFunc(qualityCode)
 	if err == nil {
 		return downloadURL, nil
 	}
 
-	GoLog("[Qobuz] Standard APIs failed, trying Jumo fallback...\n")
-	jumoURL, jumoErr := q.downloadFromJumo(trackID, quality)
-	if jumoErr == nil {
-		return jumoURL, nil
-	}
-
-	if quality == "27" {
+	currentQuality := qualityCode
+	if currentQuality == "27" {
 		GoLog("[Qobuz] Hi-res (27) failed, trying 24-bit (7)...\n")
-		jumoURL, jumoErr = q.downloadFromJumo(trackID, "7")
-		if jumoErr == nil {
-			return jumoURL, nil
+		downloadURL, err = downloadFunc("7")
+		if err == nil {
+			return downloadURL, nil
 		}
+		currentQuality = "7"
 	}
 
-	if quality == "27" || quality == "7" {
+	if currentQuality == "7" {
 		GoLog("[Qobuz] 24-bit failed, trying 16-bit (6)...\n")
-		jumoURL, jumoErr = q.downloadFromJumo(trackID, "6")
-		if jumoErr == nil {
-			return jumoURL, nil
+		downloadURL, err = downloadFunc("6")
+		if err == nil {
+			return downloadURL, nil
 		}
 	}
 
-	return "", fmt.Errorf("all Qobuz APIs and Jumo fallback failed: %w", err)
+	return "", fmt.Errorf("all Qobuz APIs failed: %w", err)
 }
 
 func (q *QobuzDownloader) DownloadFile(downloadURL, outputPath string, outputFD int, itemID string) error {

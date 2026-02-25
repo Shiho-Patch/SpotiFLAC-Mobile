@@ -19,6 +19,7 @@ import 'package:spotiflac_android/screens/home_tab.dart'
     show ExtensionAlbumScreen;
 import 'package:spotiflac_android/widgets/download_service_picker.dart';
 import 'package:spotiflac_android/widgets/track_collection_quick_actions.dart';
+import 'package:spotiflac_android/utils/clickable_metadata.dart';
 
 /// Simple in-memory cache for artist data
 class _ArtistCache {
@@ -310,6 +311,8 @@ class _ArtistScreenState extends ConsumerState<ArtistScreen> {
       artistName: (data['artists'] ?? data['artist'] ?? '').toString(),
       albumName: (data['album_name'] ?? data['album'] ?? '').toString(),
       albumArtist: data['album_artist']?.toString(),
+      artistId: data['artist_id']?.toString() ?? widget.artistId,
+      albumId: data['album_id']?.toString(),
       coverUrl: (data['cover_url'] ?? data['images'])?.toString(),
       isrc: data['isrc']?.toString(),
       duration: (durationMs / 1000).round(),
@@ -1099,6 +1102,8 @@ class _ArtistScreenState extends ConsumerState<ArtistScreen> {
               .toString(),
       albumName: album.name,
       albumArtist: widget.artistName,
+      artistId: widget.artistId,
+      albumId: album.id.isNotEmpty ? album.id : null,
       coverUrl: album.coverUrl,
       isrc: data['isrc']?.toString(),
       duration: (durationMs / 1000).round(),
@@ -1461,8 +1466,12 @@ class _ArtistScreenState extends ConsumerState<ArtistScreen> {
                         overflow: TextOverflow.ellipsis,
                       ),
                       if (track.albumName.isNotEmpty)
-                        Text(
-                          track.albumName,
+                        ClickableAlbumName(
+                          albumName: track.albumName,
+                          albumId: track.albumId,
+                          artistName: track.artistName,
+                          coverUrl: track.coverUrl,
+                          extensionId: widget.extensionId,
                           style: Theme.of(context).textTheme.bodySmall
                               ?.copyWith(color: colorScheme.onSurfaceVariant),
                           maxLines: 1,

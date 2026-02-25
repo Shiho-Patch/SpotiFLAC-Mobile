@@ -1524,6 +1524,7 @@ class _DownloadSettingsPageState extends ConsumerState<DownloadSettingsPage> {
   }
 
   static const _providerDisplayNames = <String, String>{
+    'spotify_api': 'Spotify Lyrics API',
     'lrclib': 'LRCLIB',
     'netease': 'Netease',
     'musixmatch': 'Musixmatch',

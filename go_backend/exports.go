@@ -497,6 +497,24 @@ func DownloadTrack(requestJSON string) (string, error) {
 			}
 		}
 		err = amazonErr
+	case "deezer":
+		deezerResult, deezerErr := downloadFromDeezer(req)
+		if deezerErr == nil {
+			result = DownloadResult{
+				FilePath:    deezerResult.FilePath,
+				BitDepth:    deezerResult.BitDepth,
+				SampleRate:  deezerResult.SampleRate,
+				Title:       deezerResult.Title,
+				Artist:      deezerResult.Artist,
+				Album:       deezerResult.Album,
+				ReleaseDate: deezerResult.ReleaseDate,
+				TrackNumber: deezerResult.TrackNumber,
+				DiscNumber:  deezerResult.DiscNumber,
+				ISRC:        deezerResult.ISRC,
+				LyricsLRC:   deezerResult.LyricsLRC,
+			}
+		}
+		err = deezerErr
 	case "youtube":
 		youtubeResult, youtubeErr := downloadFromYouTube(req)
 		if youtubeErr == nil {
@@ -622,7 +640,7 @@ func DownloadWithFallback(requestJSON string) (string, error) {
 
 	enrichRequestExtendedMetadata(&req)
 
-	allServices := []string{"tidal", "qobuz", "amazon"}
+	allServices := []string{"tidal", "qobuz", "amazon", "deezer"}
 	preferredService := req.Service
 	if preferredService == "" {
 		preferredService = "tidal"
@@ -710,6 +728,26 @@ func DownloadWithFallback(requestJSON string) (string, error) {
 				GoLog("[DownloadWithFallback] Amazon error: %v\n", amazonErr)
 			}
 			err = amazonErr
+		case "deezer":
+			deezerResult, deezerErr := downloadFromDeezer(req)
+			if deezerErr == nil {
+				result = DownloadResult{
+					FilePath:    deezerResult.FilePath,
+					BitDepth:    deezerResult.BitDepth,
+					SampleRate:  deezerResult.SampleRate,
+					Title:       deezerResult.Title,
+					Artist:      deezerResult.Artist,
+					Album:       deezerResult.Album,
+					ReleaseDate: deezerResult.ReleaseDate,
+					TrackNumber: deezerResult.TrackNumber,
+					DiscNumber:  deezerResult.DiscNumber,
+					ISRC:        deezerResult.ISRC,
+					LyricsLRC:   deezerResult.LyricsLRC,
+				}
+			} else if !errors.Is(deezerErr, ErrDownloadCancelled) {
+				GoLog("[DownloadWithFallback] Deezer error: %v\n", deezerErr)
+			}
+			err = deezerErr
 		}
 
 		if err != nil && errors.Is(err, ErrDownloadCancelled) {

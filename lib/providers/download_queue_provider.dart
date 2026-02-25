@@ -2050,6 +2050,8 @@ class DownloadQueueNotifier extends Notifier<DownloadQueueState> {
       artistName: baseTrack.artistName,
       albumName: backendAlbum ?? baseTrack.albumName,
       albumArtist: resolvedAlbumArtist,
+      artistId: baseTrack.artistId,
+      albumId: baseTrack.albumId,
       coverUrl: baseTrack.coverUrl,
       duration: baseTrack.duration,
       isrc: baseTrack.isrc,
@@ -2069,6 +2071,7 @@ class DownloadQueueNotifier extends Notifier<DownloadQueueState> {
     String? genre,
     String? label,
     String? copyright,
+    bool writeExternalLrc = true,
   }) async {
     final settings = ref.read(settingsProvider);
     if (!settings.embedMetadata) {
@@ -2158,12 +2161,17 @@ class DownloadQueueNotifier extends Notifier<DownloadQueueState> {
       final shouldEmbedLyrics =
           settings.embedLyrics &&
           (lyricsMode == 'embed' || lyricsMode == 'both');
+      final shouldSaveExternalLyrics =
+          settings.embedLyrics &&
+          (lyricsMode == 'external' || lyricsMode == 'both');
+      final shouldFetchLyrics = shouldEmbedLyrics || shouldSaveExternalLyrics;
+      String? lrcContent;
 
-      if (shouldEmbedLyrics) {
+      if (shouldFetchLyrics) {
         try {
           final durationMs = track.duration * 1000;
 
-          final lrcContent = await PlatformBridge.getLyricsLRC(
+          final fetchedLrc = await PlatformBridge.getLyricsLRC(
             track.id,
             track.name,
             track.artistName,
@@ -2171,20 +2179,46 @@ class DownloadQueueNotifier extends Notifier<DownloadQueueState> {
             durationMs: durationMs,
           );
 
-          if (lrcContent.isNotEmpty && lrcContent != '[instrumental:true]') {
-            metadata['LYRICS'] = lrcContent;
-            metadata['UNSYNCEDLYRICS'] = lrcContent;
-            _log.d('Lyrics fetched for embedding (${lrcContent.length} chars)');
-          } else if (lrcContent == '[instrumental:true]') {
-            _log.d('Track is instrumental, skipping lyrics embedding');
+          if (fetchedLrc.isNotEmpty && fetchedLrc != '[instrumental:true]') {
+            lrcContent = fetchedLrc;
+            _log.d('Lyrics fetched for FLAC (${fetchedLrc.length} chars)');
+          } else if (fetchedLrc == '[instrumental:true]') {
+            _log.d('Track is instrumental, skipping lyrics handling');
+          } else {
+            _log.d('No lyrics returned for FLAC download');
           }
         } catch (e) {
-          _log.w('Failed to fetch lyrics for embedding: $e');
+          _log.w('Failed to fetch lyrics for FLAC: $e');
+        }
+      }
+
+      if (shouldEmbedLyrics) {
+        if (lrcContent != null) {
+          metadata['LYRICS'] = lrcContent;
+          metadata['UNSYNCEDLYRICS'] = lrcContent;
+          _log.d('Lyrics added to FLAC metadata');
+        } else {
+          _log.d('No lyrics available for FLAC embedding');
         }
       } else {
         metadata['LYRICS'] = '';
         metadata['UNSYNCEDLYRICS'] = '';
-        _log.d('Lyrics embedding disabled by settings, skipping lyric fetch');
+        _log.d(
+          'Lyrics embedding disabled by settings, skipping lyric embedding',
+        );
+      }
+
+      if (writeExternalLrc && shouldSaveExternalLyrics && lrcContent != null) {
+        try {
+          final replacedPath = flacPath.replaceAll(RegExp(r'\.[^.]+$'), '.lrc');
+          final lrcPath = replacedPath == flacPath
+              ? '$flacPath.lrc'
+              : replacedPath;
+          await File(lrcPath).writeAsString(lrcContent);
+          _log.d('External LRC file saved: $lrcPath');
+        } catch (e) {
+          _log.w('Failed to save external LRC file for FLAC: $e');
+        }
       }
 
       _log.d('Generating tags for FLAC: $metadata');
@@ -2922,6 +2956,10 @@ class DownloadQueueNotifier extends Notifier<DownloadQueueState> {
                     (data['album_name'] as String?) ??
                     trackToDownload.albumName,
                 albumArtist: data['album_artist'] as String?,
+                artistId:
+                    data['artist_id']?.toString() ?? trackToDownload.artistId,
+                albumId:
+                    data['album_id']?.toString() ?? trackToDownload.albumId,
                 coverUrl: data['images'] as String?,
                 duration:
                     ((data['duration_ms'] as int?) ??
@@ -3128,6 +3166,8 @@ class DownloadQueueNotifier extends Notifier<DownloadQueueState> {
                 artistName: trackToDownload.artistName,
                 albumName: trackToDownload.albumName,
                 albumArtist: trackToDownload.albumArtist,
+                artistId: trackToDownload.artistId,
+                albumId: trackToDownload.albumId,
                 coverUrl: trackToDownload.coverUrl,
                 duration: trackToDownload.duration,
                 isrc: (deezerIsrc != null && _isValidISRC(deezerIsrc))
@@ -3642,6 +3682,7 @@ class DownloadQueueNotifier extends Notifier<DownloadQueueState> {
                         genre: backendGenre ?? genre,
                         label: backendLabel ?? label,
                         copyright: backendCopyright,
+                        writeExternalLrc: false,
                       );
 
                       final newFileName = '${safBaseName ?? 'track'}.flac';
@@ -3866,6 +3907,7 @@ class DownloadQueueNotifier extends Notifier<DownloadQueueState> {
                 genre: backendGenre ?? genre,
                 label: backendLabel ?? label,
                 copyright: backendCopyright,
+                writeExternalLrc: false,
               );
 
               final newFileName = '${safBaseName ?? 'track'}.flac';

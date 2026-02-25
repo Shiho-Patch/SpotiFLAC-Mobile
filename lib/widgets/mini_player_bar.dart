@@ -9,6 +9,7 @@ import 'package:spotiflac_android/l10n/l10n.dart';
 import 'package:spotiflac_android/models/playback_item.dart';
 import 'package:spotiflac_android/models/track.dart';
 import 'package:spotiflac_android/providers/download_queue_provider.dart';
+import 'package:spotiflac_android/providers/library_collections_provider.dart';
 import 'package:spotiflac_android/providers/playback_provider.dart';
 import 'package:spotiflac_android/providers/playback_provider.dart'
     as playback_types
@@ -16,6 +17,7 @@ import 'package:spotiflac_android/providers/playback_provider.dart'
 import 'package:spotiflac_android/providers/settings_provider.dart';
 import 'package:spotiflac_android/services/cover_cache_manager.dart';
 import 'package:spotiflac_android/widgets/download_service_picker.dart';
+import 'package:spotiflac_android/utils/clickable_metadata.dart';
 
 // ─── Mini Player Bar ─────────────────────────────────────────────────────────
 class MiniPlayerBar extends ConsumerWidget {
@@ -79,8 +81,10 @@ class MiniPlayerBar extends ConsumerWidget {
                           style: Theme.of(context).textTheme.bodyMedium
                               ?.copyWith(fontWeight: FontWeight.w600),
                         ),
-                        Text(
-                          item.artist,
+                        ClickableArtistName(
+                          artistName: item.artist,
+                          artistId: item.track?.artistId,
+                          coverUrl: item.coverUrl.isNotEmpty ? item.coverUrl : null,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: Theme.of(context).textTheme.bodySmall
@@ -208,6 +212,7 @@ class _FullScreenPlayerState extends ConsumerState<_FullScreenPlayer> {
   late final PageController _pageController;
   bool _isScrubbing = false;
   double _scrubSeconds = 0;
+  double _topBarDragOffset = 0;
   String? _lastLyricsPrefetchKey;
   AppLifecycleListener? _appLifecycleListener;
   bool _isAppResumed = true;
@@ -278,6 +283,21 @@ class _FullScreenPlayerState extends ConsumerState<_FullScreenPlayer> {
     );
   }
 
+  void _handleTopBarDragUpdate(DragUpdateDetails details) {
+    final delta = details.primaryDelta ?? 0;
+    if (delta <= 0) return;
+    _topBarDragOffset += delta;
+  }
+
+  void _handleTopBarDragEnd(DragEndDetails details) {
+    final swipeVelocity = details.primaryVelocity ?? 0;
+    final shouldDismiss = _topBarDragOffset > 72 || swipeVelocity > 900;
+    _topBarDragOffset = 0;
+    if (!shouldDismiss) return;
+    if (!mounted) return;
+    Navigator.of(context).pop();
+  }
+
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(playbackProvider);
@@ -341,97 +361,102 @@ class _FullScreenPlayerState extends ConsumerState<_FullScreenPlayer> {
                 child: Column(
                   children: [
                     // ── Top bar (close + title + lyrics toggle)
-                    Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 8,
-                        vertical: isCompactLayout ? 2 : 4,
-                      ),
-                      child: Row(
-                        children: [
-                          // ── Left side
-                          Expanded(
-                            child: Align(
-                              alignment: Alignment.centerLeft,
-                              child: IconButton(
-                                icon: const Icon(
-                                  Icons.keyboard_arrow_down_rounded,
-                                  size: 30,
-                                ),
-                                visualDensity: isCompactLayout
-                                    ? VisualDensity.compact
-                                    : VisualDensity.standard,
-                                onPressed: () => Navigator.of(context).pop(),
-                                tooltip: 'Close',
-                              ),
-                            ),
-                          ),
-                          // ── Center: Queue info
-                          if (state.queue.length > 1)
-                            GestureDetector(
-                              onTap: () => _showQueueSheet(context, ref),
-                              child: Container(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 12,
-                                  vertical: 4,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: colorScheme.primaryContainer
-                                      .withValues(alpha: 0.5),
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Icon(
-                                      Icons.queue_music_rounded,
-                                      size: 16,
-                                      color: colorScheme.onPrimaryContainer,
-                                    ),
-                                    const SizedBox(width: 6),
-                                    Text(
-                                      '$queuePositionLabel / ${state.queue.length}',
-                                      style: textTheme.labelMedium?.copyWith(
-                                        color: colorScheme.onPrimaryContainer,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          // ── Right side
-                          Expanded(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                if (!item.isLocal && item.track != null)
-                                  _DownloadButton(
-                                    item: item,
-                                    compact: isCompactLayout,
+                    GestureDetector(
+                      behavior: HitTestBehavior.opaque,
+                      onVerticalDragUpdate: _handleTopBarDragUpdate,
+                      onVerticalDragEnd: _handleTopBarDragEnd,
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 8,
+                          vertical: isCompactLayout ? 2 : 4,
+                        ),
+                        child: Row(
+                          children: [
+                            // ── Left side
+                            Expanded(
+                              child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: IconButton(
+                                  icon: const Icon(
+                                    Icons.keyboard_arrow_down_rounded,
+                                    size: 30,
                                   ),
-                                IconButton(
                                   visualDensity: isCompactLayout
                                       ? VisualDensity.compact
                                       : VisualDensity.standard,
-                                  icon: Icon(
-                                    Icons.lyrics_outlined,
-                                    color: _currentPage == 1
-                                        ? colorScheme.primary
-                                        : colorScheme.onSurfaceVariant,
-                                  ),
-                                  onPressed: () {
-                                    if (_currentPage == 0) {
-                                      _switchToLyrics();
-                                    } else {
-                                      _switchToCover();
-                                    }
-                                  },
-                                  tooltip: 'Lyrics',
+                                  onPressed: () => Navigator.of(context).pop(),
+                                  tooltip: 'Close',
                                 ),
-                              ],
+                              ),
                             ),
-                          ),
-                        ],
+                            // ── Center: Queue info
+                            if (state.queue.length > 1)
+                              GestureDetector(
+                                onTap: () => _showQueueSheet(context, ref),
+                                child: Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 12,
+                                    vertical: 4,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: colorScheme.primaryContainer
+                                        .withValues(alpha: 0.5),
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Icon(
+                                        Icons.queue_music_rounded,
+                                        size: 16,
+                                        color: colorScheme.onPrimaryContainer,
+                                      ),
+                                      const SizedBox(width: 6),
+                                      Text(
+                                        '$queuePositionLabel / ${state.queue.length}',
+                                        style: textTheme.labelMedium?.copyWith(
+                                          color: colorScheme.onPrimaryContainer,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            // ── Right side
+                            Expanded(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  if (!item.isLocal && item.track != null)
+                                    _DownloadButton(
+                                      item: item,
+                                      compact: isCompactLayout,
+                                    ),
+                                  IconButton(
+                                    visualDensity: isCompactLayout
+                                        ? VisualDensity.compact
+                                        : VisualDensity.standard,
+                                    icon: Icon(
+                                      Icons.lyrics_outlined,
+                                      color: _currentPage == 1
+                                          ? colorScheme.primary
+                                          : colorScheme.onSurfaceVariant,
+                                    ),
+                                    onPressed: () {
+                                      if (_currentPage == 0) {
+                                        _switchToLyrics();
+                                      } else {
+                                        _switchToCover();
+                                      }
+                                    },
+                                    tooltip: 'Lyrics',
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
 
@@ -487,45 +512,89 @@ class _FullScreenPlayerState extends ConsumerState<_FullScreenPlayer> {
                       padding: EdgeInsets.symmetric(
                         horizontal: horizontalPadding,
                       ),
-                      child: Column(
+                      child: Row(
                         children: [
-                          Text(
-                            item.title,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            textAlign: TextAlign.center,
-                            style:
-                                (isCompactLayout
-                                        ? textTheme.titleMedium
-                                        : textTheme.titleLarge)
-                                    ?.copyWith(fontWeight: FontWeight.w700),
-                          ),
-                          SizedBox(height: verticalGap),
-                          Text(
-                            item.artist,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style:
-                                (isCompactLayout
-                                        ? textTheme.bodySmall
-                                        : textTheme.bodyMedium)
-                                    ?.copyWith(
-                                      color: colorScheme.onSurfaceVariant,
-                                    ),
-                          ),
-                          if (showAlbum) ...[
-                            const SizedBox(height: 2),
-                            Text(
-                              item.album,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: textTheme.bodySmall?.copyWith(
-                                color: colorScheme.onSurfaceVariant.withValues(
-                                  alpha: 0.7,
+                          const SizedBox(width: 48),
+                          Expanded(
+                            child: Column(
+                              children: [
+                                Text(
+                                  item.title,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  textAlign: TextAlign.center,
+                                  style:
+                                      (isCompactLayout
+                                              ? textTheme.titleMedium
+                                              : textTheme.titleLarge)
+                                          ?.copyWith(
+                                            fontWeight: FontWeight.w700,
+                                          ),
                                 ),
-                              ),
+                                SizedBox(height: verticalGap),
+                                ClickableArtistName(
+                                  artistName: item.artist,
+                                  artistId: item.track?.artistId,
+                                  coverUrl: item.coverUrl.isNotEmpty ? item.coverUrl : null,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style:
+                                      (isCompactLayout
+                                              ? textTheme.bodySmall
+                                              : textTheme.bodyMedium)
+                                          ?.copyWith(
+                                            color: colorScheme.onSurfaceVariant,
+                                          ),
+                                ),
+                                if (showAlbum) ...[
+                                  const SizedBox(height: 2),
+                                  ClickableAlbumName(
+                                    albumName: item.album,
+                                    albumId: item.track?.albumId,
+                                    artistName: item.artist,
+                                    coverUrl: item.coverUrl.isNotEmpty ? item.coverUrl : null,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: textTheme.bodySmall?.copyWith(
+                                      color: colorScheme.onSurfaceVariant
+                                          .withValues(alpha: 0.7),
+                                    ),
+                                  ),
+                                ],
+                              ],
                             ),
-                          ],
+                          ),
+                          SizedBox(
+                            width: 48,
+                            child: item.track != null
+                                ? Consumer(
+                                    builder: (context, ref, child) {
+                                      final isLoved = ref.watch(
+                                        libraryCollectionsProvider.select(
+                                          (s) => s.isLoved(item.track!),
+                                        ),
+                                      );
+                                      return IconButton(
+                                        icon: Icon(
+                                          isLoved
+                                              ? Icons.favorite
+                                              : Icons.favorite_border,
+                                          size: isCompactLayout ? 24 : 28,
+                                        ),
+                                        color: isLoved
+                                            ? Colors.redAccent
+                                            : colorScheme.onSurfaceVariant,
+                                        onPressed: () => ref
+                                            .read(
+                                              libraryCollectionsProvider
+                                                  .notifier,
+                                            )
+                                            .toggleLoved(item.track!),
+                                      );
+                                    },
+                                  )
+                                : const SizedBox.shrink(),
+                          ),
                         ],
                       ),
                     ),

@@ -1303,9 +1303,10 @@ class FFmpegService {
 
     for (final entry in vorbisMetadata.entries) {
       final key = entry.key.toUpperCase();
+      final normalizedKey = key.replaceAll(RegExp(r'[^A-Z0-9]'), '');
       final value = entry.value;
 
-      switch (key) {
+      switch (normalizedKey) {
         case 'TITLE':
           id3Map['title'] = value;
           break;
@@ -1320,10 +1321,12 @@ class FFmpegService {
           break;
         case 'TRACKNUMBER':
         case 'TRACK':
+        case 'TRCK':
           id3Map['track'] = value;
           break;
         case 'DISCNUMBER':
         case 'DISC':
+        case 'TPOS':
           id3Map['disc'] = value;
           break;
         case 'DATE':

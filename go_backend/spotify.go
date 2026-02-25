@@ -141,6 +141,8 @@ type TrackMetadata struct {
 	DiscNumber  int    `json:"disc_number,omitempty"`
 	ExternalURL string `json:"external_urls"`
 	ISRC        string `json:"isrc"`
+	AlbumID     string `json:"album_id,omitempty"`
+	ArtistID    string `json:"artist_id,omitempty"`
 	AlbumType   string `json:"album_type,omitempty"`
 }
 
@@ -362,6 +364,10 @@ func (c *SpotifyMetadataClient) SearchTracks(ctx context.Context, query string, 
 	}
 
 	for _, track := range response.Tracks.Items {
+		var firstArtistID string
+		if len(track.Artists) > 0 {
+			firstArtistID = track.Artists[0].ID
+		}
 		result.Tracks = append(result.Tracks, TrackMetadata{
 			SpotifyID:   track.ID,
 			Artists:     joinArtists(track.Artists),
@@ -376,6 +382,8 @@ func (c *SpotifyMetadataClient) SearchTracks(ctx context.Context, query string, 
 			DiscNumber:  track.DiscNumber,
 			ExternalURL: track.ExternalURL.Spotify,
 			ISRC:        track.ExternalID.ISRC,
+			AlbumID:     track.Album.ID,
+			ArtistID:    firstArtistID,
 			AlbumType:   track.Album.AlbumType,
 		})
 	}
@@ -427,6 +435,10 @@ func (c *SpotifyMetadataClient) SearchAll(ctx context.Context, query string, tra
 	}
 
 	for _, track := range response.Tracks.Items {
+		var firstArtistID string
+		if len(track.Artists) > 0 {
+			firstArtistID = track.Artists[0].ID
+		}
 		result.Tracks = append(result.Tracks, TrackMetadata{
 			SpotifyID:   track.ID,
 			Artists:     joinArtists(track.Artists),
@@ -441,6 +453,8 @@ func (c *SpotifyMetadataClient) SearchAll(ctx context.Context, query string, tra
 			DiscNumber:  track.DiscNumber,
 			ExternalURL: track.ExternalURL.Spotify,
 			ISRC:        track.ExternalID.ISRC,
+			AlbumID:     track.Album.ID,
+			ArtistID:    firstArtistID,
 			AlbumType:   track.Album.AlbumType,
 		})
 	}

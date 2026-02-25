@@ -18,6 +18,7 @@ import 'package:spotiflac_android/widgets/playlist_picker_sheet.dart';
 import 'package:spotiflac_android/screens/artist_screen.dart';
 import 'package:spotiflac_android/screens/home_tab.dart'
     show ExtensionArtistScreen;
+import 'package:spotiflac_android/utils/clickable_metadata.dart';
 
 class _AlbumCache {
   static final Map<String, _CacheEntry> _cache = {};
@@ -216,6 +217,8 @@ class _AlbumScreenState extends ConsumerState<AlbumScreen> {
       artistName: data['artists'] as String? ?? '',
       albumName: data['album_name'] as String? ?? '',
       albumArtist: data['album_artist'] as String?,
+      artistId: data['artist_id']?.toString() ?? _artistId,
+      albumId: data['album_id']?.toString() ?? widget.albumId,
       coverUrl: data['images'] as String?,
       isrc: data['isrc'] as String?,
       duration: ((data['duration_ms'] as int? ?? 0) / 1000).round(),
@@ -902,8 +905,10 @@ class _AlbumTrackItem extends ConsumerWidget {
           subtitle: Row(
             children: [
               Flexible(
-                child: Text(
-                  track.artistName,
+                child: ClickableArtistName(
+                  artistName: track.artistName,
+                  artistId: track.artistId,
+                  coverUrl: track.coverUrl,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(color: colorScheme.onSurfaceVariant),

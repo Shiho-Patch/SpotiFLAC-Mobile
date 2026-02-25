@@ -27,6 +27,7 @@ import 'package:spotiflac_android/screens/playlist_screen.dart';
 import 'package:spotiflac_android/screens/downloaded_album_screen.dart';
 import 'package:spotiflac_android/widgets/download_service_picker.dart';
 import 'package:spotiflac_android/widgets/track_collection_quick_actions.dart';
+import 'package:spotiflac_android/utils/clickable_metadata.dart';
 
 class HomeTab extends ConsumerStatefulWidget {
   const HomeTab({super.key});
@@ -197,6 +198,19 @@ class _HomeTabState extends ConsumerState<HomeTab>
 
   bool _embeddedCoverRefreshScheduled = false;
   List<Extension>? _thumbnailSizesExtensionsCache;
+  bool _isCsvImporting = false;
+
+  void _setCsvImporting(bool value) {
+    if (_isCsvImporting == value) return;
+    if (!mounted) {
+      _isCsvImporting = value;
+      return;
+    }
+    setState(() {
+      _isCsvImporting = value;
+    });
+  }
+
   Map<String, (double, double)>? _thumbnailSizesCache;
   List<Track>? _searchBucketsSourceTracks;
   _SearchResultBuckets? _searchBucketsCache;
@@ -704,20 +718,28 @@ class _HomeTabState extends ConsumerState<HomeTab>
   }
 
   Future<void> _importCsv(BuildContext context, WidgetRef ref) async {
+    if (_isCsvImporting) return;
+    _setCsvImporting(true);
+
     int currentProgress = 0;
     int totalTracks = 0;
 
-    bool dialogShown = false;
+    bool progressDialogInitialized = false;
+    bool progressDialogVisible = false;
+    BuildContext? progressDialogContext;
     StateSetter? setDialogState;
 
     void showProgressDialog() {
-      if (dialogShown || !mounted) return;
-      dialogShown = true;
+      if (progressDialogInitialized || !mounted) return;
+      progressDialogInitialized = true;
+      progressDialogVisible = true;
       showDialog(
         context: this.context,
+        useRootNavigator: false,
         barrierDismissible: false,
         builder: (dialogCtx) => StatefulBuilder(
           builder: (dialogCtx, setState) {
+            progressDialogContext = dialogCtx;
             setDialogState = setState;
             return AlertDialog(
               content: Column(
@@ -738,169 +760,193 @@ class _HomeTabState extends ConsumerState<HomeTab>
             );
           },
         ),
-      );
+      ).then((_) {
+        progressDialogVisible = false;
+        progressDialogContext = null;
+      });
     }
 
-    final tracks = await CsvImportService.pickAndParseCsv(
-      onProgress: (current, total) {
-        currentProgress = current;
-        totalTracks = total;
-        if (!dialogShown && total > 0) {
-          showProgressDialog();
+    void closeProgressDialog() {
+      if (!progressDialogVisible) return;
+      setDialogState = null;
+      try {
+        if (progressDialogContext != null) {
+          Navigator.of(progressDialogContext!).pop();
+        } else if (mounted) {
+          final navigator = Navigator.of(this.context);
+          if (navigator.canPop()) {
+            navigator.pop();
+          }
         }
-        setDialogState?.call(() {});
-      },
-    );
-
-    if (dialogShown && mounted) {
-      Navigator.of(this.context).pop();
+      } catch (_) {}
+      progressDialogVisible = false;
+      progressDialogContext = null;
     }
 
-    if (tracks.isNotEmpty) {
-      final settings = ref.read(settingsProvider);
-
-      if (!mounted) return;
-
-      // ignore: use_build_context_synchronously
-      final l10n = context.l10n;
-
-      final options = await showDialog<_CsvImportOptions>(
-        context: this.context,
-        builder: (dialogCtx) {
-          var skipDownloaded = true;
-          return StatefulBuilder(
-            builder: (dialogCtx, setDialogState) => AlertDialog(
-              title: Text(l10n.dialogImportPlaylistTitle),
-              content: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(l10n.dialogImportPlaylistMessage(tracks.length)),
-                  const SizedBox(height: 12),
-                  CheckboxListTile(
-                    contentPadding: EdgeInsets.zero,
-                    title: const Text('Skip already downloaded songs'),
-                    value: skipDownloaded,
-                    onChanged: (value) {
-                      setDialogState(() {
-                        skipDownloaded = value ?? true;
-                      });
-                    },
-                  ),
-                ],
-              ),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.pop(
-                    dialogCtx,
-                    const _CsvImportOptions(
-                      confirmed: false,
-                      skipDownloaded: true,
-                    ),
-                  ),
-                  child: Text(l10n.dialogCancel),
-                ),
-                FilledButton(
-                  onPressed: () => Navigator.pop(
-                    dialogCtx,
-                    _CsvImportOptions(
-                      confirmed: true,
-                      skipDownloaded: skipDownloaded,
-                    ),
-                  ),
-                  child: Text(l10n.dialogImport),
-                ),
-              ],
-            ),
-          );
+    try {
+      final tracks = await CsvImportService.pickAndParseCsv(
+        onProgress: (current, total) {
+          currentProgress = current;
+          totalTracks = total;
+          if (!progressDialogInitialized && total > 0) {
+            showProgressDialog();
+          }
+          setDialogState?.call(() {});
         },
       );
 
-      if (options == null || !options.confirmed) return;
+      closeProgressDialog();
 
-      var tracksToQueue = tracks;
-      var skippedDownloadedCount = 0;
+      if (tracks.isNotEmpty) {
+        final settings = ref.read(settingsProvider);
 
-      if (options.skipDownloaded) {
-        final historyState = ref.read(downloadHistoryProvider);
-        tracksToQueue = [];
-        for (final track in tracks) {
-          final isDownloaded =
-              historyState.isDownloaded(track.id) ||
-              (track.isrc != null &&
-                  historyState.getByIsrc(track.isrc!) != null);
-          if (isDownloaded) {
-            skippedDownloadedCount++;
-            continue;
-          }
-          tracksToQueue.add(track);
-        }
-      }
+        if (!mounted) return;
 
-      if (tracksToQueue.isEmpty) {
-        if (mounted) {
-          ScaffoldMessenger.of(this.context).showSnackBar(
-            SnackBar(
-              content: Text(
-                l10n.discographySkippedDownloaded(0, skippedDownloadedCount),
-              ),
-            ),
-          );
-        }
-        return;
-      }
+        // ignore: use_build_context_synchronously
+        final l10n = context.l10n;
 
-      final queueSnackbarMessage = skippedDownloadedCount > 0
-          ? l10n.discographySkippedDownloaded(
-              tracksToQueue.length,
-              skippedDownloadedCount,
-            )
-          : l10n.snackbarAddedTracksToQueue(tracksToQueue.length);
-
-      if (!mounted) return;
-
-      if (settings.askQualityBeforeDownload) {
-        DownloadServicePicker.show(
-          this.context,
-          trackName: l10n.csvImportTracks(tracksToQueue.length),
-          artistName: l10n.dialogImportPlaylistTitle,
-          onSelect: (quality, service) {
-            ref
-                .read(downloadQueueProvider.notifier)
-                .addMultipleToQueue(
-                  tracksToQueue,
-                  service,
-                  qualityOverride: quality,
-                );
-            if (mounted) {
-              ScaffoldMessenger.of(this.context).showSnackBar(
-                SnackBar(
-                  content: Text(queueSnackbarMessage),
-                  action: SnackBarAction(
-                    label: l10n.snackbarViewQueue,
-                    onPressed: () {},
-                  ),
+        final options = await showDialog<_CsvImportOptions>(
+          context: this.context,
+          useRootNavigator: false,
+          builder: (dialogCtx) {
+            var skipDownloaded = true;
+            return StatefulBuilder(
+              builder: (dialogCtx, setDialogState) => AlertDialog(
+                title: Text(l10n.dialogImportPlaylistTitle),
+                content: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(l10n.dialogImportPlaylistMessage(tracks.length)),
+                    const SizedBox(height: 12),
+                    CheckboxListTile(
+                      contentPadding: EdgeInsets.zero,
+                      title: const Text('Skip already downloaded songs'),
+                      value: skipDownloaded,
+                      onChanged: (value) {
+                        setDialogState(() {
+                          skipDownloaded = value ?? true;
+                        });
+                      },
+                    ),
+                  ],
                 ),
-              );
-            }
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(
+                      dialogCtx,
+                      const _CsvImportOptions(
+                        confirmed: false,
+                        skipDownloaded: true,
+                      ),
+                    ),
+                    child: Text(l10n.dialogCancel),
+                  ),
+                  FilledButton(
+                    onPressed: () => Navigator.pop(
+                      dialogCtx,
+                      _CsvImportOptions(
+                        confirmed: true,
+                        skipDownloaded: skipDownloaded,
+                      ),
+                    ),
+                    child: Text(l10n.dialogImport),
+                  ),
+                ],
+              ),
+            );
           },
         );
-      } else {
-        ref
-            .read(downloadQueueProvider.notifier)
-            .addMultipleToQueue(tracksToQueue, settings.defaultService);
-        if (mounted) {
-          ScaffoldMessenger.of(this.context).showSnackBar(
-            SnackBar(
-              content: Text(queueSnackbarMessage),
-              action: SnackBarAction(
-                label: l10n.snackbarViewQueue,
-                onPressed: () {},
+
+        if (options == null || !options.confirmed) return;
+
+        var tracksToQueue = tracks;
+        var skippedDownloadedCount = 0;
+
+        if (options.skipDownloaded) {
+          final historyState = ref.read(downloadHistoryProvider);
+          tracksToQueue = [];
+          for (final track in tracks) {
+            final isDownloaded =
+                historyState.isDownloaded(track.id) ||
+                (track.isrc != null &&
+                    historyState.getByIsrc(track.isrc!) != null);
+            if (isDownloaded) {
+              skippedDownloadedCount++;
+              continue;
+            }
+            tracksToQueue.add(track);
+          }
+        }
+
+        if (tracksToQueue.isEmpty) {
+          if (mounted) {
+            ScaffoldMessenger.of(this.context).showSnackBar(
+              SnackBar(
+                content: Text(
+                  l10n.discographySkippedDownloaded(0, skippedDownloadedCount),
+                ),
               ),
-            ),
+            );
+          }
+          return;
+        }
+
+        final queueSnackbarMessage = skippedDownloadedCount > 0
+            ? l10n.discographySkippedDownloaded(
+                tracksToQueue.length,
+                skippedDownloadedCount,
+              )
+            : l10n.snackbarAddedTracksToQueue(tracksToQueue.length);
+
+        if (!mounted) return;
+
+        if (settings.askQualityBeforeDownload) {
+          DownloadServicePicker.show(
+            this.context,
+            trackName: l10n.csvImportTracks(tracksToQueue.length),
+            artistName: l10n.dialogImportPlaylistTitle,
+            onSelect: (quality, service) {
+              ref
+                  .read(downloadQueueProvider.notifier)
+                  .addMultipleToQueue(
+                    tracksToQueue,
+                    service,
+                    qualityOverride: quality,
+                  );
+              if (mounted) {
+                ScaffoldMessenger.of(this.context).showSnackBar(
+                  SnackBar(
+                    content: Text(queueSnackbarMessage),
+                    action: SnackBarAction(
+                      label: l10n.snackbarViewQueue,
+                      onPressed: () {},
+                    ),
+                  ),
+                );
+              }
+            },
           );
+        } else {
+          ref
+              .read(downloadQueueProvider.notifier)
+              .addMultipleToQueue(tracksToQueue, settings.defaultService);
+          if (mounted) {
+            ScaffoldMessenger.of(this.context).showSnackBar(
+              SnackBar(
+                content: Text(queueSnackbarMessage),
+                action: SnackBarAction(
+                  label: l10n.snackbarViewQueue,
+                  onPressed: () {},
+                ),
+              ),
+            );
+          }
         }
       }
+    } finally {
+      closeProgressDialog();
+      _setCsvImporting(false);
     }
   }
 
@@ -1525,8 +1571,10 @@ class _HomeTabState extends ConsumerState<HomeTab>
                 ),
               ),
               if (item.artists.isNotEmpty && !isArtist)
-                Text(
-                  item.artists,
+                ClickableArtistName(
+                  artistName: item.artists,
+                  coverUrl: item.coverUrl,
+                  extensionId: item.providerId,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
@@ -1674,8 +1722,10 @@ class _HomeTabState extends ConsumerState<HomeTab>
                           overflow: TextOverflow.ellipsis,
                         ),
                         const SizedBox(height: 4),
-                        Text(
-                          item.artists,
+                        ClickableArtistName(
+                          artistName: item.artists,
+                          coverUrl: item.coverUrl,
+                          extensionId: item.providerId,
                           style: Theme.of(context).textTheme.bodyMedium
                               ?.copyWith(color: colorScheme.onSurfaceVariant),
                           maxLines: 1,
@@ -1724,6 +1774,7 @@ class _HomeTabState extends ConsumerState<HomeTab>
       name: item.name,
       artistName: item.artists,
       albumName: item.albumName ?? '',
+      albumId: item.albumId,
       duration: item.durationMs ~/ 1000,
       trackNumber: 1,
       discNumber: 1,
@@ -2833,7 +2884,9 @@ class _HomeTabState extends ConsumerState<HomeTab>
             else ...[
               IconButton(
                 icon: const Icon(Icons.file_upload_outlined),
-                onPressed: () => _importCsv(context, ref),
+                onPressed: _isCsvImporting
+                    ? null
+                    : () => _importCsv(context, ref),
                 tooltip: 'Import CSV',
               ),
               IconButton(
@@ -3176,8 +3229,11 @@ class _TrackItemWithStatus extends ConsumerWidget {
                       Row(
                         children: [
                           Flexible(
-                            child: Text(
-                              track.artistName,
+                            child: ClickableArtistName(
+                              artistName: track.artistName,
+                              artistId: track.artistId,
+                              coverUrl: track.coverUrl,
+                              extensionId: extensionId,
                               style: Theme.of(context).textTheme.bodySmall
                                   ?.copyWith(
                                     color: colorScheme.onSurfaceVariant,
@@ -3573,8 +3629,11 @@ class _SearchAlbumItemWidget extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                       ),
                       const SizedBox(height: 2),
-                      Text(
-                        album.artists.isNotEmpty ? album.artists : 'Album',
+                      ClickableArtistName(
+                        artistName: album.artists.isNotEmpty
+                            ? album.artists
+                            : 'Album',
+                        coverUrl: album.imageUrl,
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
                           color: colorScheme.onSurfaceVariant,
                         ),
@@ -3806,6 +3865,8 @@ class _ExtensionAlbumScreenState extends ConsumerState<ExtensionAlbumScreen> {
       name: (data['name'] ?? '').toString(),
       artistName: (data['artists'] ?? data['artist'] ?? '').toString(),
       albumName: (data['album_name'] ?? widget.albumName).toString(),
+      artistId: data['artist_id']?.toString() ?? _artistId,
+      albumId: data['album_id']?.toString() ?? widget.albumId,
       coverUrl: _resolveCoverUrl(
         data['cover_url']?.toString(),
         widget.coverUrl,
@@ -3958,6 +4019,8 @@ class _ExtensionPlaylistScreenState
       name: (data['name'] ?? '').toString(),
       artistName: (data['artists'] ?? data['artist'] ?? '').toString(),
       albumName: (data['album_name'] ?? '').toString(),
+      artistId: data['artist_id']?.toString(),
+      albumId: data['album_id']?.toString(),
       coverUrl: _resolveCoverUrl(
         data['cover_url']?.toString(),
         widget.coverUrl,
@@ -4129,6 +4192,8 @@ class _ExtensionArtistScreenState extends ConsumerState<ExtensionArtistScreen> {
       artistName: (data['artists'] ?? data['artist'] ?? '').toString(),
       albumName: (data['album_name'] ?? data['album'] ?? '').toString(),
       albumArtist: data['album_artist']?.toString(),
+      artistId: data['artist_id']?.toString() ?? widget.artistId,
+      albumId: data['album_id']?.toString(),
       coverUrl: (data['cover_url'] ?? data['images'])?.toString(),
       isrc: data['isrc']?.toString(),
       duration: (durationMs / 1000).round(),
@@ -4343,8 +4408,10 @@ class _QuickPicksPageViewState extends State<_QuickPicksPageView> {
                     ),
                   ),
                   if (item.artists.isNotEmpty)
-                    Text(
-                      item.artists,
+                    ClickableArtistName(
+                      artistName: item.artists,
+                      coverUrl: item.coverUrl,
+                      extensionId: item.providerId,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(

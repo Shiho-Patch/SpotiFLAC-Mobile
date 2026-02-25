@@ -11,6 +11,7 @@ import 'package:spotiflac_android/models/playback_item.dart';
 import 'package:spotiflac_android/models/track.dart';
 import 'package:spotiflac_android/providers/extension_provider.dart';
 import 'package:spotiflac_android/providers/local_library_provider.dart';
+import 'package:spotiflac_android/providers/library_collections_provider.dart';
 import 'package:spotiflac_android/providers/settings_provider.dart';
 import 'package:spotiflac_android/services/ffmpeg_service.dart';
 import 'package:spotiflac_android/services/library_database.dart';
@@ -172,6 +173,7 @@ class _SpotiFLACAudioHandler extends audio_service.BaseAudioHandler
   final Future<void> Function() _onSkipPrevious;
   final Future<void> Function() _onStop;
   final Future<void> Function(Duration position) _onSeek;
+  final Future<void> Function() _onToggleLove;
 
   _SpotiFLACAudioHandler({
     required Future<void> Function() onPlay,
@@ -180,12 +182,26 @@ class _SpotiFLACAudioHandler extends audio_service.BaseAudioHandler
     required Future<void> Function() onSkipPrevious,
     required Future<void> Function() onStop,
     required Future<void> Function(Duration position) onSeek,
+    required Future<void> Function() onToggleLove,
   }) : _onPlay = onPlay,
        _onPause = onPause,
        _onSkipNext = onSkipNext,
        _onSkipPrevious = onSkipPrevious,
        _onStop = onStop,
-       _onSeek = onSeek;
+       _onSeek = onSeek,
+       _onToggleLove = onToggleLove;
+
+  @override
+  Future<void> customAction(String name, [Map<String, dynamic>? extras]) async {
+    if (name == 'toggle_love') {
+      try {
+        await _onToggleLove();
+      } catch (e) {
+        _log.e('Notification toggle love failed: $e');
+      }
+    }
+    return super.customAction(name, extras);
+  }
 
   @override
   Future<void> play() async {
@@ -349,6 +365,17 @@ class PlaybackController extends Notifier<PlaybackState> {
       onDetach: () => unawaited(_savePlaybackSnapshot()),
       onHide: () => unawaited(_savePlaybackSnapshot()),
     );
+
+    ref.listen(libraryCollectionsProvider, (previous, next) {
+      final track = state.currentItem?.track;
+      if (track != null) {
+        final wasLoved = previous?.isLoved(track) ?? false;
+        final isLoved = next.isLoved(track);
+        if (wasLoved != isLoved) {
+          _syncServicePlaybackState(_player.processingState, _player.playing);
+        }
+      }
+    });
 
     _subscriptions.add(
       _player.playerStateStream.listen((playerState) {
@@ -518,6 +545,7 @@ class PlaybackController extends Notifier<PlaybackState> {
               onSkipPrevious: _handleNotificationPrevious,
               onStop: _handleNotificationStop,
               onSeek: seek,
+              onToggleLove: _handleNotificationToggleLove,
             ),
             config: const audio_service.AudioServiceConfig(
               androidNotificationChannelId: 'com.zarz.spotiflac.playback',
@@ -567,6 +595,13 @@ class PlaybackController extends Notifier<PlaybackState> {
     await stop();
   }
 
+  Future<void> _handleNotificationToggleLove() async {
+    final track = state.currentItem?.track;
+    if (track != null) {
+      await ref.read(libraryCollectionsProvider.notifier).toggleLoved(track);
+    }
+  }
+
   void _syncServicePlaybackState(
     ProcessingState processingState,
     bool playing,
@@ -588,7 +623,17 @@ class PlaybackController extends Notifier<PlaybackState> {
         serviceState = audio_service.AudioProcessingState.completed;
     }
 
+    final track = state.currentItem?.track;
+    final isLoved = track != null && ref.read(libraryCollectionsProvider).isLoved(track);
+
     final controls = <audio_service.MediaControl>[
+      audio_service.MediaControl.custom(
+        androidIcon: isLoved
+            ? 'drawable/ic_stat_favorite'
+            : 'drawable/ic_stat_favorite_border',
+        label: isLoved ? 'Unlove' : 'Love',
+        name: 'toggle_love',
+      ),
       audio_service.MediaControl.skipToPrevious,
       if (playing)
         audio_service.MediaControl.pause
@@ -3269,6 +3314,8 @@ class PlaybackController extends Notifier<PlaybackState> {
       artistName: (data['artists'] ?? data['artist'] ?? '').toString(),
       albumName: (data['album_name'] ?? data['album'] ?? '').toString(),
       albumArtist: data['album_artist']?.toString(),
+      artistId: data['artist_id']?.toString(),
+      albumId: data['album_id']?.toString(),
       coverUrl: (data['cover_url'] ?? data['images'])?.toString(),
       isrc: data['isrc']?.toString(),
       duration: (durationMs / 1000).round(),

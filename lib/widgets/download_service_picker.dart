@@ -22,7 +22,7 @@ class BuiltInService {
   });
 }
 
-/// Default quality options for built-in services (Tidal, Qobuz, Amazon, YouTube)
+/// Default quality options for built-in services
 /// Note: Tidal lossy (HIGH) removed - use YouTube for lossy downloads
 const _builtInServices = [
   BuiltInService(

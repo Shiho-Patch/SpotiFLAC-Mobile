@@ -167,6 +167,9 @@ class _RecentDonorsCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     const donorNames = [
+      'NinoBrown',
+      '@nino_sandzak',
+      'IMJ',
       'J',
       'Julian',
       'matt_3050',
@@ -460,8 +463,8 @@ int _cr(String v) {
   for (final c in v.codeUnits) { r = (r * 31 + c) & 0x7FFFFFFF; }
   return r;
 }
-// Highlighted supporters (hashes of names): Julian, J.
-const _cv = {1825257268, 1035};
+// Highlighted supporters (hashes of names): Julian, J, NinoBrown, @nino_sandzak, IMJ.
+const _cv = {1825257268, 1035, 1497948283, 398058782, 996135};
 
 class _SupporterChip extends StatelessWidget {
   final String name;

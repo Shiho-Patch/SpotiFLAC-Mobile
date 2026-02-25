@@ -235,6 +235,8 @@ func (c *DeezerClient) convertTrack(track deezerTrack) TrackMetadata {
 		DiscNumber:  track.DiskNumber,
 		ExternalURL: track.Link,
 		ISRC:        track.ISRC,
+		AlbumID:     fmt.Sprintf("deezer:%d", track.Album.ID),
+		ArtistID:    fmt.Sprintf("deezer:%d", track.Artist.ID),
 	}
 }
 
