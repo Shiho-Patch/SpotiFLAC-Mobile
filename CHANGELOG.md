@@ -1,6 +1,6 @@
 # Changelog
 
-## [4.0.1] - 2026-02-25
+## [4.0.1] - 2026-02-26
 
 ### Added
 - **Clickable Metadata Navigation**: Added reusable `ClickableArtistName` and `ClickableAlbumName`
@@ -12,7 +12,7 @@
 - **Full-Screen Player UX**: Top bar now supports swipe-down dismiss; artist/album text is now tappable; and in-player love toggle is available next to track metadata
 - **Playlist Picker Flow Refactor**: Reworked playlist picker sheet into stateful multi-select flow with explicit Done action and improved create-playlist handling
 - **CSV Import Interaction Flow**: Added single-flight import guard, more reliable progress dialog lifecycle, and safer local navigator usage
-- **Amazon API Host Fallback**: Amazon metadata fetch now tries `amazon.afkarxyz.fun` and falls back to `amzn.afkarxyz.fun`
+- **Amazon API**: Amazon metadata fetch `amzn.afkarxyz.fun`
 - **Qobuz URL Resolution Strategy**: Removed legacy/Jumo fallback path; now uses standard API pool (deeb)
 - **Update Checker Asset Targeting**: Update selection now prioritizes arm64/universal assets only
 - **Donate Page Supporters**: Updated highlighted donor/supporter list entries
