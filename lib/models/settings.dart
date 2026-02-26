@@ -53,6 +53,8 @@ class AppSettings {
   autoExportFailedDownloads; // Auto export failed downloads to TXT file
   final String
   downloadNetworkMode; // 'any' = WiFi + Mobile, 'wifi_only' = WiFi only
+  final int
+  streamingCacheMaxSizeMb; // Max storage for streaming audio cache (0 = off)
   final bool
   networkCompatibilityMode; // Try HTTP + allow invalid TLS cert for API requests
   final String
@@ -130,6 +132,7 @@ class AppSettings {
     this.useAllFilesAccess = false,
     this.autoExportFailedDownloads = false,
     this.downloadNetworkMode = 'any',
+    this.streamingCacheMaxSizeMb = 1024,
     this.networkCompatibilityMode = false,
     this.songLinkRegion = 'US',
     // Local Library defaults
@@ -201,6 +204,7 @@ class AppSettings {
     bool? useAllFilesAccess,
     bool? autoExportFailedDownloads,
     String? downloadNetworkMode,
+    int? streamingCacheMaxSizeMb,
     bool? networkCompatibilityMode,
     String? songLinkRegion,
     // Local Library
@@ -273,6 +277,8 @@ class AppSettings {
       autoExportFailedDownloads:
           autoExportFailedDownloads ?? this.autoExportFailedDownloads,
       downloadNetworkMode: downloadNetworkMode ?? this.downloadNetworkMode,
+      streamingCacheMaxSizeMb:
+          streamingCacheMaxSizeMb ?? this.streamingCacheMaxSizeMb,
       networkCompatibilityMode:
           networkCompatibilityMode ?? this.networkCompatibilityMode,
       songLinkRegion: songLinkRegion ?? this.songLinkRegion,

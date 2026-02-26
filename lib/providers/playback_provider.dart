@@ -17,6 +17,8 @@ import 'package:spotiflac_android/services/ffmpeg_service.dart';
 import 'package:spotiflac_android/services/library_database.dart';
 import 'package:spotiflac_android/services/platform_bridge.dart';
 import 'package:spotiflac_android/services/stream_request_payload.dart';
+import 'package:spotiflac_android/services/stream_audio_cache_manager.dart';
+import 'package:spotiflac_android/utils/artist_utils.dart';
 import 'package:spotiflac_android/utils/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -268,6 +270,7 @@ class PlaybackController extends Notifier<PlaybackState> {
   static const Duration _prefetchRetryCooldown = Duration(seconds: 3);
   static const int _maxPrefetchAttemptsPerTrack = 2;
   static const int _prefetchLatencyWindowSize = 12;
+  static const int _streamCacheFrequentPlayThreshold = 3;
   static const int _smartQueueTriggerRemainingTracks = 2;
   static const int _smartQueueTargetRemainingTracks = 6;
   static const int _smartQueueMaxAutoAddsPerSession = 40;
@@ -624,7 +627,8 @@ class PlaybackController extends Notifier<PlaybackState> {
     }
 
     final track = state.currentItem?.track;
-    final isLoved = track != null && ref.read(libraryCollectionsProvider).isLoved(track);
+    final isLoved =
+        track != null && ref.read(libraryCollectionsProvider).isLoved(track);
 
     final controls = <audio_service.MediaControl>[
       audio_service.MediaControl.custom(
@@ -1268,6 +1272,39 @@ class PlaybackController extends Notifier<PlaybackState> {
     );
     _updateMediaItemNotification(resolvingItem);
 
+    final cachedStreamPath = await _resolveCachedStreamPath(track);
+    if (!_isPlayRequestCurrent(activeRequestEpoch)) return;
+    if (cachedStreamPath != null && cachedStreamPath.isNotEmpty) {
+      final cachedUri = Uri.file(cachedStreamPath);
+      final dotIndex = cachedStreamPath.lastIndexOf('.');
+      final cachedFormat =
+          dotIndex > -1 && dotIndex < cachedStreamPath.length - 1
+          ? cachedStreamPath.substring(dotIndex + 1).toLowerCase()
+          : 'cache';
+      final cachedItem = PlaybackItem(
+        id: track.id,
+        title: track.name,
+        artist: track.artistName,
+        album: track.albumName,
+        coverUrl: track.coverUrl ?? '',
+        sourceUri: cachedUri.toString(),
+        isLocal: false,
+        service: selectedService,
+        durationMs: _trackDurationMs(track),
+        format: cachedFormat,
+        track: track,
+      );
+      state = state.copyWith(seekSupported: true);
+      await _setSourceAndPlay(
+        cachedUri,
+        cachedItem,
+        initialPosition: initialPosition,
+        expectedRequestEpoch: activeRequestEpoch,
+      );
+      unawaited(_recordStreamPlaybackForCache(track));
+      return;
+    }
+
     final result = await PlatformBridge.resolveStreamByStrategy(
       streamRequest.payload,
     );
@@ -1429,6 +1466,17 @@ class PlaybackController extends Notifier<PlaybackState> {
         initialPosition: effectiveInitialPosition,
         expectedRequestEpoch: activeRequestEpoch,
       );
+      unawaited(
+        _maybeCacheResolvedStreamAudio(
+          track: track,
+          resolvedService: resolvedService,
+          rawStreamUrl: rawStreamUrl,
+          requiresDecryption: requiresDecryption,
+          requiresProxy: requiresProxy,
+          usesLiveProxy: usesLiveProxy,
+          resolvedFormat: playbackFormat,
+        ),
+      );
       return;
     } catch (e) {
       final shouldFallbackToTunnel =
@@ -1475,6 +1523,17 @@ class PlaybackController extends Notifier<PlaybackState> {
         Uri.parse(playbackUrl),
         fallbackItem,
         expectedRequestEpoch: activeRequestEpoch,
+      );
+      unawaited(
+        _maybeCacheResolvedStreamAudio(
+          track: track,
+          resolvedService: resolvedService,
+          rawStreamUrl: rawStreamUrl,
+          requiresDecryption: requiresDecryption,
+          requiresProxy: requiresProxy,
+          usesLiveProxy: true,
+          resolvedFormat: playbackFormat,
+        ),
       );
     }
   }
@@ -2953,15 +3012,9 @@ class PlaybackController extends Notifier<PlaybackState> {
   }
 
   List<String> _extractArtistNamesForSmartQueue(String rawArtists) {
-    final raw = rawArtists.trim();
-    if (raw.isEmpty) return const [];
+    final tokens = splitArtistNames(rawArtists);
+    if (tokens.isEmpty) return const [];
 
-    final tokens = raw.split(
-      RegExp(
-        r'\s*(?:,|&|\bx\b|feat\.?|featuring|ft\.?|with)\s*',
-        caseSensitive: false,
-      ),
-    );
     final names = <String>[];
     final seen = <String>{};
     for (final token in tokens) {
@@ -3314,7 +3367,7 @@ class PlaybackController extends Notifier<PlaybackState> {
       artistName: (data['artists'] ?? data['artist'] ?? '').toString(),
       albumName: (data['album_name'] ?? data['album'] ?? '').toString(),
       albumArtist: data['album_artist']?.toString(),
-      artistId: data['artist_id']?.toString(),
+      artistId: (data['artist_id'] ?? data['artistId'])?.toString(),
       albumId: data['album_id']?.toString(),
       coverUrl: (data['cover_url'] ?? data['images'])?.toString(),
       isrc: data['isrc']?.toString(),
@@ -3781,6 +3834,94 @@ class PlaybackController extends Notifier<PlaybackState> {
       return Uri.parse(input);
     }
     return Uri.file(input);
+  }
+
+  int _streamCacheLimitBytesFromSettings() {
+    final sizeMb = ref.read(settingsProvider).streamingCacheMaxSizeMb;
+    if (sizeMb <= 0) return 0;
+    return sizeMb * 1024 * 1024;
+  }
+
+  Future<String?> _resolveCachedStreamPath(Track track) async {
+    final maxSizeBytes = _streamCacheLimitBytesFromSettings();
+    if (maxSizeBytes <= 0) return null;
+
+    final trackKey = _trackKeyFromTrack(track);
+    if (trackKey.isEmpty) return null;
+
+    try {
+      await StreamAudioCacheManager.instance.initialize(
+        maxSizeBytes: maxSizeBytes,
+      );
+      return await StreamAudioCacheManager.instance.getCachedFilePath(trackKey);
+    } catch (e) {
+      _log.d('Stream cache lookup skipped: $e');
+      return null;
+    }
+  }
+
+  Future<void> _recordStreamPlaybackForCache(Track track) async {
+    final maxSizeBytes = _streamCacheLimitBytesFromSettings();
+    if (maxSizeBytes <= 0) return;
+
+    final trackKey = _trackKeyFromTrack(track);
+    if (trackKey.isEmpty) return;
+
+    try {
+      await StreamAudioCacheManager.instance.initialize(
+        maxSizeBytes: maxSizeBytes,
+      );
+      await StreamAudioCacheManager.instance.recordPlayback(trackKey);
+    } catch (e) {
+      _log.d('Failed to record stream playback cache hit: $e');
+    }
+  }
+
+  Future<void> _maybeCacheResolvedStreamAudio({
+    required Track track,
+    required String resolvedService,
+    required String rawStreamUrl,
+    required bool requiresDecryption,
+    required bool requiresProxy,
+    required bool usesLiveProxy,
+    required String resolvedFormat,
+  }) async {
+    final maxSizeBytes = _streamCacheLimitBytesFromSettings();
+    if (maxSizeBytes <= 0) return;
+
+    if (requiresDecryption || requiresProxy || usesLiveProxy) return;
+
+    final normalizedService = resolvedService.trim().toLowerCase();
+    if (normalizedService == 'youtube') return;
+    if (rawStreamUrl.startsWith('MANIFEST:')) return;
+    if (!(rawStreamUrl.startsWith('http://') ||
+        rawStreamUrl.startsWith('https://'))) {
+      return;
+    }
+
+    final trackKey = _trackKeyFromTrack(track);
+    if (trackKey.isEmpty) return;
+
+    try {
+      await StreamAudioCacheManager.instance.initialize(
+        maxSizeBytes: maxSizeBytes,
+      );
+      final playCount = await StreamAudioCacheManager.instance.recordPlayback(
+        trackKey,
+      );
+      if (playCount < _streamCacheFrequentPlayThreshold) {
+        return;
+      }
+
+      await StreamAudioCacheManager.instance.cacheTrackFromUrlIfFrequent(
+        trackKey: trackKey,
+        streamUrl: rawStreamUrl,
+        minPlayCount: _streamCacheFrequentPlayThreshold,
+        extensionHint: resolvedFormat,
+      );
+    } catch (e) {
+      _log.d('Failed to cache resolved stream audio: $e');
+    }
   }
 
   String _resolvePrefetchServiceBucket(PlaybackItem item) {

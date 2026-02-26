@@ -2957,7 +2957,8 @@ class DownloadQueueNotifier extends Notifier<DownloadQueueState> {
                     trackToDownload.albumName,
                 albumArtist: data['album_artist'] as String?,
                 artistId:
-                    data['artist_id']?.toString() ?? trackToDownload.artistId,
+                    (data['artist_id'] ?? data['artistId'])?.toString() ??
+                    trackToDownload.artistId,
                 albumId:
                     data['album_id']?.toString() ?? trackToDownload.albumId,
                 coverUrl: data['images'] as String?,

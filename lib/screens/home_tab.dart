@@ -3833,7 +3833,7 @@ class _ExtensionAlbumScreenState extends ConsumerState<ExtensionAlbumScreen> {
           .toList();
 
       // Extract artist info from album response
-      final artistId = result['artist_id'] as String?;
+      final artistId = (result['artist_id'] ?? result['artistId'])?.toString();
       final artistName = result['artists'] as String?;
 
       setState(() {
@@ -3865,7 +3865,8 @@ class _ExtensionAlbumScreenState extends ConsumerState<ExtensionAlbumScreen> {
       name: (data['name'] ?? '').toString(),
       artistName: (data['artists'] ?? data['artist'] ?? '').toString(),
       albumName: (data['album_name'] ?? widget.albumName).toString(),
-      artistId: data['artist_id']?.toString() ?? _artistId,
+      artistId:
+          (data['artist_id'] ?? data['artistId'])?.toString() ?? _artistId,
       albumId: data['album_id']?.toString() ?? widget.albumId,
       coverUrl: _resolveCoverUrl(
         data['cover_url']?.toString(),
@@ -4019,7 +4020,7 @@ class _ExtensionPlaylistScreenState
       name: (data['name'] ?? '').toString(),
       artistName: (data['artists'] ?? data['artist'] ?? '').toString(),
       albumName: (data['album_name'] ?? '').toString(),
-      artistId: data['artist_id']?.toString(),
+      artistId: (data['artist_id'] ?? data['artistId'])?.toString(),
       albumId: data['album_id']?.toString(),
       coverUrl: _resolveCoverUrl(
         data['cover_url']?.toString(),
@@ -4192,7 +4193,9 @@ class _ExtensionArtistScreenState extends ConsumerState<ExtensionArtistScreen> {
       artistName: (data['artists'] ?? data['artist'] ?? '').toString(),
       albumName: (data['album_name'] ?? data['album'] ?? '').toString(),
       albumArtist: data['album_artist']?.toString(),
-      artistId: data['artist_id']?.toString() ?? widget.artistId,
+      artistId:
+          (data['artist_id'] ?? data['artistId'])?.toString() ??
+          widget.artistId,
       albumId: data['album_id']?.toString(),
       coverUrl: (data['cover_url'] ?? data['images'])?.toString(),
       isrc: data['isrc']?.toString(),

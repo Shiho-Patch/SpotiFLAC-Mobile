@@ -9,8 +9,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:spotiflac_android/l10n/l10n.dart';
 import 'package:spotiflac_android/providers/download_queue_provider.dart';
 import 'package:spotiflac_android/providers/local_library_provider.dart';
+import 'package:spotiflac_android/providers/settings_provider.dart';
 import 'package:spotiflac_android/services/cover_cache_manager.dart';
 import 'package:spotiflac_android/services/platform_bridge.dart';
+import 'package:spotiflac_android/services/stream_audio_cache_manager.dart';
 import 'package:spotiflac_android/utils/app_bar_layout.dart';
 import 'package:spotiflac_android/widgets/settings_group.dart';
 
@@ -26,6 +28,15 @@ class _CacheManagementPageState extends ConsumerState<CacheManagementPage> {
   // Keep in sync with ExploreNotifier keys.
   static const String _exploreCacheKey = 'explore_home_feed_cache';
   static const String _exploreCacheTsKey = 'explore_home_feed_ts';
+  static const List<int> _streamCacheLimitOptionsMb = <int>[
+    0,
+    256,
+    512,
+    1024,
+    2048,
+    4096,
+    8192,
+  ];
 
   _CacheOverview? _overview;
   bool _isLoading = true;
@@ -60,12 +71,18 @@ class _CacheManagementPageState extends ConsumerState<CacheManagementPage> {
   }
 
   Future<_CacheOverview> _buildOverview() async {
+    final settings = ref.read(settingsProvider);
+    final streamCacheLimitBytes =
+        settings.streamingCacheMaxSizeMb * 1024 * 1024;
     final appCacheDirFuture = getApplicationCacheDirectory();
     final tempDirFuture = getTemporaryDirectory();
     final appSupportDirFuture = getApplicationSupportDirectory();
     final coverStatsFuture = CoverCacheManager.getStats();
     final prefsFuture = SharedPreferences.getInstance();
     final trackCacheEntriesFuture = _getTrackCacheSizeSafe();
+    final streamCacheStatsFuture = StreamAudioCacheManager.instance.getStats(
+      maxSizeBytes: streamCacheLimitBytes,
+    );
 
     final appCacheDir = await appCacheDirFuture;
     final tempDir = await tempDirFuture;
@@ -100,6 +117,7 @@ class _CacheManagementPageState extends ConsumerState<CacheManagementPage> {
     final coverStats = await coverStatsFuture;
     final libraryCoverStats = await libraryCoverStatsFuture;
     final trackCacheEntries = await trackCacheEntriesFuture;
+    final streamCacheStats = await streamCacheStatsFuture;
 
     return _CacheOverview(
       appCachePath: appCachePath,
@@ -112,6 +130,7 @@ class _CacheManagementPageState extends ConsumerState<CacheManagementPage> {
       exploreCacheBytes: exploreBytes,
       hasExploreCache: hasExploreCache,
       trackCacheEntries: trackCacheEntries,
+      streamCacheStats: streamCacheStats,
     );
   }
 
@@ -207,6 +226,10 @@ class _CacheManagementPageState extends ConsumerState<CacheManagementPage> {
     await PlatformBridge.clearTrackCache();
   }
 
+  Future<void> _clearStreamingAudioCache() async {
+    await StreamAudioCacheManager.instance.clearCache();
+  }
+
   Future<void> _clearAllCaches() async {
     final currentOverview = _overview;
     await _clearAppCache();
@@ -217,6 +240,7 @@ class _CacheManagementPageState extends ConsumerState<CacheManagementPage> {
     await _clearLibraryCoverCache();
     await _clearExploreCache();
     await _clearTrackCache();
+    await _clearStreamingAudioCache();
   }
 
   Future<bool> _confirmClear(String target) async {
@@ -352,6 +376,47 @@ class _CacheManagementPageState extends ConsumerState<CacheManagementPage> {
     return '$description\n$sizeInfo';
   }
 
+  String _formatCacheLimit(int megabytes) {
+    if (megabytes <= 0) return 'Off';
+    if (megabytes >= 1024) {
+      final gb = megabytes / 1024;
+      final label = gb % 1 == 0 ? gb.toStringAsFixed(0) : gb.toStringAsFixed(1);
+      return '$label GB';
+    }
+    return '$megabytes MB';
+  }
+
+  Future<void> _pickStreamCacheLimit(int currentMb) async {
+    if (_isBusy) return;
+    final selected = await showModalBottomSheet<int>(
+      context: context,
+      showDragHandle: true,
+      builder: (context) {
+        return SafeArea(
+          child: ListView.builder(
+            shrinkWrap: true,
+            itemCount: _streamCacheLimitOptionsMb.length,
+            itemBuilder: (context, index) {
+              final option = _streamCacheLimitOptionsMb[index];
+              return ListTile(
+                title: Text(_formatCacheLimit(option)),
+                subtitle: option == 0
+                    ? const Text('Disable streaming cache')
+                    : Text('Max cache size for streamed songs'),
+                trailing: option == currentMb ? const Icon(Icons.check) : null,
+                onTap: () => Navigator.pop(context, option),
+              );
+            },
+          ),
+        );
+      },
+    );
+
+    if (selected == null || selected == currentMb) return;
+    ref.read(settingsProvider.notifier).setStreamingCacheMaxSizeMb(selected);
+    await _refreshOverview();
+  }
+
   Widget _buildClearTrailing(String actionKey, VoidCallback onPressed) {
     if (_busyAction == actionKey) {
       return const SizedBox(
@@ -369,6 +434,7 @@ class _CacheManagementPageState extends ConsumerState<CacheManagementPage> {
 
   @override
   Widget build(BuildContext context) {
+    final settings = ref.watch(settingsProvider);
     final colorScheme = Theme.of(context).colorScheme;
     final topPadding = normalizedHeaderTopPadding(context);
     final overview = _overview;
@@ -623,6 +689,39 @@ class _CacheManagementPageState extends ConsumerState<CacheManagementPage> {
                         action: _clearTrackCache,
                       ),
                     ),
+                  ),
+                  SettingsItem(
+                    icon: Icons.audiotrack_outlined,
+                    title: 'Streaming audio cache',
+                    subtitle: _buildSubtitle(
+                      'Frequently played streamed songs are cached here (not your downloads).',
+                      overview.streamCacheStats.maxSizeBytes > 0
+                          ? '${_formatBytes(overview.streamCacheStats.totalSizeBytes)} / ${_formatBytes(overview.streamCacheStats.maxSizeBytes)} (${overview.streamCacheStats.fileCount} files)'
+                          : 'Disabled',
+                    ),
+                    trailing: _buildClearTrailing(
+                      'clear_stream_audio_cache',
+                      () => _confirmAndRunAction(
+                        actionKey: 'clear_stream_audio_cache',
+                        targetLabel: 'Streaming audio cache',
+                        action: _clearStreamingAudioCache,
+                      ),
+                    ),
+                  ),
+                  SettingsItem(
+                    icon: Icons.sd_storage_outlined,
+                    title: 'Streaming cache limit',
+                    subtitle:
+                        'Choose how much storage can be used for streaming cache.',
+                    trailing: Text(
+                      _formatCacheLimit(settings.streamingCacheMaxSizeMb),
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                    onTap: _isBusy
+                        ? null
+                        : () => _pickStreamCacheLimit(
+                            settings.streamingCacheMaxSizeMb,
+                          ),
                     showDivider: false,
                   ),
                 ],
@@ -671,6 +770,7 @@ class _CacheOverview {
   final int exploreCacheBytes;
   final bool hasExploreCache;
   final int trackCacheEntries;
+  final StreamAudioCacheStats streamCacheStats;
 
   const _CacheOverview({
     required this.appCachePath,
@@ -683,6 +783,7 @@ class _CacheOverview {
     required this.exploreCacheBytes,
     required this.hasExploreCache,
     required this.trackCacheEntries,
+    required this.streamCacheStats,
   });
 
   int get totalKnownDiskCacheBytes {
@@ -690,7 +791,8 @@ class _CacheOverview {
         (tempStats?.totalSizeBytes ?? 0) +
         coverStats.totalSizeBytes +
         libraryCoverStats.totalSizeBytes +
-        exploreCacheBytes;
+        exploreCacheBytes +
+        streamCacheStats.totalSizeBytes;
   }
 }
 

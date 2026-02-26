@@ -6,6 +6,7 @@ import 'package:spotiflac_android/models/settings.dart';
 import 'package:spotiflac_android/constants/app_info.dart';
 import 'package:spotiflac_android/providers/playback_provider.dart';
 import 'package:spotiflac_android/services/platform_bridge.dart';
+import 'package:spotiflac_android/services/stream_audio_cache_manager.dart';
 import 'package:spotiflac_android/utils/logger.dart';
 
 const _settingsKey = 'app_settings';
@@ -17,6 +18,7 @@ final _log = AppLogger('SettingsProvider');
 class SettingsNotifier extends Notifier<AppSettings> {
   static const List<int> _youtubeOpusSupportedBitrates = [128, 256];
   static const List<int> _youtubeMp3SupportedBitrates = [128, 256, 320];
+  static const int _maxStreamingCacheMb = 8192;
   static final RegExp _isoRegionPattern = RegExp(r'^[A-Z]{2}$');
 
   /// Compare two semver strings. Returns true if [a] < [b].
@@ -63,6 +65,7 @@ class SettingsNotifier extends Notifier<AppSettings> {
 
     _syncLyricsSettingsToBackend();
     _syncNetworkCompatibilitySettingsToBackend();
+    _syncStreamingCacheLimitToManager();
   }
 
   void _syncLyricsSettingsToBackend() {
@@ -88,6 +91,23 @@ class SettingsNotifier extends Notifier<AppSettings> {
     ).catchError((e) {
       _log.w('Failed to sync network compatibility options to backend: $e');
     });
+  }
+
+  int _normalizeStreamingCacheSizeMb(int sizeMb) {
+    if (sizeMb <= 0) return 0;
+    return sizeMb.clamp(64, _maxStreamingCacheMb).toInt();
+  }
+
+  void _syncStreamingCacheLimitToManager() {
+    final normalizedMb = _normalizeStreamingCacheSizeMb(
+      state.streamingCacheMaxSizeMb,
+    );
+    final maxSizeBytes = normalizedMb * 1024 * 1024;
+    StreamAudioCacheManager.instance
+        .initialize(maxSizeBytes: maxSizeBytes)
+        .catchError((e) {
+          _log.w('Failed to sync streaming cache limit: $e');
+        });
   }
 
   Future<void> _runMigrations(SharedPreferences prefs) async {
@@ -552,6 +572,13 @@ class SettingsNotifier extends Notifier<AppSettings> {
   void setDownloadNetworkMode(String mode) {
     state = state.copyWith(downloadNetworkMode: mode);
     _saveSettings();
+  }
+
+  void setStreamingCacheMaxSizeMb(int sizeMb) {
+    final normalized = _normalizeStreamingCacheSizeMb(sizeMb);
+    state = state.copyWith(streamingCacheMaxSizeMb: normalized);
+    _saveSettings();
+    _syncStreamingCacheLimitToManager();
   }
 
   void setNetworkCompatibilityMode(bool enabled) {

@@ -19,6 +19,24 @@ import 'package:spotiflac_android/services/cover_cache_manager.dart';
 import 'package:spotiflac_android/widgets/download_service_picker.dart';
 import 'package:spotiflac_android/utils/clickable_metadata.dart';
 
+const Set<String> _builtInPlaybackSources = {
+  'deezer',
+  'spotify',
+  'tidal',
+  'qobuz',
+  'amazon',
+  'youtube',
+  'ytmusic',
+  'local',
+};
+
+String? _playbackItemExtensionId(PlaybackItem item) {
+  final source = (item.track?.source ?? '').trim();
+  if (source.isEmpty) return null;
+  if (_builtInPlaybackSources.contains(source.toLowerCase())) return null;
+  return source;
+}
+
 // ─── Mini Player Bar ─────────────────────────────────────────────────────────
 class MiniPlayerBar extends ConsumerWidget {
   const MiniPlayerBar({super.key});
@@ -81,10 +99,8 @@ class MiniPlayerBar extends ConsumerWidget {
                           style: Theme.of(context).textTheme.bodyMedium
                               ?.copyWith(fontWeight: FontWeight.w600),
                         ),
-                        ClickableArtistName(
-                          artistName: item.artist,
-                          artistId: item.track?.artistId,
-                          coverUrl: item.coverUrl.isNotEmpty ? item.coverUrl : null,
+                        Text(
+                          item.artist,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: Theme.of(context).textTheme.bodySmall
@@ -320,6 +336,7 @@ class _FullScreenPlayerState extends ConsumerState<_FullScreenPlayer> {
       return const SizedBox.shrink();
     }
     _prefetchLyricsForCurrentTrack(state);
+    final extensionId = _playbackItemExtensionId(item);
 
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
@@ -535,7 +552,10 @@ class _FullScreenPlayerState extends ConsumerState<_FullScreenPlayer> {
                                 ClickableArtistName(
                                   artistName: item.artist,
                                   artistId: item.track?.artistId,
-                                  coverUrl: item.coverUrl.isNotEmpty ? item.coverUrl : null,
+                                  extensionId: extensionId,
+                                  coverUrl: item.coverUrl.isNotEmpty
+                                      ? item.coverUrl
+                                      : null,
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                   style:
@@ -543,7 +563,7 @@ class _FullScreenPlayerState extends ConsumerState<_FullScreenPlayer> {
                                               ? textTheme.bodySmall
                                               : textTheme.bodyMedium)
                                           ?.copyWith(
-                                            color: colorScheme.onSurfaceVariant,
+                                            color: colorScheme.primary,
                                           ),
                                 ),
                                 if (showAlbum) ...[
@@ -552,7 +572,10 @@ class _FullScreenPlayerState extends ConsumerState<_FullScreenPlayer> {
                                     albumName: item.album,
                                     albumId: item.track?.albumId,
                                     artistName: item.artist,
-                                    coverUrl: item.coverUrl.isNotEmpty ? item.coverUrl : null,
+                                    extensionId: extensionId,
+                                    coverUrl: item.coverUrl.isNotEmpty
+                                        ? item.coverUrl
+                                        : null,
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
                                     style: textTheme.bodySmall?.copyWith(

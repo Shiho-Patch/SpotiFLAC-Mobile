@@ -16,6 +16,7 @@ import 'package:spotiflac_android/screens/store_tab.dart';
 import 'package:spotiflac_android/screens/queue_tab.dart';
 import 'package:spotiflac_android/screens/settings/settings_tab.dart';
 import 'package:spotiflac_android/services/platform_bridge.dart';
+import 'package:spotiflac_android/services/shell_navigation_service.dart';
 import 'package:spotiflac_android/services/share_intent_service.dart';
 import 'package:spotiflac_android/services/update_checker.dart';
 import 'package:spotiflac_android/widgets/update_dialog.dart';
@@ -38,16 +39,20 @@ class _MainShellState extends ConsumerState<MainShell> {
   StreamSubscription<String>? _shareSubscription;
   DateTime? _lastBackPress;
   final GlobalKey<NavigatorState> _homeTabNavigatorKey =
-      GlobalKey<NavigatorState>();
+      ShellNavigationService.homeTabNavigatorKey;
   final GlobalKey<NavigatorState> _libraryTabNavigatorKey =
-      GlobalKey<NavigatorState>();
+      ShellNavigationService.libraryTabNavigatorKey;
   final GlobalKey<NavigatorState> _storeTabNavigatorKey =
-      GlobalKey<NavigatorState>();
+      ShellNavigationService.storeTabNavigatorKey;
 
   @override
   void initState() {
     super.initState();
     _pageController = PageController(initialPage: _currentIndex);
+    ShellNavigationService.syncState(
+      currentTabIndex: _currentIndex,
+      showStoreTab: false,
+    );
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _checkForUpdates();
       _setupShareListener();
@@ -242,6 +247,13 @@ class _MainShellState extends ConsumerState<MainShell> {
     if (_currentIndex != index) {
       HapticFeedback.selectionClick();
       setState(() => _currentIndex = index);
+      final showStore = ref.read(
+        settingsProvider.select((s) => s.showExtensionStore),
+      );
+      ShellNavigationService.syncState(
+        currentTabIndex: _currentIndex,
+        showStoreTab: showStore,
+      );
       _pageController.animateToPage(
         index,
         duration: const Duration(milliseconds: 250),
@@ -254,6 +266,13 @@ class _MainShellState extends ConsumerState<MainShell> {
     final previousIndex = _currentIndex;
     if (_currentIndex != index) {
       setState(() => _currentIndex = index);
+      final showStore = ref.read(
+        settingsProvider.select((s) => s.showExtensionStore),
+      );
+      ShellNavigationService.syncState(
+        currentTabIndex: _currentIndex,
+        showStoreTab: showStore,
+      );
       FocusManager.instance.primaryFocus?.unfocus();
       if (index == 0 && previousIndex != 0) {
         _resetHomeToMain();
@@ -384,6 +403,10 @@ class _MainShellState extends ConsumerState<MainShell> {
     );
     final showStore = ref.watch(
       settingsProvider.select((s) => s.showExtensionStore),
+    );
+    ShellNavigationService.syncState(
+      currentTabIndex: _currentIndex,
+      showStoreTab: showStore,
     );
     final storeUpdatesCount = ref.watch(
       storeProvider.select((s) => s.updatesAvailableCount),

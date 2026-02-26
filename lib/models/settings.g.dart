@@ -54,6 +54,8 @@ AppSettings _$AppSettingsFromJson(Map<String, dynamic> json) => AppSettings(
   autoExportFailedDownloads:
       json['autoExportFailedDownloads'] as bool? ?? false,
   downloadNetworkMode: json['downloadNetworkMode'] as String? ?? 'any',
+  streamingCacheMaxSizeMb:
+      (json['streamingCacheMaxSizeMb'] as num?)?.toInt() ?? 1024,
   networkCompatibilityMode: json['networkCompatibilityMode'] as bool? ?? false,
   songLinkRegion: json['songLinkRegion'] as String? ?? 'US',
   localLibraryEnabled: json['localLibraryEnabled'] as bool? ?? false,
@@ -131,6 +133,7 @@ Map<String, dynamic> _$AppSettingsToJson(
   'useAllFilesAccess': instance.useAllFilesAccess,
   'autoExportFailedDownloads': instance.autoExportFailedDownloads,
   'downloadNetworkMode': instance.downloadNetworkMode,
+  'streamingCacheMaxSizeMb': instance.streamingCacheMaxSizeMb,
   'networkCompatibilityMode': instance.networkCompatibilityMode,
   'songLinkRegion': instance.songLinkRegion,
   'localLibraryEnabled': instance.localLibraryEnabled,
