@@ -3865,7 +3865,7 @@
   "trackConvertFailed": "转换失败",
   "@trackConvertFailed": {
     "description": "转换失败时的提示"
-  }
+  },
   "setupModeSelectionTitle": "选择您的模式",
   "setupModeSelectionDescription": "您想如何使用 SpotiFLAC？您可以稍后在设置中随时更改。",
   "setupModeDownloaderTitle": "下载器",
