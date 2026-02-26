@@ -1,0 +1,3882 @@
+{
+  "@@locale": "zh_CN",
+  "@@last_modified": "2026-02-27T00:00:00Z",
+  "appName": "SpotiFLAC",
+  "@appName": {
+    "description": "应用名称 - 请勿翻译"
+  },
+  "appDescription": "从 Tidal、Qobuz 和 Amazon Music 下载无损质量的 Spotify 曲目。",
+  "@appDescription": {
+    "description": "关于页面显示的应用描述"
+  },
+  "navHome": "首页",
+  "@navHome": {
+    "description": "底部导航 - 首页标签"
+  },
+  "navLibrary": "媒体库",
+  "@navLibrary": {
+    "description": "底部导航 - 媒体库标签"
+  },
+  "navHistory": "历史记录 (旧版)",
+  "@navHistory": {
+    "description": "底部导航 - 历史标签 (旧版)"
+  },
+  "navSettings": "设置",
+  "@navSettings": {
+    "description": "底部导航 - 设置标签"
+  },
+  "navStore": "商店",
+  "@navStore": {
+    "description": "底部导航 - 扩展商店标签"
+  },
+  "homeTitle": "首页",
+  "@homeTitle": {
+    "description": "首页标题"
+  },
+  "homeSearchHint": "粘贴 Spotify 链接或搜索...",
+  "@homeSearchHint": {
+    "description": "搜索框占位文本"
+  },
+  "homeSearchHintExtension": "使用 {extensionName} 搜索...",
+  "@homeSearchHintExtension": {
+    "description": "扩展搜索激活时的占位符",
+    "placeholders": {
+      "extensionName": {
+        "type": "String",
+        "description": "活动扩展的名称"
+      }
+    }
+  },
+  "homeSubtitle": "粘贴 Spotify 链接或按名称搜索",
+  "@homeSubtitle": {
+    "description": "搜索框下方的副标题"
+  },
+  "homeSupports": "支持：单曲、专辑、歌单、艺术家链接",
+  "@homeSupports": {
+    "description": "关于支持的 URL 类型的说明文字"
+  },
+  "homeRecent": "最近搜索",
+  "@homeRecent": {
+    "description": "最近搜索的部分页眉"
+  },
+  "historyTitle": "历史记录",
+  "@historyTitle": {
+    "description": "历史界面标题"
+  },
+  "historyDownloading": "正在下载 ({count})",
+  "@historyDownloading": {
+    "description": "显示活动下载数量的标签页",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "description": "活动下载的数量"
+      }
+    }
+  },
+  "historyDownloaded": "已下载",
+  "@historyDownloaded": {
+    "description": "显示已完成下载的标签页"
+  },
+  "historyFilterAll": "全部",
+  "@historyFilterAll": {
+    "description": "过滤芯片 - 显示所有项目"
+  },
+  "historyFilterAlbums": "专辑",
+  "@historyFilterAlbums": {
+    "description": "过滤芯片 - 仅显示专辑"
+  },
+  "historyFilterSingles": "单曲",
+  "@historyFilterSingles": {
+    "description": "过滤芯片 - 仅显示单曲"
+  },
+  "historyTracksCount": "{count, plural, =1{1 首曲目} other{{count} 首曲目}}",
+  "@historyTracksCount": {
+    "description": "带复数形式的曲目计数",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "historyAlbumsCount": "{count, plural, =1{1 张专辑} other{{count} 张专辑}}",
+  "@historyAlbumsCount": {
+    "description": "带复数形式的专辑计数",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "historyNoDownloads": "暂无下载历史",
+  "@historyNoDownloads": {
+    "description": "空状态标题"
+  },
+  "historyNoDownloadsSubtitle": "下载的曲目将显示在这里",
+  "@historyNoDownloadsSubtitle": {
+    "description": "空状态副标题"
+  },
+  "historyNoAlbums": "没有专辑下载",
+  "@historyNoAlbums": {
+    "description": "过滤专辑时的空状态"
+  },
+  "historyNoAlbumsSubtitle": "从专辑中下载多首曲目后即可在此查看",
+  "@historyNoAlbumsSubtitle": {
+    "description": "专辑过滤器的空状态副标题"
+  },
+  "historyNoSingles": "没有单曲下载",
+  "@historyNoSingles": {
+    "description": "过滤单曲时的空状态"
+  },
+  "historyNoSinglesSubtitle": "单曲下载将显示在这里",
+  "@historyNoSinglesSubtitle": {
+    "description": "单曲过滤器的空状态副标题"
+  },
+  "historySearchHint": "搜索历史...",
+  "@historySearchHint": {
+    "description": "历史记录中的搜索栏占位符"
+  },
+  "settingsTitle": "设置",
+  "@settingsTitle": {
+    "description": "设置界面标题"
+  },
+  "settingsDownload": "下载",
+  "@settingsDownload": {
+    "description": "设置部分 - 下载选项"
+  },
+  "settingsAppearance": "外观",
+  "@settingsAppearance": {
+    "description": "设置部分 - 视觉自定义"
+  },
+  "settingsOptions": "选项",
+  "@settingsOptions": {
+    "description": "设置部分 - 应用选项"
+  },
+  "settingsExtensions": "扩展",
+  "@settingsExtensions": {
+    "description": "设置部分 - 扩展管理"
+  },
+  "settingsAbout": "关于",
+  "@settingsAbout": {
+    "description": "设置部分 - 应用信息"
+  },
+  "downloadTitle": "下载",
+  "@downloadTitle": {
+    "description": "下载设置页面标题"
+  },
+  "downloadLocation": "下载位置",
+  "@downloadLocation": {
+    "description": "下载文件夹设置"
+  },
+  "downloadLocationSubtitle": "选择文件的保存位置",
+  "@downloadLocationSubtitle": {
+    "description": "下载位置的副标题"
+  },
+  "downloadLocationDefault": "默认位置",
+  "@downloadLocationDefault": {
+    "description": "使用默认文件夹时显示"
+  },
+  "downloadDefaultService": "默认服务",
+  "@downloadDefaultService": {
+    "description": "首选下载服务设置 (Tidal/Qobuz/Amazon)"
+  },
+  "downloadDefaultServiceSubtitle": "用于下载的服务",
+  "@downloadDefaultServiceSubtitle": {
+    "description": "默认服务的副标题"
+  },
+  "downloadDefaultQuality": "默认音质",
+  "@downloadDefaultQuality": {
+    "description": "音频质量设置"
+  },
+  "downloadAskQuality": "下载前询问音质",
+  "@downloadAskQuality": {
+    "description": "显示音质选择器的开关"
+  },
+  "downloadAskQualitySubtitle": "每次下载都显示音质选择器",
+  "@downloadAskQualitySubtitle": {
+    "description": "询问音质开关的副标题"
+  },
+  "downloadFilenameFormat": "文件名格式",
+  "@downloadFilenameFormat": {
+    "description": "输出文件名模式设置"
+  },
+  "downloadFolderOrganization": "文件夹组织",
+  "@downloadFolderOrganization": {
+    "description": "文件夹结构设置"
+  },
+  "downloadSeparateSingles": "单独存放歌曲",
+  "@downloadSeparateSingles": {
+    "description": "将单曲分开存放的开关"
+  },
+  "downloadSeparateSinglesSubtitle": "将单曲放入单独的文件夹中",
+  "@downloadSeparateSinglesSubtitle": {
+    "description": "单独存放歌曲开关的副标题"
+  },
+  "qualityBest": "最佳可用音质",
+  "@qualityBest": {
+    "description": "音频质量选项 - 最高可用"
+  },
+  "qualityFlac": "FLAC",
+  "@qualityFlac": {
+    "description": "音频质量选项 - FLAC 无损"
+  },
+  "quality320": "320 kbps",
+  "@quality320": {
+    "description": "音频质量选项 - 320kbps MP3"
+  },
+  "quality128": "128 kbps",
+  "@quality128": {
+    "description": "音频质量选项 - 128kbps MP3"
+  },
+  "appearanceTitle": "外观",
+  "@appearanceTitle": {
+    "description": "外观设置页面标题"
+  },
+  "appearanceTheme": "主题",
+  "@appearanceTheme": {
+    "description": "主题模式设置"
+  },
+  "appearanceThemeSystem": "跟随系统",
+  "@appearanceThemeSystem": {
+    "description": "跟随系统主题"
+  },
+  "appearanceThemeLight": "浅色",
+  "@appearanceThemeLight": {
+    "description": "浅色主题"
+  },
+  "appearanceThemeDark": "深色",
+  "@appearanceThemeDark": {
+    "description": "深色主题"
+  },
+  "appearanceDynamicColor": "动态配色 (Material You)",
+  "@appearanceDynamicColor": {
+    "description": "Material You 动态颜色"
+  },
+  "appearanceDynamicColorSubtitle": "使用壁纸中的颜色",
+  "@appearanceDynamicColorSubtitle": {
+    "description": "动态配色的副标题"
+  },
+  "appearanceAccentColor": "强调色",
+  "@appearanceAccentColor": {
+    "description": "自定义强调色选择器"
+  },
+  "appearanceHistoryView": "历史布局",
+  "@appearanceHistoryView": {
+    "description": "历史记录的布局样式"
+  },
+  "appearanceHistoryViewList": "列表",
+  "@appearanceHistoryViewList": {
+    "description": "列表布局选项"
+  },
+  "appearanceHistoryViewGrid": "网格",
+  "@appearanceHistoryViewGrid": {
+    "description": "网格布局选项"
+  },
+  "optionsTitle": "选项",
+  "@optionsTitle": {
+    "description": "选项设置页面标题"
+  },
+  "optionsSearchSource": "搜索源",
+  "@optionsSearchSource": {
+    "description": "搜索提供商设置部分"
+  },
+  "optionsPrimaryProvider": "主要提供商",
+  "@optionsPrimaryProvider": {
+    "description": "主要搜索提供商设置"
+  },
+  "optionsPrimaryProviderSubtitle": "按曲目名称搜索时使用的服务。",
+  "@optionsPrimaryProviderSubtitle": {
+    "description": "主要提供商的副标题"
+  },
+  "optionsUsingExtension": "正在使用扩展：{extensionName}",
+  "@optionsUsingExtension": {
+    "description": "显示活动扩展名称",
+    "placeholders": {
+      "extensionName": {
+        "type": "String"
+      }
+    }
+  },
+  "optionsSwitchBack": "点击 Deezer 或 Spotify 以从扩展切回",
+  "@optionsSwitchBack": {
+    "description": "切换回内置提供商的提示"
+  },
+  "optionsAutoFallback": "自动回退",
+  "@optionsAutoFallback": {
+    "description": "自动尝试其他服务"
+  },
+  "optionsAutoFallbackSubtitle": "如果下载失败，尝试其他服务",
+  "@optionsAutoFallbackSubtitle": {
+    "description": "自动回退的副标题"
+  },
+  "optionsUseExtensionProviders": "使用扩展提供商",
+  "@optionsUseExtensionProviders": {
+    "description": "启用扩展下载提供商"
+  },
+  "optionsUseExtensionProvidersOn": "将优先尝试扩展",
+  "@optionsUseExtensionProvidersOn": {
+    "description": "启用扩展提供商时的状态"
+  },
+  "optionsUseExtensionProvidersOff": "仅使用内置提供商",
+  "@optionsUseExtensionProvidersOff": {
+    "description": "禁用扩展提供商时的状态"
+  },
+  "optionsEmbedLyrics": "内嵌歌词",
+  "@optionsEmbedLyrics": {
+    "description": "在音频文件中内嵌歌词"
+  },
+  "optionsEmbedLyricsSubtitle": "将同步歌词内嵌到 FLAC 文件中",
+  "@optionsEmbedLyricsSubtitle": {
+    "description": "内嵌歌词的副标题"
+  },
+  "optionsMaxQualityCover": "最高音质封面",
+  "@optionsMaxQualityCover": {
+    "description": "下载最高质量的专辑封面"
+  },
+  "optionsMaxQualityCoverSubtitle": "下载最高分辨率的封面艺术",
+  "@optionsMaxQualityCoverSubtitle": {
+    "description": "最高音质封面的副标题"
+  },
+  "optionsConcurrentDownloads": "并发下载数",
+  "@optionsConcurrentDownloads": {
+    "description": "并行下载的数量"
+  },
+  "optionsConcurrentSequential": "串行 (一次 1 个)",
+  "@optionsConcurrentSequential": {
+    "description": "一次下载一个"
+  },
+  "optionsConcurrentParallel": "{count} 个并行下载",
+  "@optionsConcurrentParallel": {
+    "description": "多个并行下载",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "optionsConcurrentWarning": "并行下载可能会触发频率限制 (Rate Limiting)",
+  "@optionsConcurrentWarning": {
+    "description": "关于频率限制的警告"
+  },
+  "optionsExtensionStore": "扩展商店",
+  "@optionsExtensionStore": {
+    "description": "显示/隐藏商店标签页"
+  },
+  "optionsExtensionStoreSubtitle": "在导航栏中显示商店标签页",
+  "@optionsExtensionStoreSubtitle": {
+    "description": "扩展商店开关的副标题"
+  },
+  "optionsCheckUpdates": "检查更新",
+  "@optionsCheckUpdates": {
+    "description": "自动更新检查开关"
+  },
+  "optionsCheckUpdatesSubtitle": "当有新版本可用时通知我",
+  "@optionsCheckUpdatesSubtitle": {
+    "description": "更新检查的副标题"
+  },
+  "optionsUpdateChannel": "更新频道",
+  "@optionsUpdateChannel": {
+    "description": "稳定版 vs 预览版"
+  },
+  "optionsUpdateChannelStable": "仅稳定版本",
+  "@optionsUpdateChannelStable": {
+    "description": "仅稳定更新"
+  },
+  "optionsUpdateChannelPreview": "获取预览版本",
+  "@optionsUpdateChannelPreview": {
+    "description": "包括测试/预览版更新"
+  },
+  "optionsUpdateChannelWarning": "预览版可能包含 Bug 或不完整的功能",
+  "@optionsUpdateChannelWarning": {
+    "description": "关于预览频道的警告"
+  },
+  "optionsClearHistory": "清除下载历史",
+  "@optionsClearHistory": {
+    "description": "删除所有下载历史"
+  },
+  "optionsClearHistorySubtitle": "从历史记录中移除所有已下载曲目",
+  "@optionsClearHistorySubtitle": {
+    "description": "清除历史记录的副标题"
+  },
+  "optionsDetailedLogging": "详细日志",
+  "@optionsDetailedLogging": {
+    "description": "启用详细日志以进行调试"
+  },
+  "optionsDetailedLoggingOn": "正在记录详细日志",
+  "@optionsDetailedLoggingOn": {
+    "description": "启用日志时的状态"
+  },
+  "optionsDetailedLoggingOff": "提交 Bug 报告时请启用",
+  "@optionsDetailedLoggingOff": {
+    "description": "禁用日志时的状态"
+  },
+  "optionsSpotifyCredentials": "Spotify 凭据",
+  "@optionsSpotifyCredentials": {
+    "description": "Spotify API 凭据设置"
+  },
+  "optionsSpotifyCredentialsConfigured": "客户端 ID: {clientId}...",
+  "@optionsSpotifyCredentialsConfigured": {
+    "description": "显示配置的客户端 ID 预览",
+    "placeholders": {
+      "clientId": {
+        "type": "String"
+      }
+    }
+  },
+  "optionsSpotifyCredentialsRequired": "必需 - 点击进行配置",
+  "@optionsSpotifyCredentialsRequired": {
+    "description": "设置凭据的提示"
+  },
+"optionsSpotifyWarning": "Spotify 需要您自己的 API 凭据。请从 developer.spotify.com 免费获取它们。",
+  "@optionsSpotifyWarning": {
+    "description": "关于 Spotify API 要求的说明"
+  },
+  "optionsSpotifyDeprecationWarning": "由于 Spotify API 更改，Spotify 搜索将于 2026 年 3 月 3 日弃用。请切换到 Deezer。",
+  "@optionsSpotifyDeprecationWarning": {
+    "description": "关于 Spotify API 弃用的警告"
+  },
+  "extensionsTitle": "扩展",
+  "@extensionsTitle": {
+    "description": "扩展页面标题"
+  },
+  "extensionsInstalled": "已安装的扩展",
+  "@extensionsInstalled": {
+    "description": "已安装扩展的部分页眉"
+  },
+  "extensionsNone": "未安装扩展",
+  "@extensionsNone": {
+    "description": "空状态标题"
+  },
+  "extensionsNoneSubtitle": "从商店标签页安装扩展",
+  "@extensionsNoneSubtitle": {
+    "description": "空状态副标题"
+  },
+  "extensionsEnabled": "已启用",
+  "@extensionsEnabled": {
+    "description": "扩展状态 - 活动"
+  },
+  "extensionsDisabled": "已禁用",
+  "@extensionsDisabled": {
+    "description": "扩展状态 - 非活动"
+  },
+  "extensionsVersion": "版本 {version}",
+  "@extensionsVersion": {
+    "description": "扩展版本显示",
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "extensionsAuthor": "作者 {author}",
+  "@extensionsAuthor": {
+    "description": "扩展作者致谢",
+    "placeholders": {
+      "author": {
+        "type": "String"
+      }
+    }
+  },
+  "extensionsUninstall": "卸载",
+  "@extensionsUninstall": {
+    "description": "卸载扩展按钮"
+  },
+  "extensionsSetAsSearch": "设为搜索提供商",
+  "@extensionsSetAsSearch": {
+    "description": "使用扩展进行搜索"
+  },
+  "storeTitle": "扩展商店",
+  "@storeTitle": {
+    "description": "商店界面标题"
+  },
+  "storeSearch": "搜索扩展...",
+  "@storeSearch": {
+    "description": "商店搜索占位符"
+  },
+  "storeInstall": "安装",
+  "@storeInstall": {
+    "description": "安装扩展按钮"
+  },
+  "storeInstalled": "已安装",
+  "@storeInstalled": {
+    "description": "已安装徽章"
+  },
+  "storeUpdate": "更新",
+  "@storeUpdate": {
+    "description": "可用更新按钮"
+  },
+  "aboutTitle": "关于",
+  "@aboutTitle": {
+    "description": "关于页面标题"
+  },
+  "aboutContributors": "贡献者",
+  "@aboutContributors": {
+    "description": "贡献者部分"
+  },
+  "aboutMobileDeveloper": "移动端开发者",
+  "@aboutMobileDeveloper": {
+    "description": "移动端开发者的角色描述"
+  },
+  "aboutOriginalCreator": "SpotiFLAC 原作者",
+  "@aboutOriginalCreator": {
+    "description": "原作者的角色描述"
+  },
+  "aboutLogoArtist": "为我们创建精美应用图标的天才艺术家！",
+  "@aboutLogoArtist": {
+    "description": "图标艺术家的角色描述"
+  },
+  "aboutTranslators": "翻译者",
+  "@aboutTranslators": {
+    "description": "翻译者部分"
+  },
+  "aboutSpecialThanks": "特别鸣谢",
+  "@aboutSpecialThanks": {
+    "description": "特别鸣谢部分"
+  },
+  "aboutLinks": "相关链接",
+  "@aboutLinks": {
+    "description": "外部链接部分"
+  },
+  "aboutMobileSource": "移动端源码",
+  "@aboutMobileSource": {
+    "description": "指向移动端 GitHub 仓库的链接"
+  },
+  "aboutPCSource": "PC 端源码",
+  "@aboutPCSource": {
+    "description": "指向 PC 端 GitHub 仓库的链接"
+  },
+  "aboutReportIssue": "反馈问题",
+  "@aboutReportIssue": {
+    "description": "报告 Bug 的链接"
+  },
+  "aboutReportIssueSubtitle": "反馈您遇到的任何问题",
+  "@aboutReportIssueSubtitle": {
+    "description": "反馈问题的副标题"
+  },
+  "aboutFeatureRequest": "功能请求",
+  "@aboutFeatureRequest": {
+    "description": "建议功能的链接"
+  },
+  "aboutFeatureRequestSubtitle": "为应用建议新功能",
+  "@aboutFeatureRequestSubtitle": {
+    "description": "功能请求的副标题"
+  },
+  "aboutTelegramChannel": "Telegram 频道",
+  "@aboutTelegramChannel": {
+    "description": "Telegram 频道链接"
+  },
+  "aboutTelegramChannelSubtitle": "公告与更新提示",
+  "@aboutTelegramChannelSubtitle": {
+    "description": "Telegram 频道的副标题"
+  },
+  "aboutTelegramChat": "Telegram 社区",
+  "@aboutTelegramChat": {
+    "description": "Telegram 聊天群组链接"
+  },
+  "aboutTelegramChatSubtitle": "与其他用户交流",
+  "@aboutTelegramChatSubtitle": {
+    "description": "Telegram 社区的副标题"
+  },
+  "aboutSocial": "社交网络",
+  "@aboutSocial": {
+    "description": "社交链接部分"
+  },
+  "aboutSupport": "赞助支持",
+  "@aboutSupport": {
+    "description": "支持/捐赠链接部分"
+  },
+  "aboutApp": "应用详情",
+  "@aboutApp": {
+    "description": "应用信息部分"
+  },
+  "aboutVersion": "版本",
+  "@aboutVersion": {
+    "description": "版本信息标签"
+  },
+  "aboutBinimumDesc": "QQDL & HiFi API 的创作者。没有这个 API，Tidal 下载就无法实现！",
+  "@aboutBinimumDesc": {
+    "description": "对 binimum 的致谢描述"
+  },
+  "aboutSachinsenalDesc": "最初的 HiFi 项目创作者。Tidal 集成的基石！",
+  "@aboutSachinsenalDesc": {
+    "description": "对 sachinsenal0x64 的致谢描述"
+  },
+  "aboutSjdonadoDesc": "I Don't Have Spotify (IDHS) 的创作者。拯救危机的回退链接解析器！",
+  "@aboutSjdonadoDesc": {
+    "description": "对 sjdonado 的致谢描述"
+  },
+  "aboutDoubleDouble": "DoubleDouble",
+  "@aboutDoubleDouble": {
+    "description": "Amazon API 服务名称 - 请勿翻译"
+  },
+  "aboutDoubleDoubleDesc": "用于 Amazon Music 下载的出色 API。感谢您的免费分享！",
+  "@aboutDoubleDoubleDesc": {
+    "description": "对 DoubleDouble API 的致谢"
+  },
+  "aboutDabMusic": "DAB Music",
+  "@aboutDabMusic": {
+    "description": "Qobuz API 服务名称 - 请勿翻译"
+  },
+  "aboutDabMusicDesc": "最好的 Qobuz 串流 API。没有它就不可能有 Hi-Res 下载！",
+  "@aboutDabMusicDesc": {
+    "description": "对 DAB Music API 的致谢"
+  },
+  "aboutSpotiSaver": "SpotiSaver",
+  "@aboutSpotiSaver": {
+    "description": "SpotiSaver API 服务名称 - 请勿翻译"
+  },
+  "aboutSpotiSaverDesc": "Tidal Hi-Res FLAC 串流端点。无损音乐版图的关键一环！",
+  "@aboutSpotiSaverDesc": {
+    "description": "对 SpotiSaver API 的致谢"
+  },
+  "aboutAppDescription": "从 Tidal、Qobuz 和 Amazon Music 下载无损质量的 Spotify 曲目。",
+  "@aboutAppDescription": {
+    "description": "页眉卡片中的应用描述"
+  },
+  "albumTitle": "专辑",
+  "@albumTitle": {
+    "description": "专辑界面标题"
+  },
+  "albumTracks": "{count, plural, =1{1 首曲目} other{{count} 首曲目}}",
+  "@albumTracks": {
+    "description": "专辑曲目计数",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "albumDownloadAll": "全部下载",
+  "@albumDownloadAll": {
+    "description": "下载所有曲目的按钮"
+  },
+  "albumDownloadRemaining": "下载剩余部分",
+  "@albumDownloadRemaining": {
+    "description": "下载剩余曲目的按钮"
+  },
+  "playlistTitle": "歌单",
+  "@playlistTitle": {
+    "description": "歌单界面标题"
+  },
+  "artistTitle": "艺术家",
+  "@artistTitle": {
+    "description": "艺术家界面标题"
+  },
+  "artistAlbums": "专辑",
+  "@artistAlbums": {
+    "description": "艺术家专辑部分页眉"
+  },
+  "artistSingles": "单曲与 EP",
+  "@artistSingles": {
+    "description": "单曲/EP 部分页眉"
+  },
+  "artistCompilations": "精选集",
+  "@artistCompilations": {
+    "description": "精选集部分页眉"
+  },
+  "artistReleases": "{count, plural, =1{1 个发行版本} other{{count} 个发行版本}}",
+  "@artistReleases": {
+    "description": "艺术家发行计数",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "artistPopular": "热门曲目",
+  "@artistPopular": {
+    "description": "热门/顶级曲目部分页眉"
+  },
+  "artistMonthlyListeners": "{count} 位月收听者",
+  "@artistMonthlyListeners": {
+    "description": "月收听人数显示",
+    "placeholders": {
+      "count": {
+        "type": "String",
+        "description": "格式化后的收听人数"
+      }
+    }
+  },
+  "trackMetadataTitle": "曲目详情",
+  "@trackMetadataTitle": {
+    "description": "曲目元数据界面标题"
+  },
+  "trackMetadataArtist": "艺术家",
+  "@trackMetadataArtist": {
+    "description": "元数据字段 - 艺术家名称"
+  },
+  "trackMetadataAlbum": "专辑",
+  "@trackMetadataAlbum": {
+    "description": "元数据字段 - 专辑名称"
+  },
+  "trackMetadataDuration": "时长",
+  "@trackMetadataDuration": {
+    "description": "元数据字段 - 曲目长度"
+  },
+  "trackMetadataQuality": "音质",
+  "@trackMetadataQuality": {
+    "description": "元数据字段 - 音频质量"
+  },
+  "trackMetadataPath": "文件路径",
+  "@trackMetadataPath": {
+    "description": "元数据字段 - 文件位置"
+  },
+  "trackMetadataDownloadedAt": "下载日期",
+  "@trackMetadataDownloadedAt": {
+    "description": "元数据字段 - 下载日期"
+  },
+  "trackMetadataService": "服务源",
+  "@trackMetadataService": {
+    "description": "元数据字段 - 所使用的下载服务"
+  },
+  "trackMetadataPlay": "播放",
+  "@trackMetadataPlay": {
+    "description": "操作按钮 - 播放曲目"
+  },
+  "trackMetadataShare": "分享",
+  "@trackMetadataShare": {
+    "description": "操作按钮 - 分享曲目"
+  },
+  "trackMetadataDelete": "删除",
+  "@trackMetadataDelete": {
+    "description": "操作按钮 - 删除曲目"
+  },
+  "trackMetadataRedownload": "重新下载",
+  "@trackMetadataRedownload": {
+    "description": "操作按钮 - 再次下载"
+  },
+  "trackMetadataOpenFolder": "打开文件夹",
+  "@trackMetadataOpenFolder": {
+    "description": "操作按钮 - 打开包含文件夹"
+  },
+  "setupTitle": "欢迎使用 SpotiFLAC",
+  "@setupTitle": {
+    "description": "设置向导标题"
+  },
+  "setupSubtitle": "让我们开始为您进行初步配置",
+  "@setupSubtitle": {
+    "description": "设置向导副标题"
+  },
+  "setupStoragePermission": "存储权限",
+  "@setupStoragePermission": {
+    "description": "存储权限步骤标题"
+  },
+  "setupStoragePermissionSubtitle": "保存下载文件所必需的权限",
+  "@setupStoragePermissionSubtitle": {
+    "description": "存储权限的解释"
+  },
+  "setupStoragePermissionGranted": "权限已授予",
+  "@setupStoragePermissionGranted": {
+    "description": "权限授予后的状态"
+  },
+  "setupStoragePermissionDenied": "权限已拒绝",
+  "@setupStoragePermissionDenied": {
+    "description": "权限被拒绝后的状态"
+  },
+  "setupGrantPermission": "授予权限",
+  "@setupGrantPermission": {
+    "description": "请求权限的按钮"
+  },
+  "setupDownloadLocation": "下载位置",
+  "@setupDownloadLocation": {
+    "description": "下载文件夹步骤标题"
+  },
+  "setupChooseFolder": "选择文件夹",
+  "@setupChooseFolder": {
+    "description": "挑选文件夹的按钮"
+  },
+  "setupContinue": "继续",
+  "@setupContinue": {
+    "description": "继续下一步按钮"
+  },
+  "setupSkip": "以后再说",
+  "@setupSkip": {
+    "description": "跳过当前步骤按钮"
+  },
+  "setupStorageAccessRequired": "需要存储访问权",
+  "@setupStorageAccessRequired": {
+    "description": "需要存储访问权时的标题"
+  },
+  "setupStorageAccessMessage": "SpotiFLAC 需要“所有文件访问权限”才能将音乐文件保存到您选择的文件夹中。",
+  "@setupStorageAccessMessage": {
+    "description": "存储访问权的解释"
+  },
+  "setupStorageAccessMessageAndroid11": "Android 11+ 需要“所有文件访问权限”才能将文件保存到您选择的下载文件夹。",
+  "@setupStorageAccessMessageAndroid11": {
+    "description": "Android 11+ 的特定解释"
+  },
+  "setupOpenSettings": "打开设置",
+  "@setupOpenSettings": {
+    "description": "打开系统设置的按钮"
+  },
+  "setupPermissionDeniedMessage": "权限被拒绝。请授予所有权限以继续。",
+  "@setupPermissionDeniedMessage": {
+    "description": "权限拒绝时的错误提示"
+  },
+  "setupPermissionRequired": "需要 {permissionType} 权限",
+  "@setupPermissionRequired": {
+    "description": "通用权限要求标题",
+    "placeholders": {
+      "permissionType": {
+        "type": "String",
+        "description": "权限类型 (存储/通知)"
+      }
+    }
+  },
+  "setupPermissionRequiredMessage": "为了获得最佳体验，需要 {permissionType} 权限。您稍后可以在设置中更改此设置。",
+  "@setupPermissionRequiredMessage": {
+    "description": "通用权限要求信息",
+    "placeholders": {
+      "permissionType": {
+        "type": "String"
+      }
+    }
+  },
+  "setupSelectDownloadFolder": "选择下载文件夹",
+  "@setupSelectDownloadFolder": {
+    "description": "文件夹选择步骤标题"
+  },
+  "setupUseDefaultFolder": "使用默认文件夹？",
+  "@setupUseDefaultFolder": {
+    "description": "默认文件夹的对话框标题"
+  },
+  "setupNoFolderSelected": "未选择文件夹。您想使用默认的音乐文件夹吗？",
+  "@setupNoFolderSelected": {
+    "description": "未选择文件夹时的提示"
+  },
+  "setupUseDefault": "使用默认",
+  "@setupUseDefault": {
+    "description": "使用默认文件夹的按钮"
+  },
+  "setupDownloadLocationTitle": "下载位置",
+  "@setupDownloadLocationTitle": {
+    "description": "下载位置对话框标题"
+  },
+  "setupDownloadLocationIosMessage": "在 iOS 上，下载内容保存在应用的 Documents 文件夹中。您可以通过“文件”应用访问它们。",
+  "@setupDownloadLocationIosMessage": {
+    "description": "iOS 特定的文件夹信息"
+  },
+  "setupAppDocumentsFolder": "应用文档文件夹",
+  "@setupAppDocumentsFolder": {
+    "description": "iOS 文档文件夹选项"
+  },
+  "setupAppDocumentsFolderSubtitle": "推荐 - 可通过“文件”应用访问",
+  "@setupAppDocumentsFolderSubtitle": {
+    "description": "文档文件夹的副标题"
+  },
+  "setupChooseFromFiles": "从“文件”中选择",
+  "@setupChooseFromFiles": {
+    "description": "iOS 文件选择器选项"
+  },
+  "setupChooseFromFilesSubtitle": "选择 iCloud 或其他位置",
+  "@setupChooseFromFilesSubtitle": {
+    "description": "文件选择器的副标题"
+  },
+  "setupIosEmptyFolderWarning": "iOS 限制：无法选择空文件夹。请选择一个至少包含一个文件的文件夹。",
+  "@setupIosEmptyFolderWarning": {
+    "description": "iOS 文件夹选择警告"
+  },
+  "setupIcloudNotSupported": "不支持 iCloud 云盘。请使用应用 Documents 文件夹。",
+  "@setupIcloudNotSupported": {
+    "description": "当用户在 iOS 上选择 iCloud 云盘时的错误"
+  },
+  "setupDownloadInFlac": "以 FLAC 格式下载 Spotify 曲目",
+  "@setupDownloadInFlac": {
+    "description": "设置中的应用口号"
+  },
+  "setupStepStorage": "存储",
+  "@setupStepStorage": {
+    "description": "设置步骤指示器 - 存储"
+  },
+  "setupStepNotification": "通知",
+  "@setupStepNotification": {
+    "description": "设置步骤指示器 - 通知"
+  },
+  "setupStepFolder": "文件夹",
+  "@setupStepFolder": {
+    "description": "设置步骤指示器 - 文件夹"
+  },
+  "setupStepSpotify": "Spotify",
+  "@setupStepSpotify": {
+    "description": "设置步骤指示器 - Spotify API"
+  },
+  "setupStepPermission": "权限",
+  "@setupStepPermission": {
+    "description": "设置步骤指示器 - 权限"
+  },
+  "setupStorageGranted": "存储权限已授予！",
+  "@setupStorageGranted": {
+    "description": "存储权限成功的消息"
+  },
+  "setupStorageRequired": "需要存储权限",
+  "@setupStorageRequired": {
+    "description": "需要存储权限时的标题"
+  },
+  "setupStorageDescription": "SpotiFLAC 需要存储权限来保存您下载的音乐文件。",
+  "@setupStorageDescription": {
+    "description": "存储权限的解释"
+  },
+  "setupNotificationGranted": "通知权限已授予！",
+  "@setupNotificationGranted": {
+    "description": "通知权限成功的消息"
+  },
+  "setupNotificationEnable": "启用通知",
+  "@setupNotificationEnable": {
+    "description": "启用通知的按钮"
+  },
+  "setupNotificationDescription": "当下载完成或需要注意时接收通知。",
+  "@setupNotificationDescription": {
+    "description": "通知功能的解释"
+  },
+  "setupFolderSelected": "下载文件夹已选择！",
+  "@setupFolderSelected": {
+    "description": "文件夹选择成功的消息"
+  },
+  "setupFolderChoose": "选择下载文件夹",
+  "@setupFolderChoose": {
+    "description": "选择文件夹按钮"
+  },
+  "setupFolderDescription": "选择一个用于保存下载音乐的文件夹。",
+  "@setupFolderDescription": {
+    "description": "文件夹选择的解释"
+  },
+  "setupChangeFolder": "更改文件夹",
+  "@setupChangeFolder": {
+    "description": "更改所选文件夹的按钮"
+  },
+  "setupSelectFolder": "选择文件夹",
+  "@setupSelectFolder": {
+    "description": "选择文件夹按钮"
+  },
+  "setupSpotifyApiOptional": "Spotify API (可选)",
+  "@setupSpotifyApiOptional": {
+    "description": "Spotify API 步骤标题"
+  },
+  "setupSpotifyApiDescription": "添加您的 Spotify API 凭据，以获得更好的搜索结果并访问 Spotify 专属内容。",
+  "@setupSpotifyApiDescription": {
+    "description": "Spotify API 的解释"
+  },
+  "setupUseSpotifyApi": "使用 Spotify API",
+  "@setupUseSpotifyApi": {
+    "description": "启用 Spotify API 的开关"
+  },
+  "setupEnterCredentialsBelow": "在下方输入您的凭据",
+  "@setupEnterCredentialsBelow": {
+    "description": "输入凭据的提示"
+  },
+  "setupUsingDeezer": "正在使用 Deezer (无需账号)",
+  "@setupUsingDeezer": {
+    "description": "使用 Deezer 时的状态"
+  },
+  "setupEnterClientId": "输入 Spotify Client ID",
+  "@setupEnterClientId": {
+    "description": "客户端 ID 字段的占位符"
+  },
+  "setupEnterClientSecret": "输入 Spotify Client Secret",
+  "@setupEnterClientSecret": {
+    "description": "客户端密钥字段的占位符"
+  },
+  "setupGetFreeCredentials": "从 Spotify 开发者面板获取您的免费 API 凭据。",
+  "@setupGetFreeCredentials": {
+    "description": "关于获取凭据的信息"
+  },
+  "setupEnableNotifications": "启用通知",
+  "@setupEnableNotifications": {
+    "description": "启用通知的按钮"
+  },
+  "setupProceedToNextStep": "您现在可以继续下一步了。",
+  "@setupProceedToNextStep": {
+    "description": "完成一步后的消息"
+  },
+  "setupNotificationProgressDescription": "您将收到下载进度的通知。",
+  "@setupNotificationProgressDescription": {
+    "description": "关于通知用途的信息"
+  },
+  "setupNotificationBackgroundDescription": "接收下载进度和完成通知。这有助于您在应用处于后台时跟踪下载情况。",
+  "@setupNotificationBackgroundDescription": {
+    "description": "详细的通知解释"
+  },
+  "setupSkipForNow": "暂时跳过",
+  "@setupSkipForNow": {
+    "description": "跳过按钮文本"
+  },
+  "setupBack": "返回",
+  "@setupBack": {
+    "description": "返回按钮文本"
+  },
+  "setupNext": "下一步",
+  "@setupNext": {
+    "description": "下一步按钮文本"
+  },
+  "setupGetStarted": "开始使用",
+  "@setupGetStarted": {
+    "description": "最后的设置按钮"
+  },
+  "setupSkipAndStart": "跳过并启动",
+  "@setupSkipAndStart": {
+    "description": "跳过设置并启动应用"
+  },
+  "setupAllowAccessToManageFiles": "请在下一个屏幕中开启“允许访问管理所有文件”。",
+  "@setupAllowAccessToManageFiles": {
+    "description": "文件访问权限的说明"
+  },
+  "setupGetCredentialsFromSpotify": "从 spotify.com 获取凭据",
+  "@setupGetCredentialsFromSpotify": {
+    "description": "Spotify 开发者门户的链接文字"
+  },
+  "dialogCancel": "取消",
+  "@dialogCancel": {
+    "description": "对话框按钮 - 取消操作"
+  },
+  "dialogOk": "确定",
+  "@dialogOk": {
+    "description": "对话框按钮 - 确认/获悉"
+  },
+  "dialogSave": "保存",
+  "@dialogSave": {
+    "description": "对话框按钮 - 保存更改"
+  },
+  "dialogDelete": "删除",
+  "@dialogDelete": {
+    "description": "对话框按钮 - 删除项目"
+  },
+  "dialogRetry": "重试",
+  "@dialogRetry": {
+    "description": "对话框按钮 - 重试操作"
+  },
+  "dialogClose": "关闭",
+  "@dialogClose": {
+    "description": "对话框按钮 - 关闭对话框"
+  },
+  "dialogYes": "是",
+  "@dialogYes": {
+    "description": "对话框按钮 - 确认“是”"
+  },
+  "dialogNo": "否",
+  "@dialogNo": {
+    "description": "对话框按钮 - 确认“否”"
+  },
+  "dialogClear": "清除",
+  "@dialogClear": {
+    "description": "对话框按钮 - 清除项目"
+  },
+  "dialogConfirm": "确认",
+  "@dialogConfirm": {
+    "description": "对话框按钮 - 确认操作"
+  },
+  "dialogDone": "完成",
+  "@dialogDone": {
+    "description": "对话框按钮 - 操作已完成"
+  },
+  "dialogImport": "导入",
+  "@dialogImport": {
+    "description": "对话框按钮 - 导入数据"
+  },
+  "dialogDiscard": "放弃",
+  "@dialogDiscard": {
+    "description": "对话框按钮 - 放弃更改"
+  },
+  "dialogRemove": "移除",
+  "@dialogRemove": {
+    "description": "对话框按钮 - 移除项目"
+  },
+  "dialogUninstall": "卸载",
+  "@dialogUninstall": {
+    "description": "对话框按钮 - 卸载扩展"
+  },
+  "dialogDiscardChanges": "放弃更改？",
+  "@dialogDiscardChanges": {
+    "description": "对话框标题 - 未保存更改警告"
+  },
+  "dialogUnsavedChanges": "您有未保存的更改。确定要放弃吗？",
+  "@dialogUnsavedChanges": {
+    "description": "对话框消息 - 未保存的更改"
+  },
+  "dialogDownloadFailed": "下载失败",
+  "@dialogDownloadFailed": {
+    "description": "对话框标题 - 下载错误"
+  },
+  "dialogTrackLabel": "曲目：",
+  "@dialogTrackLabel": {
+    "description": "错误对话框中的曲目名称标签"
+  },
+  "dialogArtistLabel": "艺术家：",
+  "@dialogArtistLabel": {
+    "description": "错误对话框中的艺术家名称标签"
+  },
+  "dialogErrorLabel": "错误：",
+  "@dialogErrorLabel": {
+    "description": "错误信息的标签"
+  },
+  "dialogClearAll": "清除全部",
+  "@dialogClearAll": {
+    "description": "对话框标题 - 清除所有项目"
+  },
+  "dialogClearAllDownloads": "您确定要清除所有下载记录吗？",
+  "@dialogClearAllDownloads": {
+    "description": "对话框消息 - 清除下载确认"
+  },
+  "dialogRemoveFromDevice": "从设备中移除？",
+  "@dialogRemoveFromDevice": {
+    "description": "对话框标题 - 删除文件确认"
+  },
+  "dialogRemoveExtension": "移除扩展",
+  "@dialogRemoveExtension": {
+    "description": "对话框标题 - 卸载扩展"
+  },
+  "dialogRemoveExtensionMessage": "您确定要移除此扩展吗？此操作不可撤销。",
+  "@dialogRemoveExtensionMessage": {
+    "description": "对话框消息 - 卸载确认"
+  },
+  "dialogUninstallExtension": "卸载扩展？",
+  "@dialogUninstallExtension": {
+    "description": "对话框标题 - 卸载扩展"
+  },
+  "dialogUninstallExtensionMessage": "您确定要移除 {extensionName} 吗？",
+  "@dialogUninstallExtensionMessage": {
+    "description": "对话框消息 - 卸载特定扩展",
+    "placeholders": {
+      "extensionName": {
+        "type": "String"
+      }
+    }
+  },
+  "dialogClearHistoryTitle": "清除历史记录",
+  "@dialogClearHistoryTitle": {
+    "description": "对话框标题 - 清除下载历史"
+  },
+  "dialogClearHistoryMessage": "您确定要清除所有下载历史吗？此操作不可撤销。",
+  "@dialogClearHistoryMessage": {
+    "description": "对话框消息 - 清除历史确认"
+  },
+  "dialogDeleteSelectedTitle": "删除所选",
+  "@dialogDeleteSelectedTitle": {
+    "description": "对话框标题 - 删除所选项目"
+  },
+  "dialogDeleteSelectedMessage": "从历史记录中删除 {count} {count, plural, =1{首曲目} other{首曲目}}？\n\n这也将从存储空间中删除文件。",
+  "@dialogDeleteSelectedMessage": {
+    "description": "对话框消息 - 删除所选曲目",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dialogImportPlaylistTitle": "导入歌单",
+  "@dialogImportPlaylistTitle": {
+    "description": "对话框标题 - 导入 CSV 歌单"
+  },
+  "dialogImportPlaylistMessage": "在 CSV 中找到 {count} 首曲目。加入下载队列吗？",
+  "csvImportTracks": "来自 CSV 的 {count} 首曲目",
+  "@csvImportTracks": {
+    "description": "CSV 导入时在音质选择器中显示的标签",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "@dialogImportPlaylistMessage": {
+    "description": "对话框消息 - 导入歌单确认",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "snackbarAddedToQueue": "已将“{trackName}”加入队列",
+  "@snackbarAddedToQueue": {
+    "description": "信息栏 - 曲目已加入下载队列",
+    "placeholders": {
+      "trackName": {
+        "type": "String"
+      }
+    }
+  },
+  "snackbarAddedTracksToQueue": "已将 {count} 首曲目加入队列",
+  "@snackbarAddedTracksToQueue": {
+    "description": "信息栏 - 多首曲目已加入队列",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "snackbarAlreadyDownloaded": "“{trackName}”已下载",
+  "@snackbarAlreadyDownloaded": {
+    "description": "信息栏 - 曲目已存在",
+    "placeholders": {
+      "trackName": {
+        "type": "String"
+      }
+    }
+  },
+  "snackbarAlreadyInLibrary": "“{trackName}”已存在于您的媒体库中",
+  "@snackbarAlreadyInLibrary": {
+    "description": "信息栏 - 曲目已存在于本地媒体库",
+    "placeholders": {
+      "trackName": {
+        "type": "String"
+      }
+    }
+  },
+  "snackbarHistoryCleared": "历史记录已清除",
+  "@snackbarHistoryCleared": {
+    "description": "信息栏 - 历史已删除"
+  },
+  "snackbarCredentialsSaved": "凭据已保存",
+  "@snackbarCredentialsSaved": {
+    "description": "信息栏 - Spotify 凭据已保存"
+  },
+  "snackbarCredentialsCleared": "凭据已清除",
+  "@snackbarCredentialsCleared": {
+    "description": "信息栏 - Spotify 凭据已移除"
+  },
+  "snackbarDeletedTracks": "已删除 {count} {count, plural, =1{首曲目} other{首曲目}}",
+  "@snackbarDeletedTracks": {
+    "description": "信息栏 - 曲目已删除",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "snackbarCannotOpenFile": "无法打开文件：{error}",
+  "@snackbarCannotOpenFile": {
+    "description": "信息栏 - 文件打开错误",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "snackbarFillAllFields": "请填写所有字段",
+  "@snackbarFillAllFields": {
+    "description": "信息栏 - 验证错误"
+  },
+  "snackbarViewQueue": "查看队列",
+  "@snackbarViewQueue": {
+    "description": "信息栏操作 - 查看下载队列"
+  },
+  "snackbarFailedToLoad": "加载失败：{error}",
+  "@snackbarFailedToLoad": {
+    "description": "信息栏 - 加载错误",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "snackbarUrlCopied": "{platform} 链接已复制到剪贴板",
+  "@snackbarUrlCopied": {
+    "description": "信息栏 - URL 已复制",
+    "placeholders": {
+      "platform": {
+        "type": "String",
+        "description": "平台名称 (Spotify/Deezer)"
+      }
+    }
+  },
+  "snackbarFileNotFound": "未找到文件",
+  "@snackbarFileNotFound": {
+    "description": "信息栏 - 文件不存在"
+  },
+  "snackbarSelectExtFile": "请选择一个 .spotiflac-ext 文件",
+  "@snackbarSelectExtFile": {
+    "description": "信息栏 - 选择了错误的文件类型"
+  },
+  "snackbarProviderPrioritySaved": "提供商优先级已保存",
+  "@snackbarProviderPrioritySaved": {
+    "description": "信息栏 - 提供商顺序已保存"
+  },
+  "snackbarMetadataProviderSaved": "元数据提供商优先级已保存",
+  "@snackbarMetadataProviderSaved": {
+    "description": "信息栏 - 元数据提供商顺序已保存"
+  },
+  "snackbarExtensionInstalled": "{extensionName} 已安装。",
+  "@snackbarExtensionInstalled": {
+    "description": "信息栏 - 扩展安装成功",
+    "placeholders": {
+      "extensionName": {
+        "type": "String"
+      }
+    }
+  },
+  "snackbarExtensionUpdated": "{extensionName} 已更新。",
+  "@snackbarExtensionUpdated": {
+    "description": "信息栏 - 扩展更新成功",
+    "placeholders": {
+      "extensionName": {
+        "type": "String"
+      }
+    }
+  },
+  "snackbarFailedToInstall": "扩展安装失败",
+  "@snackbarFailedToInstall": {
+    "description": "信息栏 - 扩展安装错误"
+  },
+  "snackbarFailedToUpdate": "扩展更新失败",
+  "@snackbarFailedToUpdate": {
+    "description": "信息栏 - 扩展更新错误"
+  },
+  "errorRateLimited": "触发频率限制",
+  "@errorRateLimited": {
+    "description": "错误标题 - 请求过多"
+  },
+  "errorRateLimitedMessage": "请求过多。请稍后再尝试搜索。",
+  "@errorRateLimitedMessage": {
+    "description": "错误消息 - 频率限制说明"
+  },
+  "errorFailedToLoad": "加载 {item} 失败",
+  "@errorFailedToLoad": {
+    "description": "错误消息 - 加载失败",
+    "placeholders": {
+      "item": {
+        "type": "String",
+        "description": "加载失败的项目 (专辑/歌单等)"
+      }
+    }
+  },
+  "errorNoTracksFound": "未找到曲目",
+  "@errorNoTracksFound": {
+    "description": "错误 - 搜索返回无结果"
+  },
+  "errorMissingExtensionSource": "无法加载 {item}：缺少扩展源",
+  "@errorMissingExtensionSource": {
+    "description": "错误 - 扩展源不可用",
+    "placeholders": {
+      "item": {
+        "type": "String"
+      }
+    }
+  },
+  "statusQueued": "排队中",
+  "@statusQueued": {
+    "description": "下载状态 - 队列等待中"
+  },
+  "statusDownloading": "正在下载",
+  "@statusDownloading": {
+    "description": "下载状态 - 正在进行"
+  },
+  "statusFinalizing": "正在完成",
+  "@statusFinalizing": {
+    "description": "下载状态 - 正在写入元数据"
+  },
+  "statusCompleted": "已完成",
+  "@statusCompleted": {
+    "description": "下载状态 - 已结束"
+  },
+  "statusFailed": "失败",
+  "@statusFailed": {
+    "description": "下载状态 - 发生错误"
+  },
+  "statusSkipped": "跳过",
+  "@statusSkipped": {
+    "description": "下载状态 - 文件已存在"
+  },
+  "statusPaused": "已暂停",
+  "@statusPaused": {
+    "description": "下载状态 - 已暂停"
+  },
+  "actionPause": "暂停",
+  "@actionPause": {
+    "description": "操作按钮 - 暂停下载"
+  },
+  "actionResume": "继续",
+  "@actionResume": {
+    "description": "操作按钮 - 恢复下载"
+  },
+  "actionCancel": "取消",
+  "@actionCancel": {
+    "description": "操作按钮 - 取消操作"
+  },
+  "actionStop": "停止",
+  "@actionStop": {
+    "description": "操作按钮 - 停止操作"
+  },
+  "actionSelect": "选择",
+  "@actionSelect": {
+    "description": "操作按钮 - 进入选择模式"
+  },
+  "actionSelectAll": "全选",
+  "@actionSelectAll": {
+    "description": "操作按钮 - 选择所有项目"
+  },
+  "actionDeselectAll": "取消全选",
+  "actionPaste": "粘贴",
+  "@actionPaste": {
+    "description": "操作按钮 - 从剪贴板粘贴"
+  },
+  "actionImportCsv": "导入 CSV",
+  "@actionImportCsv": {
+    "description": "操作按钮 - 导入 CSV 文件"
+  },
+  "actionRemoveCredentials": "移除凭据",
+  "@actionRemoveCredentials": {
+    "description": "操作按钮 - 删除 Spotify 凭据"
+  },
+  "actionSaveCredentials": "保存凭据",
+  "@actionSaveCredentials": {
+    "description": "操作按钮 - 保存 Spotify 凭据"
+  },
+  "selectionSelected": "已选择 {count} 项",
+  "@selectionSelected": {
+    "description": "选择计数指示器",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "selectionAllSelected": "已全选所有曲目",
+  "@selectionAllSelected": {
+    "description": "状态 - 所有项目已选择"
+  },
+  "selectionTapToSelect": "点击曲目以选择",
+  "@selectionTapToSelect": {
+    "description": "提示 - 如何选择项目"
+  },
+  "selectionDeleteTracks": "删除 {count} 首曲目",
+  "@selectionDeleteTracks": {
+    "description": "带计数的删除按钮",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "selectionSelectToDelete": "选择要删除的曲目",
+  "@selectionSelectToDelete": {
+    "description": "未选择任何项目时的占位显示"
+  },
+  "progressFetchingMetadata": "正在获取元数据... {current}/{total}",
+  "@progressFetchingMetadata": {
+    "description": "进度指示器 - 正在加载曲目信息",
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "progressReadingCsv": "正在读取 CSV...",
+  "@progressReadingCsv": {
+    "description": "进度指示器 - 正在解析 CSV 文件"
+  },
+  "searchSongs": "单曲",
+  "@searchSongs": {
+    "description": "搜索结果类别 - 歌曲"
+  },
+  "searchArtists": "艺术家",
+  "@searchArtists": {
+    "description": "搜索结果类别 - 艺术家"
+  },
+  "searchAlbums": "专辑",
+  "@searchAlbums": {
+    "description": "搜索结果类别 - 专辑"
+  },
+  "searchPlaylists": "歌单",
+  "@searchPlaylists": {
+    "description": "搜索结果类别 - 歌单"
+  },
+  "tooltipPlay": "播放",
+  "@tooltipPlay": {
+    "description": "工具提示 - 播放按钮"
+  },
+  "tooltipCancel": "取消",
+  "@tooltipCancel": {
+    "description": "工具提示 - 取消按钮"
+  },
+  "tooltipStop": "停止",
+  "@tooltipStop": {
+    "description": "工具提示 - 停止按钮"
+  },
+  "tooltipRetry": "重试",
+  "@tooltipRetry": {
+    "description": "工具提示 - 重试按钮"
+  },
+  "tooltipRemove": "移除",
+  "@tooltipRemove": {
+    "description": "工具提示 - 移除按钮"
+  },
+  "tooltipClear": "清除",
+  "@tooltipClear": {
+    "description": "工具提示 - 清除按钮"
+  },
+  "tooltipPaste": "粘贴",
+  "@tooltipPaste": {
+    "description": "工具提示 - 粘贴按钮"
+  },
+  "filenameFormat": "文件名格式",
+  "@filenameFormat": {
+    "description": "设置标题 - 文件名命名模式"
+  },
+  "filenameFormatPreview": "预览：{preview}",
+  "@filenameFormatPreview": {
+    "description": "文件名模式预览",
+    "placeholders": {
+      "preview": {
+        "type": "String"
+      }
+    }
+  },
+  "filenameAvailablePlaceholders": "可用占位符：",
+  "@filenameAvailablePlaceholders": {
+    "description": "占位符列表标签"
+  },
+  "filenameHint": "{artist} - {title}",
+  "@filenameHint": {
+    "description": "默认文件名格式提示"
+  },
+  "folderOrganization": "文件夹组织",
+  "@folderOrganization": {
+    "description": "设置标题 - 文件夹结构"
+  },
+  "folderOrganizationNone": "无组织",
+  "@folderOrganizationNone": {
+    "description": "文件夹选项 - 平铺结构"
+  },
+  "folderOrganizationByArtist": "按艺术家",
+  "@folderOrganizationByArtist": {
+    "description": "文件夹选项 - 艺术家文件夹"
+  },
+  "folderOrganizationByAlbum": "按专辑",
+  "@folderOrganizationByAlbum": {
+    "description": "文件夹选项 - 专辑文件夹"
+  },
+  "folderOrganizationByArtistAlbum": "艺术家/专辑",
+  "@folderOrganizationByArtistAlbum": {
+    "description": "文件夹选项 - 嵌套文件夹"
+  },
+  "folderOrganizationDescription": "将下载的文件整理到文件夹中",
+  "@folderOrganizationDescription": {
+    "description": "文件夹组织面板描述"
+  },
+  "folderOrganizationNoneSubtitle": "所有文件保存在下载文件夹根目录",
+  "@folderOrganizationNoneSubtitle": {
+    "description": "无组织选项的副标题"
+  },
+  "folderOrganizationByArtistSubtitle": "为每个艺术家创建独立文件夹",
+  "@folderOrganizationByArtistSubtitle": {
+    "description": "艺术家文件夹选项的副标题"
+  },
+  "folderOrganizationByAlbumSubtitle": "为每张专辑创建独立文件夹",
+  "@folderOrganizationByAlbumSubtitle": {
+    "description": "专辑文件夹选项的副标题"
+  },
+  "folderOrganizationByArtistAlbumSubtitle": "按艺术家/专辑层级创建嵌套文件夹",
+  "@folderOrganizationByArtistAlbumSubtitle": {
+    "description": "嵌套文件夹选项的副标题"
+  },
+  "updateAvailable": "发现新版本",
+  "@updateAvailable": {
+    "description": "更新对话框标题"
+  },
+  "updateNewVersion": "版本 {version} 已发布",
+  "@updateNewVersion": {
+    "description": "更新可用消息",
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "updateDownload": "下载",
+  "@updateDownload": {
+    "description": "更新按钮 - 下载更新"
+  },
+  "updateLater": "稍后",
+  "@updateLater": {
+    "description": "更新按钮 - 关闭"
+  },
+  "updateChangelog": "更新日志",
+  "@updateChangelog": {
+    "description": "更新日志链接"
+  },
+  "updateStartingDownload": "开始下载...",
+  "@updateStartingDownload": {
+    "description": "更新状态 - 正在初始化"
+  },
+  "updateDownloadFailed": "下载失败",
+  "@updateDownloadFailed": {
+    "description": "更新错误标题"
+  },
+  "updateFailedMessage": "无法下载更新",
+  "@updateFailedMessage": {
+    "description": "更新错误消息"
+  },
+  "updateNewVersionReady": "新版本已就绪",
+  "@updateNewVersionReady": {
+    "description": "更新副标题"
+  },
+  "updateCurrent": "当前版本",
+  "@updateCurrent": {
+    "description": "当前版本标签"
+  },
+  "updateNew": "最新版本",
+  "@updateNew": {
+    "description": "新版本标签"
+  },
+  "updateDownloading": "正在下载...",
+  "@updateDownloading": {
+    "description": "更新状态 - 正在下载"
+  },
+  "updateWhatsNew": "更新内容",
+  "@updateWhatsNew": {
+    "description": "更新日志章节标题"
+  },
+  "updateDownloadInstall": "下载并安装",
+  "@updateDownloadInstall": {
+    "description": "更新按钮 - 下载并安装"
+  },
+  "updateDontRemind": "不再提醒",
+  "@updateDontRemind": {
+    "description": "更新按钮 - 跳过此版本"
+  },
+  "providerPriority": "提供商优先级",
+  "@providerPriority": {
+    "description": "设置标题 - 下载提供商顺序"
+  },
+  "providerPrioritySubtitle": "拖动以重排下载提供商顺序",
+  "@providerPrioritySubtitle": {
+    "description": "提供商优先级的副标题"
+  },
+  "providerPriorityTitle": "提供商优先级",
+  "@providerPriorityTitle": {
+    "description": "提供商优先级页面标题"
+  },
+  "providerPriorityDescription": "拖动以调整顺序。下载曲目时，应用将从上到下依次尝试这些提供商。",
+  "@providerPriorityDescription": {
+    "description": "提供商优先级页面描述"
+  },
+  "providerPriorityInfo": "如果第一个提供商无法提供该曲目，应用将自动尝试列表中的下一个。",
+  "@providerPriorityInfo": {
+    "description": "关于自动回退行为的提示"
+  },
+  "providerBuiltIn": "内置",
+  "@providerBuiltIn": {
+    "description": "内置提供商标签 (Tidal/Qobuz/Amazon)"
+  },
+  "providerExtension": "扩展",
+  "@providerExtension": {
+    "description": "来自扩展的提供商标签"
+  },
+  "metadataProviderPriority": "元数据提供商优先级",
+  "@metadataProviderPriority": {
+    "description": "设置标题 - 元数据提供商顺序"
+  },
+  "metadataProviderPrioritySubtitle": "获取曲目元数据时的优先顺序",
+  "@metadataProviderPrioritySubtitle": {
+    "description": "元数据优先级的副标题"
+  },
+  "metadataProviderPriorityTitle": "元数据优先级",
+  "@metadataProviderPriorityTitle": {
+    "description": "元数据优先级页面标题"
+  },
+  "metadataProviderPriorityDescription": "拖动以调整顺序。在搜索曲目和获取元数据时，应用将按此顺序尝试提供商。",
+  "@metadataProviderPriorityDescription": {
+    "description": "元数据优先级页面描述"
+  },
+  "metadataProviderPriorityInfo": "Deezer 没有频率限制，建议设为主要。Spotify 在大量请求后可能会触发频率限制。",
+  "@metadataProviderPriorityInfo": {
+    "description": "关于频率限制的提示"
+  },
+  "metadataNoRateLimits": "无频率限制",
+  "@metadataNoRateLimits": {
+    "description": "Deezer 提供商描述"
+  },
+  "metadataMayRateLimit": "可能会限速",
+  "@metadataMayRateLimit": {
+    "description": "Spotify 提供商描述"
+  },
+  "logTitle": "运行日志",
+  "@logTitle": {
+    "description": "日志界面标题"
+  },
+  "logCopy": "复制日志",
+  "@logCopy": {
+    "description": "操作 - 将日志复制到剪贴板"
+  },
+  "logClear": "清除日志",
+  "@logClear": {
+    "description": "操作 - 删除所有日志"
+  },
+  "logShare": "分享日志",
+  "@logShare": {
+    "description": "操作 - 分享日志文件"
+  },
+  "logEmpty": "暂无日志",
+  "@logEmpty": {
+    "description": "空状态标题"
+  },
+  "logCopied": "日志已复制到剪贴板",
+  "@logCopied": {
+    "description": "信息栏 - 日志已复制"
+  },
+  "logSearchHint": "搜索日志...",
+  "@logSearchHint": {
+    "description": "日志搜索占位符"
+  },
+  "logFilterLevel": "级别",
+  "@logFilterLevel": {
+    "description": "按日志级别过滤"
+  },
+  "logFilterSection": "过滤器",
+  "@logFilterSection": {
+    "description": "过滤器章节标题"
+  },
+  "logShareLogs": "分享日志",
+  "@logShareLogs": {
+    "description": "分享按钮工具提示"
+  },
+  "logClearLogs": "清除日志",
+  "@logClearLogs": {
+    "description": "清除按钮工具提示"
+  },
+  "logClearLogsTitle": "清除所有日志",
+  "@logClearLogsTitle": {
+    "description": "清除日志对话框标题"
+  },
+  "logClearLogsMessage": "确定要清除所有日志吗？",
+  "@logClearLogsMessage": {
+    "description": "清除日志确认消息"
+  },
+  "logIspBlocking": "检测到 ISP 拦截",
+  "@logIspBlocking": {
+    "description": "错误类别 - ISP 拦截"
+  },
+  "logRateLimited": "触发频率限制",
+  "@logRateLimited": {
+    "description": "错误类别 - 频率限制"
+  },
+  "logNetworkError": "网络错误",
+  "@logNetworkError": {
+    "description": "错误类别 - 网络问题"
+  },
+  "logTrackNotFound": "未找到曲目",
+  "@logTrackNotFound": {
+    "description": "错误类别 - 曲目缺失"
+  },
+  "logFilterBySeverity": "按严重程度过滤",
+  "@logFilterBySeverity": {
+    "description": "过滤器对话框标题"
+  },
+  "logNoLogsYet": "暂无日志",
+  "@logNoLogsYet": {
+    "description": "空状态标题"
+  },
+  "logNoLogsYetSubtitle": "使用应用时日志将显示在此处",
+  "@logNoLogsYetSubtitle": {
+    "description": "空状态副标题"
+  },
+  "logIssueSummary": "问题摘要",
+  "@logIssueSummary": {
+    "description": "错误摘要的部分页眉"
+  },
+  "logIspBlockingDescription": "您的运营商 (ISP) 可能正在拦截下载服务的访问",
+  "@logIspBlockingDescription": {
+    "description": "ISP 拦截解释"
+  },
+  "logIspBlockingSuggestion": "请尝试使用 VPN 或将 DNS 更改为 1.1.1.1 或 8.8.8.8",
+  "@logIspBlockingSuggestion": {
+    "description": "ISP 拦截解决方法"
+  },
+  "logRateLimitedDescription": "对该服务的请求过于频繁",
+  "@logRateLimitedDescription": {
+    "description": "频率限制解释"
+  },
+  "logRateLimitedSuggestion": "请等待几分钟后再重试",
+  "@logRateLimitedSuggestion": {
+    "description": "频率限制解决方法"
+  },
+  "logNetworkErrorDescription": "检测到连接问题",
+  "@logNetworkErrorDescription": {
+    "description": "网络错误解释"
+  },
+  "logNetworkErrorSuggestion": "请检查您的互联网连接",
+  "@logNetworkErrorSuggestion": {
+    "description": "网络错误解决方法"
+  },
+  "logTrackNotFoundDescription": "在下载服务中找不到部分曲目",
+  "@logTrackNotFoundDescription": {
+    "description": "曲目未找到解释"
+  },
+  "logTrackNotFoundSuggestion": "该曲目可能不提供无损音质版本",
+  "@logTrackNotFoundSuggestion": {
+    "description": "曲目未找到解释"
+  },
+  "logTotalErrors": "错误总数：{count}",
+  "@logTotalErrors": {
+    "description": "错误计数显示",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "logAffected": "受影响范围：{domains}",
+  "@logAffected": {
+    "description": "受影响域名显示",
+    "placeholders": {
+      "domains": {
+        "type": "String"
+      }
+    }
+  },
+  "logEntriesFiltered": "条目（已过滤 {count} 条）",
+  "@logEntriesFiltered": {
+    "description": "开启过滤器时的日志计数",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "logEntries": "条目 ({count})",
+  "@logEntries": {
+    "description": "总日志条目数",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "credentialsTitle": "Spotify 凭据",
+  "@credentialsTitle": {
+    "description": "凭据对话框标题"
+  },
+  "credentialsDescription": "输入您的 Client ID 和 Secret，以使用您自己的 Spotify 应用配额。",
+  "@credentialsDescription": {
+    "description": "凭据对话框说明"
+  },
+  "credentialsClientId": "Client ID",
+  "@credentialsClientId": {
+    "description": "Client ID 字段标签 - 请勿翻译"
+  },
+  "credentialsClientIdHint": "粘贴 Client ID",
+  "@credentialsClientIdHint": {
+    "description": "Client ID 占位符"
+  },
+  "credentialsClientSecret": "Client Secret",
+  "@credentialsClientSecret": {
+    "description": "Client Secret 字段标签 - 请勿翻译"
+  },
+  "credentialsClientSecretHint": "粘贴 Client Secret",
+  "@credentialsClientSecretHint": {
+    "description": "Client Secret 占位符"
+  },
+  "channelStable": "稳定版",
+  "@channelStable": {
+    "description": "更新频道 - 稳定发布"
+  },
+  "channelPreview": "预览版",
+  "@channelPreview": {
+    "description": "更新频道 - 测试/预览发布"
+  },
+  "sectionSearchSource": "搜索源",
+  "@sectionSearchSource": {
+    "description": "设置章节标题"
+  },
+  "sectionDownload": "下载设置",
+  "@sectionDownload": {
+    "description": "设置章节标题"
+  },
+  "sectionPerformance": "性能",
+  "@sectionPerformance": {
+    "description": "设置章节标题"
+  },
+  "sectionApp": "应用设置",
+  "@sectionApp": {
+    "description": "设置章节标题"
+  },
+  "sectionData": "数据管理",
+  "@sectionData": {
+    "description": "设置章节标题"
+  },
+  "sectionDebug": "调试",
+  "@sectionDebug": {
+    "description": "设置章节标题"
+  },
+  "sectionService": "服务",
+  "@sectionService": {
+    "description": "设置章节标题"
+  },
+  "sectionAudioQuality": "音质",
+  "@sectionAudioQuality": {
+    "description": "设置章节标题"
+  },
+  "sectionFileSettings": "文件设置",
+  "@sectionFileSettings": {
+    "description": "设置章节标题"
+  },
+  "sectionLyrics": "歌词",
+  "@sectionLyrics": {
+    "description": "设置章节标题"
+  },
+  "lyricsMode": "歌词模式",
+  "@lyricsMode": {
+    "description": "设置 - 歌词保存方式"
+  },
+  "lyricsModeDescription": "选择下载时歌词的保存方式",
+  "@lyricsModeDescription": {
+    "description": "歌词模式选择描述"
+  },
+  "lyricsModeEmbed": "内嵌到文件",
+  "@lyricsModeEmbed": {
+    "description": "歌词模式选项 - 内嵌到音频文件"
+  },
+  "lyricsModeEmbedSubtitle": "歌词存储在 FLAC 元数据中",
+  "@lyricsModeEmbedSubtitle": {
+    "description": "内嵌选项的副标题"
+  },
+  "lyricsModeExternal": "外部 .lrc 文件",
+  "@lyricsModeExternal": {
+    "description": "歌词模式选项 - 独立的 LRC 文件"
+  },
+  "lyricsModeExternalSubtitle": "为三星音乐等播放器生成独立的 .lrc 文件",
+  "@lyricsModeExternalSubtitle": {
+    "description": "外部选项的副标题"
+  },
+  "lyricsModeBoth": "两者皆有",
+  "@lyricsModeBoth": {
+    "description": "歌词模式选项 - 同时内嵌和保存外部文件"
+  },
+  "lyricsModeBothSubtitle": "同时内嵌歌词并保存 .lrc 文件",
+  "@lyricsModeBothSubtitle": {
+    "description": "两者皆有选项的副标题"
+  },
+  "sectionColor": "色彩",
+  "@sectionColor": {
+    "description": "设置章节标题"
+  },
+  "sectionTheme": "主题",
+  "@sectionTheme": {
+    "description": "设置章节标题"
+  },
+  "sectionLayout": "布局",
+  "@sectionLayout": {
+    "description": "设置章节标题"
+  },
+  "sectionLanguage": "语言",
+  "@sectionLanguage": {
+    "description": "设置章节标题 - 语言"
+  },
+  "appearanceLanguage": "应用语言",
+  "@appearanceLanguage": {
+    "description": "语言设置标题"
+  },
+  "appearanceLanguageSubtitle": "选择您偏好的语言",
+  "@appearanceLanguageSubtitle": {
+    "description": "语言设置副标题"
+  },
+  "settingsAppearanceSubtitle": "主题、颜色、显示效果",
+  "@settingsAppearanceSubtitle": {
+    "description": "外观设置描述"
+  },
+  "settingsDownloadSubtitle": "服务、音质、文件名格式",
+  "@settingsDownloadSubtitle": {
+    "description": "下载设置描述"
+  },
+  "settingsOptionsSubtitle": "自动回退、歌词、封面、更新",
+  "@settingsOptionsSubtitle": {
+    "description": "选项设置描述"
+  },
+  "settingsExtensionsSubtitle": "管理下载提供商扩展",
+  "@settingsExtensionsSubtitle": {
+    "description": "扩展设置描述"
+  },
+  "settingsLogsSubtitle": "查看应用日志以进行调试",
+  "@settingsLogsSubtitle": {
+    "description": "日志设置描述"
+  },
+  "loadingSharedLink": "正在加载共享链接...",
+  "@loadingSharedLink": {
+    "description": "打开共享 URL 时的状态"
+  },
+  "pressBackAgainToExit": "再按一次返回键退出",
+  "@pressBackAgainToExit": {
+    "description": "退出确认消息"
+  },
+  "tracksHeader": "曲目",
+  "@tracksHeader": {
+    "description": "曲目列表的部分页眉"
+  },
+  "downloadAllCount": "全部下载 ({count})",
+  "@downloadAllCount": {
+    "description": "带计数的全部下载按钮",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "tracksCount": "{count, plural, =1{1 首曲目} other{{count} 首曲目}}",
+  "@tracksCount": {
+    "description": "曲目计数显示",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "trackCopyFilePath": "复制文件路径",
+  "@trackCopyFilePath": {
+    "description": "操作 - 复制文件路径"
+  },
+  "trackRemoveFromDevice": "从设备中移除",
+  "@trackRemoveFromDevice": {
+    "description": "操作 - 删除下载的文件"
+  },
+  "trackLoadLyrics": "加载歌词",
+  "@trackLoadLyrics": {
+    "description": "操作 - 获取歌词"
+  },
+  "trackMetadata": "元数据",
+  "@trackMetadata": {
+    "description": "标签页标题 - 曲目元数据"
+  },
+  "trackFileInfo": "文件信息",
+  "@trackFileInfo": {
+    "description": "标签页标题 - 文件详细信息"
+  },
+  "trackLyrics": "歌词",
+  "@trackLyrics": {
+    "description": "标签页标题 - 歌词内容"
+  },
+  "trackFileNotFound": "未找到文件",
+  "@trackFileNotFound": {
+    "description": "错误 - 文件不存在"
+  },
+  "trackOpenInDeezer": "在 Deezer 中打开",
+  "@trackOpenInDeezer": {
+    "description": "操作 - 在 Deezer 应用中打开曲目"
+  },
+  "trackOpenInSpotify": "在 Spotify 中打开",
+  "@trackOpenInSpotify": {
+    "description": "操作 - 在 Spotify 应用中打开曲目"
+  },
+  "trackTrackName": "曲目名称",
+  "@trackTrackName": {
+    "description": "元数据标签 - 歌曲标题"
+  },
+  "trackArtist": "艺术家",
+  "@trackArtist": {
+    "description": "元数据标签 - 艺术家名称"
+  },
+  "trackAlbumArtist": "专辑艺术家",
+  "@trackAlbumArtist": {
+    "description": "元数据标签 - 专辑艺术家"
+  },
+  "trackAlbum": "专辑",
+  "@trackAlbum": {
+    "description": "元数据标签 - 专辑名称"
+  },
+  "trackTrackNumber": "音轨号",
+  "@trackTrackNumber": {
+    "description": "元数据标签 - 音轨编号"
+  },
+  "trackDiscNumber": "碟片号",
+  "@trackDiscNumber": {
+    "description": "元数据标签 - 碟片编号"
+  },
+  "trackDuration": "时长",
+  "@trackDuration": {
+    "description": "元数据标签 - 曲目长度"
+  },
+  "trackAudioQuality": "音频质量",
+  "@trackAudioQuality": {
+    "description": "元数据标签 - 音质级别"
+  },
+  "trackReleaseDate": "发行日期",
+  "@trackReleaseDate": {
+    "description": "元数据标签 - 发行日期"
+  },
+  "trackGenre": "流派",
+  "@trackGenre": {
+    "description": "元数据标签 - 音乐风格"
+  },
+  "trackLabel": "唱片公司",
+  "@trackLabel": {
+    "description": "元数据标签 - 唱片厂牌"
+  },
+  "trackCopyright": "版权",
+  "@trackCopyright": {
+    "description": "元数据标签 - 版权信息"
+  },
+  "trackDownloaded": "下载于",
+  "@trackDownloaded": {
+    "description": "元数据标签 - 下载日期"
+  },
+  "trackCopyLyrics": "复制歌词",
+  "@trackCopyLyrics": {
+    "description": "操作 - 将歌词复制到剪贴板"
+  },
+  "trackLyricsNotAvailable": "此曲目不提供歌词",
+  "@trackLyricsNotAvailable": {
+    "description": "未找到歌词时的消息"
+  },
+  "trackLyricsTimeout": "请求超时。请稍后重试。",
+  "@trackLyricsTimeout": {
+    "description": "歌词请求超时消息"
+  },
+  "trackLyricsLoadFailed": "加载歌词失败",
+  "@trackLyricsLoadFailed": {
+    "description": "歌词加载失败消息"
+  },
+  "trackEmbedLyrics": "内嵌歌词",
+  "@trackEmbedLyrics": {
+    "description": "操作 - 将歌词嵌入音频文件"
+  },
+  "trackLyricsEmbedded": "歌词已成功内嵌",
+  "@trackLyricsEmbedded": {
+    "description": "信息栏 - 歌词已保存到文件"
+  },
+  "trackInstrumental": "纯音乐曲目",
+  "@trackInstrumental": {
+    "description": "曲目为器乐 (无歌词) 时的消息"
+  },
+  "trackCopiedToClipboard": "已复制到剪贴板",
+  "@trackCopiedToClipboard": {
+    "description": "信息栏 - 内容已复制"
+  },
+  "trackDeleteConfirmTitle": "从设备中移除？",
+  "@trackDeleteConfirmTitle": {
+    "description": "删除确认标题"
+  },
+  "trackDeleteConfirmMessage": "这将永久删除下载的文件，并将其从历史记录中移除。",
+  "@trackDeleteConfirmMessage": {
+    "description": "删除确认消息"
+  },
+  "trackCannotOpen": "无法打开：{message}",
+  "@trackCannotOpen": {
+    "description": "打开文件错误",
+    "placeholders": {
+      "message": {
+        "type": "String"
+      }
+    }
+  },
+  "dateToday": "今天",
+  "@dateToday": {
+    "description": "相对日期 - 今天"
+  },
+  "dateYesterday": "昨天",
+  "@dateYesterday": {
+    "description": "相对日期 - 昨天"
+  },
+  "dateDaysAgo": "{count} 天前",
+  "@dateDaysAgo": {
+    "description": "相对日期 - 几天前",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dateWeeksAgo": "{count} 周前",
+  "@dateWeeksAgo": {
+    "description": "相对日期 - 几周前",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dateMonthsAgo": "{count} 个月前",
+  "@dateMonthsAgo": {
+    "description": "相对日期 - 几个月前",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "concurrentSequential": "串行下载",
+  "@concurrentSequential": {
+    "description": "下载模式 - 逐个下载"
+  },
+  "concurrentParallel2": "2 个并行下载",
+  "@concurrentParallel2": {
+    "description": "下载模式 - 2 个同时下载"
+  },
+  "concurrentParallel3": "3 个并行下载",
+  "@concurrentParallel3": {
+    "description": "下载模式 - 3 个同时下载"
+  },
+  "tapToSeeError": "点击查看错误详情",
+  "@tapToSeeError": {
+    "description": "下载失败的工具提示"
+  },
+  "storeFilterAll": "全部",
+  "@storeFilterAll": {
+    "description": "商店过滤器 - 所有扩展"
+  },
+  "storeFilterMetadata": "元数据",
+  "@storeFilterMetadata": {
+    "description": "商店过滤器 - 元数据提供商"
+  },
+  "storeFilterDownload": "下载",
+  "@storeFilterDownload": {
+    "description": "商店过滤器 - 下载提供商"
+  },
+  "storeFilterUtility": "工具",
+  "@storeFilterUtility": {
+    "description": "商店过滤器 - 实用工具扩展"
+  },
+  "storeFilterLyrics": "歌词",
+  "@storeFilterLyrics": {
+    "description": "商店过滤器 - 歌词提供商"
+  },
+  "storeFilterIntegration": "集成",
+  "@storeFilterIntegration": {
+    "description": "商店过滤器 - 第三方集成"
+  },
+  "storeClearFilters": "清除筛选",
+  "@storeClearFilters": {
+    "description": "清除所有过滤条件的按钮"
+  },
+  "storeNoResults": "未发现符合条件的扩展",
+  "@storeNoResults": {
+    "description": "过滤器不匹配时的空状态"
+  },
+  "extensionProviderPriority": "提供商优先级",
+  "@extensionProviderPriority": {
+    "description": "扩展能力 - 提供商优先级"
+  },
+  "extensionInstallButton": "安装扩展",
+  "@extensionInstallButton": {
+    "description": "安装扩展按钮"
+  },
+  "extensionDefaultProvider": "默认 (Deezer/Spotify)",
+  "@extensionDefaultProvider": {
+    "description": "默认搜索提供商选项"
+  },
+  "extensionDefaultProviderSubtitle": "使用内置搜索",
+  "@extensionDefaultProviderSubtitle": {
+    "description": "默认提供商的副标题"
+  },
+  "extensionAuthor": "作者",
+  "@extensionAuthor": {
+    "description": "扩展详情 - 作者"
+  },
+  "extensionId": "ID",
+  "@extensionId": {
+    "description": "扩展详情 - 唯一 ID"
+  },
+  "extensionError": "错误",
+  "@extensionError": {
+    "description": "扩展详情 - 错误消息"
+  },
+  "extensionCapabilities": "功能",
+  "@extensionCapabilities": {
+    "description": "章节页眉 - 扩展特有功能"
+  },
+  "extensionMetadataProvider": "元数据提供商",
+  "@extensionMetadataProvider": {
+    "description": "能力 - 提供元数据"
+  },
+  "extensionDownloadProvider": "下载提供商",
+  "@extensionDownloadProvider": {
+    "description": "能力 - 提供下载"
+  },
+  "extensionLyricsProvider": "歌词提供商",
+  "@extensionLyricsProvider": {
+    "description": "能力 - 提供歌词"
+  },
+  "extensionUrlHandler": "URL 处理器",
+  "@extensionUrlHandler": {
+    "description": "能力 - 处理特定 URL"
+  },
+  "extensionQualityOptions": "音质选项",
+  "@extensionQualityOptions": {
+    "description": "能力 - 音质选择"
+  },
+  "extensionPostProcessingHooks": "后处理钩子",
+  "@extensionPostProcessingHooks": {
+    "description": "能力 - 后处理"
+  },
+  "extensionPermissions": "所需权限",
+  "@extensionPermissions": {
+    "description": "章节页眉 - 扩展所需权限"
+  },
+  "extensionSettings": "扩展设置",
+  "@extensionSettings": {
+    "description": "章节页眉 - 扩展具体设置"
+  },
+  "extensionRemoveButton": "移除扩展",
+  "@extensionRemoveButton": {
+    "description": "卸载扩展按钮"
+  },
+  "extensionUpdated": "最后更新",
+  "@extensionUpdated": {
+    "description": "扩展详情 - 上次更新时间"
+  },
+  "extensionMinAppVersion": "最低应用版本要求",
+  "@extensionMinAppVersion": {
+    "description": "扩展详情 - 最低 App 版本"
+  },
+  "extensionCustomTrackMatching": "自定义曲目匹配",
+  "@extensionCustomTrackMatching": {
+    "description": "能力 - 自定义曲目匹配算法"
+  },
+  "extensionPostProcessing": "后处理",
+  "@extensionPostProcessing": {
+    "description": "能力 - 下载后处理"
+  },
+  "extensionHooksAvailable": "{count} 个钩子可用",
+  "@extensionHooksAvailable": {
+    "description": "后处理钩子计数",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "extensionPatternsCount": "{count} 个模式",
+  "@extensionPatternsCount": {
+    "description": "URL 模式计数",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "extensionStrategy": "策略：{strategy}",
+  "@extensionStrategy": {
+    "description": "曲目匹配策略名称",
+    "placeholders": {
+      "strategy": {
+        "type": "String"
+      }
+    }
+  },
+  "extensionsProviderPrioritySection": "提供商优先级",
+  "@extensionsProviderPrioritySection": {
+    "description": "章节页眉 - 提供商优先级"
+  },
+  "extensionsInstalledSection": "已安装的扩展",
+  "@extensionsInstalledSection": {
+    "description": "章节页眉 - 已安装扩展"
+  },
+  "extensionsNoExtensions": "未安装扩展",
+  "@extensionsNoExtensions": {
+    "description": "空状态 - 无扩展"
+  },
+  "extensionsNoExtensionsSubtitle": "安装 .spotiflac-ext 文件来添加新提供商",
+  "@extensionsNoExtensionsSubtitle": {
+    "description": "空状态副标题"
+  },
+  "extensionsInstallButton": "安装扩展",
+  "@extensionsInstallButton": {
+    "description": "通过文件安装扩展按钮"
+  },
+  "extensionsInfoTip": "扩展可以添加新的元数据和下载源。请务必只安装来自信任来源的扩展。",
+  "@extensionsInfoTip": {
+    "description": "关于扩展的安全警告"
+  },
+  "extensionsInstalledSuccess": "扩展安装成功",
+  "@extensionsInstalledSuccess": {
+    "description": "安装成功后的消息"
+  },
+  "extensionsDownloadPriority": "下载优先级",
+  "@extensionsDownloadPriority": {
+    "description": "设置 - 下载提供商顺序"
+  },
+  "extensionsDownloadPrioritySubtitle": "设置下载服务的尝试顺序",
+  "@extensionsDownloadPrioritySubtitle": {
+    "description": "下载优先级的副标题"
+  },
+  "extensionsNoDownloadProvider": "没有提供下载功能的扩展",
+  "@extensionsNoDownloadProvider": {
+    "description": "空状态 - 无下载提供商"
+  },
+  "extensionsMetadataPriority": "元数据优先级",
+  "@extensionsMetadataPriority": {
+    "description": "设置 - 元数据提供商顺序"
+  },
+  "extensionsMetadataPrioritySubtitle": "设置搜索和元数据来源顺序",
+  "@extensionsMetadataPrioritySubtitle": {
+    "description": "元数据优先级的副标题"
+  },
+  "extensionsNoMetadataProvider": "没有提供元数据功能的扩展",
+  "@extensionsNoMetadataProvider": {
+    "description": "空状态 - 无元数据提供商"
+  },
+  "extensionsSearchProvider": "搜索提供商",
+  "@extensionsSearchProvider": {
+    "description": "设置 - 选择搜索提供商"
+  },
+  "extensionsNoCustomSearch": "没有提供自定义搜索的扩展",
+  "@extensionsNoCustomSearch": {
+    "description": "空状态 - 无搜索提供商"
+  },
+  "extensionsSearchProviderDescription": "选择用于搜索曲目的服务",
+  "@extensionsSearchProviderDescription": {
+    "description": "搜索提供商设置描述"
+  },
+  "extensionsCustomSearch": "自定义搜索",
+  "@extensionsCustomSearch": {
+    "description": "自定义搜索提供商标签"
+  },
+  "extensionsErrorLoading": "加载扩展出错",
+  "@extensionsErrorLoading": {
+    "description": "扩展加载失败时的错误消息"
+  },
+  "qualityFlacLossless": "FLAC 无损",
+  "@qualityFlacLossless": {
+    "description": "音质选项 - CD 质量 FLAC"
+  },
+  "qualityFlacLosslessSubtitle": "16-bit / 44.1kHz",
+  "@qualityFlacLosslessSubtitle": {
+    "description": "无损技术参数"
+  },
+  "qualityHiResFlac": "Hi-Res FLAC 高解析",
+  "@qualityHiResFlac": {
+    "description": "音质选项 - 高解析 FLAC"
+  },
+  "qualityHiResFlacSubtitle": "24-bit / 最高 96kHz",
+  "@qualityHiResFlacSubtitle": {
+    "description": "高解析技术参数"
+  },
+  "qualityHiResFlacMax": "Hi-Res FLAC 极致",
+  "@qualityHiResFlacMax": {
+    "description": "音质选项 - 最高解析 FLAC"
+  },
+  "qualityHiResFlacMaxSubtitle": "24-bit / 最高 192kHz",
+  "@qualityHiResFlacMaxSubtitle": {
+    "description": "最高解析技术参数"
+  },
+  "qualityLossy": "有损音质",
+  "@qualityLossy": {
+    "description": "音质选项 - 有损格式 (MP3/Opus)"
+  },
+  "qualityLossyMp3Subtitle": "MP3 320kbps (从 FLAC 转换)",
+  "@qualityLossyMp3Subtitle": {
+    "description": "有损 MP3 技术参数"
+  },
+  "qualityLossyOpusSubtitle": "Opus 128kbps (从 FLAC 转换)",
+  "@qualityLossyOpusSubtitle": {
+    "description": "有损 Opus 技术参数"
+  },
+  "enableLossyOption": "启用有损音质选项",
+  "@enableLossyOption": {
+    "description": "设置 - 开启有损音质选择"
+  },
+  "enableLossyOptionSubtitleOn": "已提供有损音质选项",
+  "@enableLossyOptionSubtitleOn": {
+    "description": "开启有损时的副标题"
+  },
+  "enableLossyOptionSubtitleOff": "下载 FLAC 后自动转换为有损格式",
+  "@enableLossyOptionSubtitleOff": {
+    "description": "禁用有损时的副标题"
+  },
+  "lossyFormat": "有损格式选择",
+  "@lossyFormat": {
+    "description": "设置 - 选择有损格式"
+  },
+  "lossyFormatDescription": "选择转换时使用的有损格式",
+  "@lossyFormatDescription": {
+    "description": "有损格式选择器描述"
+  },
+  "lossyFormatMp3Subtitle": "320kbps，兼容性最好",
+  "@lossyFormatMp3Subtitle": {
+    "description": "MP3 格式描述"
+  },
+  "lossyFormatOpusSubtitle": "128kbps，更小体积更高音质",
+  "@lossyFormatOpusSubtitle": {
+    "description": "Opus 格式描述"
+  },
+  "qualityNote": "实际音质取决于服务中该曲目的可用性",
+  "@qualityNote": {
+    "description": "关于音质可用性的说明"
+  },
+  "youtubeQualityNote": "YouTube 仅提供有损音频。不包含在无损回退方案中。",
+  "@youtubeQualityNote": {
+    "description": "YouTube 服务说明"
+  },
+  "downloadAskBeforeDownload": "下载前询问",
+  "@downloadAskBeforeDownload": {
+    "description": "设置 - 显示音质选择器"
+  },
+  "downloadDirectory": "下载目录",
+  "@downloadDirectory": {
+    "description": "设置 - 下载文件夹"
+  },
+  "downloadSeparateSinglesFolder": "独立单曲文件夹",
+  "@downloadSeparateSinglesFolder": {
+    "description": "设置 - 为单曲使用独立文件夹"
+  },
+  "downloadAlbumFolderStructure": "专辑文件夹结构",
+  "@downloadAlbumFolderStructure": {
+    "description": "设置 - 专辑文件夹组织"
+  },
+  "downloadUseAlbumArtistForFolders": "文件夹使用“专辑艺术家”",
+  "@downloadUseAlbumArtistForFolders": {
+    "description": "设置 - 文件夹命名使用专辑艺术家还是曲目艺术家"
+  },
+  "downloadUseAlbumArtistForFoldersAlbumSubtitle": "艺术家文件夹优先使用“专辑艺术家”命名",
+  "@downloadUseAlbumArtistForFoldersAlbumSubtitle": {
+    "description": "使用专辑艺术家命名时的副标题"
+  },
+  "downloadUseAlbumArtistForFoldersTrackSubtitle": "艺术家文件夹仅使用“曲目艺术家”命名",
+  "@downloadUseAlbumArtistForFoldersTrackSubtitle": {
+    "description": "使用曲目艺术家命名时的副标题"
+  },
+  "downloadUsePrimaryArtistOnly": "文件夹仅显示主艺术家",
+  "@downloadUsePrimaryArtistOnly": {
+    "description": "设置 - 从文件夹名中剔除合作艺术家"
+  },
+  "downloadUsePrimaryArtistOnlyEnabled": "文件夹名已剔除合作艺术家（例如：Justin Bieber, Quavo → Justin Bieber）",
+  "@downloadUsePrimaryArtistOnlyEnabled": {
+    "description": "开启仅显示主艺术家时的副标题"
+  },
+  "downloadUsePrimaryArtistOnlyDisabled": "文件夹名使用完整的艺术家字符串",
+  "@downloadUsePrimaryArtistOnlyDisabled": {
+    "description": "禁用仅显示主艺术家时的副标题"
+  },
+  "downloadSaveFormat": "保存格式",
+  "@downloadSaveFormat": {
+    "description": "设置 - 输出文件格式"
+  },
+  "downloadSelectService": "选择服务",
+  "@downloadSelectService": {
+    "description": "对话框标题 - 选择下载服务"
+  },
+  "downloadSelectQuality": "选择音质",
+  "@downloadSelectQuality": {
+    "description": "对话框标题 - 选择音频质量"
+  },
+  "downloadFrom": "下载源：",
+  "@downloadFrom": {
+    "description": "标签 - 下载来源"
+  },
+  "downloadDefaultQualityLabel": "默认音质",
+  "@downloadDefaultQualityLabel": {
+    "description": "标签 - 默认音质设置"
+  },
+  "downloadBestAvailable": "最高可用",
+  "@downloadBestAvailable": {
+    "description": "音质选项 - 当前最高的可用音质"
+  },
+  "folderNone": "无",
+  "@folderNone": {
+    "description": "文件夹选项 - 不进行组织"
+  },
+  "folderNoneSubtitle": "所有文件直接保存在下载文件夹中",
+  "@folderNoneSubtitle": {
+    "description": "无文件夹组织的副标题"
+  },
+  "folderArtist": "艺术家",
+  "@folderArtist": {
+    "description": "文件夹选项 - 按艺术家"
+  },
+  "folderArtistSubtitle": "艺术家名称/文件名",
+  "@folderArtistSubtitle": {
+    "description": "文件夹结构示例"
+  },
+  "folderAlbum": "专辑",
+  "@folderAlbum": {
+    "description": "文件夹选项 - 按专辑"
+  },
+  "folderAlbumSubtitle": "专辑名称/文件名",
+  "@folderAlbumSubtitle": {
+    "description": "文件夹结构示例"
+  },
+  "folderArtistAlbum": "艺术家/专辑",
+  "@folderArtistAlbum": {
+    "description": "文件夹选项 - 嵌套"
+  },
+  "folderArtistAlbumSubtitle": "艺术家名称/专辑名称/文件名",
+  "@folderArtistAlbumSubtitle": {
+    "description": "文件夹结构示例"
+  },
+  "serviceTidal": "Tidal",
+  "@serviceTidal": {
+    "description": "服务名称 - 请勿翻译"
+  },
+  "serviceQobuz": "Qobuz",
+  "@serviceQobuz": {
+    "description": "服务名称 - 请勿翻译"
+  },
+  "serviceAmazon": "Amazon",
+  "@serviceAmazon": {
+    "description": "服务名称 - 请勿翻译"
+  },
+  "serviceDeezer": "Deezer",
+  "@serviceDeezer": {
+    "description": "服务名称 - 请勿翻译"
+  },
+  "serviceSpotify": "Spotify",
+  "@serviceSpotify": {
+    "description": "服务名称 - 请勿翻译"
+  },
+  "appearanceAmoledDark": "AMOLED 纯黑",
+  "@appearanceAmoledDark": {
+    "description": "主题选项 - 纯黑色背景"
+  },
+  "appearanceAmoledDarkSubtitle": "极致纯黑背景（省电）",
+  "@appearanceAmoledDarkSubtitle": {
+    "description": "AMOLED 纯黑副标题"
+  },
+  "appearanceChooseAccentColor": "选择强调色",
+  "@appearanceChooseAccentColor": {
+    "description": "取色器对话框标题"
+  },
+  "appearanceChooseTheme": "主题模式",
+  "@appearanceChooseTheme": {
+    "description": "主题选择对话框标题"
+  },
+  "queueTitle": "下载队列",
+  "@queueTitle": {
+    "description": "队列界面标题"
+  },
+  "queueClearAll": "全部清除",
+  "@queueClearAll": {
+    "description": "按钮 - 清除队列中所有项"
+  },
+  "queueClearAllMessage": "确定要清除所有下载任务吗？",
+  "@queueClearAllMessage": {
+    "description": "清除队列确认消息"
+  },
+  "queueExportFailed": "导出",
+  "@queueExportFailed": {
+    "description": "按钮 - 将失败任务导出为 TXT"
+  },
+  "queueExportFailedSuccess": "失败的任务已导出至 TXT 文件",
+  "@queueExportFailedSuccess": {
+    "description": "导出成功后的消息"
+  },
+  "queueExportFailedClear": "清除失败任务",
+  "@queueExportFailedClear": {
+    "description": "导出后清除失败下载的操作"
+  },
+  "queueExportFailedError": "导出下载任务失败",
+  "@queueExportFailedError": {
+    "description": "导出失败时的错误消息"
+  },
+  "settingsAutoExportFailed": "自动导出失败下载",
+  "@settingsAutoExportFailed": {
+    "description": "设置开关 - 自动导出"
+  },
+  "settingsAutoExportFailedSubtitle": "自动将失败的下载任务保存到 TXT 文件中",
+  "@settingsAutoExportFailedSubtitle": {
+    "description": "自动导出设置的副标题"
+  },
+  "settingsDownloadNetwork": "下载网络选择",
+  "@settingsDownloadNetwork": {
+    "description": "网络类型偏好设置"
+  },
+  "settingsDownloadNetworkAny": "WiFi + 移动数据",
+  "@settingsDownloadNetworkAny": {
+    "description": "网络选项 - 使用任何连接"
+  },
+  "settingsDownloadNetworkWifiOnly": "仅限 WiFi",
+  "@settingsDownloadNetworkWifiOnly": {
+    "description": "网络选项 - 仅使用 WiFi"
+  },
+  "settingsDownloadNetworkSubtitle": "选择用于下载的网络。设为“仅限 WiFi”时，使用移动数据将自动暂停下载。",
+  "@settingsDownloadNetworkSubtitle": {
+    "description": "关于网络偏好的说明"
+  },
+  "queueEmpty": "下载队列为空",
+  "@queueEmpty": {
+    "description": "空队列状态标题"
+  },
+  "queueEmptySubtitle": "请从首页添加曲目",
+  "@queueEmptySubtitle": {
+    "description": "空队列状态副标题"
+  },
+  "queueClearCompleted": "清除已完成项",
+  "@queueClearCompleted": {
+    "description": "按钮 - 清除已结束的任务"
+  },
+  "queueDownloadFailed": "下载失败",
+  "@queueDownloadFailed": {
+    "description": "错误对话框标题"
+  },
+  "queueTrackLabel": "曲目：",
+  "@queueTrackLabel": {
+    "description": "错误对话框中的标签"
+  },
+  "queueArtistLabel": "艺术家：",
+  "@queueArtistLabel": {
+    "description": "错误对话框中的标签"
+  },
+  "queueErrorLabel": "错误：",
+  "@queueErrorLabel": {
+    "description": "错误对话框中的标签"
+  },
+  "queueUnknownError": "未知错误",
+  "@queueUnknownError": {
+    "description": "后备错误消息"
+  },
+  "albumFolderArtistAlbum": "艺术家 / 专辑",
+  "@albumFolderArtistAlbum": {
+    "description": "专辑文件夹选项"
+  },
+  "albumFolderArtistAlbumSubtitle": "Albums/艺术家/专辑名称/",
+  "@albumFolderArtistAlbumSubtitle": {
+    "description": "文件夹结构示例"
+  },
+  "albumFolderArtistYearAlbum": "艺术家 / [年份] 专辑",
+  "@albumFolderArtistYearAlbum": {
+    "description": "带年份的专辑文件夹选项"
+  },
+  "albumFolderArtistYearAlbumSubtitle": "Albums/艺术家/[2005] 专辑名称/",
+  "@albumFolderArtistYearAlbumSubtitle": {
+    "description": "文件夹结构示例"
+  },
+  "albumFolderAlbumOnly": "仅专辑名",
+  "@albumFolderAlbumOnly": {
+    "description": "专辑文件夹选项"
+  },
+  "albumFolderAlbumOnlySubtitle": "Albums/专辑名称/",
+  "@albumFolderAlbumOnlySubtitle": {
+    "description": "文件夹结构示例"
+  },
+  "albumFolderYearAlbum": "[年份] 专辑",
+  "@albumFolderYearAlbum": {
+    "description": "带年份的专辑文件夹选项"
+  },
+  "albumFolderYearAlbumSubtitle": "Albums/[2005] 专辑名称/",
+  "@albumFolderYearAlbumSubtitle": {
+    "description": "文件夹结构示例"
+  },
+  "albumFolderArtistAlbumSingles": "艺术家 / 专辑 + 单曲",
+  "@albumFolderArtistAlbumSingles": {
+    "description": "单曲放入艺术家目录的专辑文件夹选项"
+  },
+  "albumFolderArtistAlbumSinglesSubtitle": "Artist/Album/ 以及 Artist/Singles/",
+  "@albumFolderArtistAlbumSinglesSubtitle": {
+    "description": "文件夹结构示例"
+  },
+  "downloadedAlbumDeleteSelected": "删除所选",
+  "@downloadedAlbumDeleteSelected": {
+    "description": "按钮 - 删除所选曲目"
+  },
+  "downloadedAlbumDeleteMessage": "确定要从该专辑中删除 {count} 首曲目吗？\n\n这将同时从本地存储中删除对应的文件。",
+  "@downloadedAlbumDeleteMessage": {
+    "description": "带计数的删除确认",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "downloadedAlbumTracksHeader": "曲目列表",
+  "@downloadedAlbumTracksHeader": {
+    "description": "曲目部分页眉"
+  },
+  "downloadedAlbumDownloadedCount": "已下载 {count} 首",
+  "@downloadedAlbumDownloadedCount": {
+    "description": "已下载曲目计数徽章",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "downloadedAlbumSelectedCount": "已选择 {count} 项",
+  "@downloadedAlbumSelectedCount": {
+    "description": "选择计数指示器",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "downloadedAlbumAllSelected": "已全选所有曲目",
+  "@downloadedAlbumAllSelected": {
+    "description": "状态 - 所有项目已选择"
+  },
+  "downloadedAlbumTapToSelect": "点击曲目以选择",
+  "@downloadedAlbumTapToSelect": {
+    "description": "选择提示"
+  },
+  "downloadedAlbumDeleteCount": "删除 {count} 首曲目",
+  "@downloadedAlbumDeleteCount": {
+    "description": "带计数的删除按钮文本",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "downloadedAlbumSelectToDelete": "选择要删除的曲目",
+  "@downloadedAlbumSelectToDelete": {
+    "description": "未选择任何项时的占位显示"
+  },
+  "downloadedAlbumDiscHeader": "碟片 {discNumber}",
+  "@downloadedAlbumDiscHeader": {
+    "description": "多碟专辑的碟片分隔页眉",
+    "placeholders": {
+      "discNumber": {
+        "type": "int",
+        "example": "1"
+      }
+    }
+  },
+  "utilityFunctions": "常用工具",
+  "@utilityFunctions": {
+    "description": "扩展功能 - 常用工具"
+  },
+  "recentTypeArtist": "歌手",
+  "@recentTypeArtist": {
+    "description": "最近访问项类型 - 歌手"
+  },
+  "recentTypeAlbum": "专辑",
+  "@recentTypeAlbum": {
+    "description": "最近访问项类型 - 专辑"
+  },
+  "recentTypeSong": "歌曲",
+  "@recentTypeSong": {
+    "description": "最近访问项类型 - 歌曲/曲目"
+  },
+  "recentTypePlaylist": "歌单",
+  "@recentTypePlaylist": {
+    "description": "最近访问项类型 - 歌单"
+  },
+  "recentEmpty": "暂无最近访问记录",
+  "@recentEmpty": {
+    "description": "最近访问列表为空时的提示文字"
+  },
+  "recentShowAllDownloads": "显示所有下载",
+  "@recentShowAllDownloads": {
+    "description": "在最近访问中显示隐藏下载项的按钮标签"
+  },
+  "recentPlaylistInfo": "歌单：{name}",
+  "@recentPlaylistInfo": {
+    "description": "在最近访问中点击歌单时的提示消息",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "description": "歌单名称"
+      }
+    }
+  },
+  "errorGeneric": "错误：{message}",
+  "@errorGeneric": {
+    "description": "通用错误消息格式",
+    "placeholders": {
+      "message": {
+        "type": "String",
+        "description": "错误消息"
+      }
+    }
+  },
+  "discographyDownload": "下载全部作品",
+  "@discographyDownload": {
+    "description": "按钮 - 下载歌手的全部作品"
+  },
+  "discographyDownloadAll": "下载全部",
+  "@discographyDownloadAll": {
+    "description": "选项 - 下载所有作品"
+  },
+  "discographyDownloadAllSubtitle": "共 {albumCount} 个发布版本，包含 {count} 首曲目",
+  "@discographyDownloadAllSubtitle": {
+    "description": "显示总曲目和专辑数的副标题",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "albumCount": {
+        "type": "int"
+      }
+    }
+  },
+  "discographyAlbumsOnly": "仅专辑",
+  "@discographyAlbumsOnly": {
+    "description": "选项 - 仅下载专辑"
+  },
+  "discographyAlbumsOnlySubtitle": "共 {albumCount} 张专辑，包含 {count} 首曲目",
+  "@discographyAlbumsOnlySubtitle": {
+    "description": "显示专辑曲目数的副标题",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "albumCount": {
+        "type": "int"
+      }
+    }
+  },
+  "discographySinglesOnly": "仅单曲与 EP",
+  "@discographySinglesOnly": {
+    "description": "选项 - 仅下载单曲"
+  },
+  "discographySinglesOnlySubtitle": "共 {albumCount} 张单曲，包含 {count} 首曲目",
+  "@discographySinglesOnlySubtitle": {
+    "description": "显示单曲曲目数的副标题",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "albumCount": {
+        "type": "int"
+      }
+    }
+  },
+  "discographySelectAlbums": "手动选择专辑...",
+  "@discographySelectAlbums": {
+    "description": "选项 - 手动选择要下载的专辑"
+  },
+  "discographySelectAlbumsSubtitle": "选择特定的专辑或单曲",
+  "@discographySelectAlbumsSubtitle": {
+    "description": "手动选择专辑选项的副标题"
+  },
+  "discographyFetchingTracks": "正在获取曲目列表...",
+  "@discographyFetchingTracks": {
+    "description": "进度 - 正在获取专辑曲目"
+  },
+  "discographyFetchingAlbum": "正在获取第 {current} / {total} 张...",
+  "@discographyFetchingAlbum": {
+    "description": "进度 - 正在获取特定专辑",
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "discographySelectedCount": "已选择 {count} 项",
+  "@discographySelectedCount": {
+    "description": "选择计数角标",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "discographyDownloadSelected": "下载所选内容",
+  "@discographyDownloadSelected": {
+    "description": "按钮 - 下载所选专辑"
+  },
+  "discographyAddedToQueue": "已将 {count} 首曲目添加到队列",
+  "@discographyAddedToQueue": {
+    "description": "提示 - 从作品集中添加的曲目数",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "discographySkippedDownloaded": "已添加 {added} 首，跳过已下载的 {skipped} 首",
+  "@discographySkippedDownloaded": {
+    "description": "提示 - 包含跳过曲目计数",
+    "placeholders": {
+      "added": {
+        "type": "int"
+      },
+      "skipped": {
+        "type": "int"
+      }
+    }
+  },
+  "discographyNoAlbums": "无可用的专辑",
+  "@discographyNoAlbums": {
+    "description": "错误 - 未找到歌手的专辑"
+  },
+  "discographyFailedToFetch": "部分专辑获取失败",
+  "@discographyFailedToFetch": {
+    "description": "错误 - 部分专辑加载失败"
+  },
+  "sectionStorageAccess": "存储权限",
+  "@sectionStorageAccess": {
+    "description": "存储权限设置的章节标题"
+  },
+  "allFilesAccess": "所有文件访问权限",
+  "@allFilesAccess": {
+    "description": "MANAGE_EXTERNAL_STORAGE 权限开关"
+  },
+  "allFilesAccessEnabledSubtitle": "可以写入任何文件夹",
+  "@allFilesAccessEnabledSubtitle": {
+    "description": "启用所有文件访问时的副标题"
+  },
+  "allFilesAccessDisabledSubtitle": "仅限访问媒体文件夹",
+  "@allFilesAccessDisabledSubtitle": {
+    "description": "禁用所有文件访问时的副标题"
+  },
+  "allFilesAccessDescription": "如果您在保存到自定义文件夹时遇到写入错误，请启用此项。Android 13+ 默认限制了对某些目录的访问。",
+  "@allFilesAccessDescription": {
+    "description": "说明何时需要启用所有文件访问"
+  },
+  "allFilesAccessDeniedMessage": "权限被拒绝。请在系统设置中手动开启“所有文件访问权限”。",
+  "@allFilesAccessDeniedMessage": {
+    "description": "权限被永久拒绝时的消息"
+  },
+  "allFilesAccessDisabledMessage": "所有文件访问权限已禁用。应用将使用受限的存储访问模式。",
+  "@allFilesAccessDisabledMessage": {
+    "description": "用户禁用所有文件访问时的提示消息"
+  },
+  "settingsLocalLibrary": "本地媒体库",
+  "@settingsLocalLibrary": {
+    "description": "设置菜单项 - 本地媒体库"
+  },
+  "settingsLocalLibrarySubtitle": "扫描音乐并检测重复文件",
+  "@settingsLocalLibrarySubtitle": {
+    "description": "本地媒体库设置的副标题"
+  },
+  "settingsCache": "存储与缓存",
+  "@settingsCache": {
+    "description": "设置菜单项 - 缓存管理"
+  },
+  "settingsCacheSubtitle": "查看占用大小并清理缓存数据",
+  "@settingsCacheSubtitle": {
+    "description": "缓存管理菜单的副标题"
+  },
+  "libraryTitle": "本地媒体库",
+  "@libraryTitle": {
+    "description": "本地媒体库设置页面标题"
+  },
+  "libraryStatus": "库状态",
+  "@libraryStatus": {
+    "description": "库状态章节标题"
+  },
+  "libraryScanSettings": "扫描设置",
+  "@libraryScanSettings": {
+    "description": "扫描设置章节标题"
+  },
+  "libraryEnableLocalLibrary": "启用本地媒体库",
+  "@libraryEnableLocalLibrary": {
+    "description": "启用库扫描的开关"
+  },
+  "libraryEnableLocalLibrarySubtitle": "扫描并追踪现有的音乐文件",
+  "@libraryEnableLocalLibrarySubtitle": {
+    "description": "启用开关的副标题"
+  },
+  "libraryFolder": "库文件夹",
+  "@libraryFolder": {
+    "description": "文件夹选择设置"
+  },
+  "libraryFolderHint": "点击选择文件夹",
+  "@libraryFolderHint": {
+    "description": "未选择文件夹时的占位符"
+  },
+  "libraryShowDuplicateIndicator": "显示重复标识",
+  "@libraryShowDuplicateIndicator": {
+    "description": "搜索中重复项标识的开关"
+  },
+  "libraryShowDuplicateIndicatorSubtitle": "搜索时标识本地已存在的曲目",
+  "@libraryShowDuplicateIndicatorSubtitle": {
+    "description": "重复标识开关的副标题"
+  },
+  "libraryActions": "操作",
+  "@libraryActions": {
+    "description": "库操作章节标题"
+  },
+  "libraryScan": "扫描媒体库",
+  "@libraryScan": {
+    "description": "开始扫描库的按钮"
+  },
+  "libraryScanSubtitle": "扫描音频文件",
+  "@libraryScanSubtitle": {
+    "description": "扫描按钮的副标题"
+  },
+  "libraryScanSelectFolderFirst": "请先选择一个文件夹",
+  "@libraryScanSelectFolderFirst": {
+    "description": "未选择文件夹尝试扫描时的消息"
+  },
+  "libraryCleanupMissingFiles": "清理失效文件",
+  "@libraryCleanupMissingFiles": {
+    "description": "删除不存在文件记录的按钮"
+  },
+  "libraryCleanupMissingFilesSubtitle": "移除库中已不存在的文件记录",
+  "@libraryCleanupMissingFilesSubtitle": {
+    "description": "清理按钮的副标题"
+  },
+  "libraryClear": "清空媒体库",
+  "@libraryClear": {
+    "description": "清空所有库记录的按钮"
+  },
+  "libraryClearSubtitle": "移除所有已扫描的曲目记录",
+  "@libraryClearSubtitle": {
+    "description": "清空按钮的副标题"
+  },
+  "libraryClearConfirmTitle": "清空媒体库",
+  "@libraryClearConfirmTitle": {
+    "description": "清空确认对话框标题"
+  },
+  "libraryClearConfirmMessage": "这将从库中移除所有已扫描的曲目。您的实际音乐文件不会被删除。",
+  "@libraryClearConfirmMessage": {
+    "description": "清空确认对话框消息"
+  },
+  "libraryAbout": "关于本地媒体库",
+  "@libraryAbout": {
+    "description": "关于信息的章节标题"
+  },
+  "libraryAboutDescription": "通过扫描现有音乐收藏，在下载时检测重复项。支持 FLAC、M4A、MP3、Opus 和 OGG 格式。元数据将尽可能从文件标签中读取。",
+  "@libraryAboutDescription": {
+    "description": "本地媒体库功能的描述"
+  },
+  "libraryTracksCount": "{count} 首曲目",
+  "@libraryTracksCount": {
+    "description": "库中的曲目计数",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "libraryLastScanned": "上次扫描：{time}",
+  "@libraryLastScanned": {
+    "description": "上次扫描时间显示",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "libraryLastScannedNever": "从未扫描",
+  "@libraryLastScannedNever": {
+    "description": "媒体库从未扫描时显示"
+  },
+  "libraryScanning": "正在扫描...",
+  "@libraryScanning": {
+    "description": "扫描中的状态"
+  },
+  "libraryScanProgress": "已完成 {progress}%，共 {total} 个文件",
+  "@libraryScanProgress": {
+    "description": "扫描进度显示",
+    "placeholders": {
+      "progress": {
+        "type": "String"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "libraryInLibrary": "库中已有",
+  "@libraryInLibrary": {
+    "description": "本地库已存在曲目的标签"
+  },
+  "libraryRemovedMissingFiles": "已从库中移除 {count} 个失效文件记录",
+  "@libraryRemovedMissingFiles": {
+    "description": "清理后的提示",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "libraryCleared": "媒体库已清空",
+  "@libraryCleared": {
+    "description": "清空媒体库后的提示"
+  },
+  "libraryStorageAccessRequired": "需要存储权限",
+  "@libraryStorageAccessRequired": {
+    "description": "存储权限对话框标题"
+  },
+  "libraryStorageAccessMessage": "SpotiFLAC 需要存储权限来扫描您的音乐库。请在设置中授予权限。",
+  "@libraryStorageAccessMessage": {
+    "description": "存储权限对话框消息"
+  },
+  "libraryFolderNotExist": "所选文件夹不存在",
+  "@libraryFolderNotExist": {
+    "description": "文件夹不存在时的错误"
+  },
+  "librarySourceDownloaded": "已下载",
+  "@librarySourceDownloaded": {
+    "description": "通过 SpotiFLAC 下载的曲目标签"
+  },
+  "librarySourceLocal": "本地",
+  "@librarySourceLocal": {
+    "description": "通过本地库扫描到的曲目标签"
+  },
+  "libraryFilterAll": "全部",
+  "@libraryFilterAll": {
+    "description": "过滤标签 - 显示所有库项目"
+  },
+  "libraryFilterDownloaded": "已下载",
+  "@libraryFilterDownloaded": {
+    "description": "过滤标签 - 仅显示已下载项目"
+  },
+  "libraryFilterLocal": "本地",
+  "@libraryFilterLocal": {
+    "description": "过滤标签 - 仅显示本地库项目"
+  },
+  "libraryFilterTitle": "筛选",
+  "@libraryFilterTitle": {
+    "description": "过滤面板标题"
+  },
+  "libraryFilterReset": "重置",
+  "@libraryFilterReset": {
+    "description": "重置所有筛选器的按钮"
+  },
+  "libraryFilterApply": "应用",
+  "@libraryFilterApply": {
+    "description": "应用筛选器的按钮"
+  },
+  "libraryFilterSource": "来源",
+  "@libraryFilterSource": {
+    "description": "筛选部分 - 来源类型"
+  },
+  "libraryFilterQuality": "音质",
+  "@libraryFilterQuality": {
+    "description": "筛选部分 - 音频音质"
+  },
+  "libraryFilterQualityHiRes": "高解析度 (24bit)",
+  "@libraryFilterQualityHiRes": {
+    "description": "筛选选项 - Hi-Res 音频"
+  },
+  "libraryFilterQualityCD": "CD 无损 (16bit)",
+  "@libraryFilterQualityCD": {
+    "description": "筛选选项 - CD 音质音频"
+  },
+  "libraryFilterQualityLossy": "有损",
+  "@libraryFilterQualityLossy": {
+    "description": "筛选选项 - 有损压缩音频"
+  },
+  "libraryFilterFormat": "格式",
+  "@libraryFilterFormat": {
+    "description": "筛选部分 - 文件格式"
+  },
+  "libraryFilterDate": "添加日期",
+  "@libraryFilterDate": {
+    "description": "筛选部分 - 日期范围"
+  },
+  "libraryFilterDateToday": "今天",
+  "@libraryFilterDateToday": {
+    "description": "筛选选项 - 仅限今天"
+  },
+  "libraryFilterDateWeek": "本周",
+  "@libraryFilterDateWeek": {
+    "description": "筛选选项 - 本周"
+  },
+  "libraryFilterDateMonth": "本月",
+  "@libraryFilterDateMonth": {
+    "description": "筛选选项 - 本月"
+  },
+  "libraryFilterDateYear": "今年",
+  "@libraryFilterDateYear": {
+    "description": "筛选选项 - 今年"
+  },
+  "libraryFilterSort": "排序",
+  "@libraryFilterSort": {
+    "description": "筛选部分 - 排序顺序"
+  },
+  "libraryFilterSortLatest": "最新优先",
+  "@libraryFilterSortLatest": {
+    "description": "排序选项 - 从新到旧"
+  },
+  "libraryFilterSortOldest": "最早优先",
+  "@libraryFilterSortOldest": {
+    "description": "排序选项 - 从旧到新"
+  },
+  "libraryFilterActive": "已开启 {count} 个筛选器",
+  "@libraryFilterActive": {
+    "description": "显示活跃筛选器数量的标签",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "timeJustNow": "刚刚",
+  "@timeJustNow": {
+    "description": "相对时间 - 1分钟内"
+  },
+  "timeMinutesAgo": "{count} 分钟前",
+  "@timeMinutesAgo": {
+    "description": "相对时间 - 分钟前",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "timeHoursAgo": "{count} 小时前",
+  "@timeHoursAgo": {
+    "description": "相对时间 - 小时前",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "storageSwitchTitle": "切换存储模式",
+  "@storageSwitchTitle": {
+    "description": "切换存储模式时的对话框标题"
+  },
+  "storageSwitchToSafTitle": "切换到 SAF 存储？",
+  "@storageSwitchToSafTitle": {
+    "description": "切换到 SAF 时的对话框标题"
+  },
+  "storageSwitchToAppTitle": "切换到应用内部存储？",
+  "@storageSwitchToAppTitle": {
+    "description": "切换到应用存储时的对话框标题"
+  },
+  "storageSwitchToSafMessage": "您现有的下载内容将保留在当前位置且仍可访问。\n\n新的下载将保存到您选择的 SAF 文件夹中。",
+  "@storageSwitchToSafMessage": {
+    "description": "切换到 SAF 时的说明"
+  },
+  "storageSwitchToAppMessage": "您现有的下载内容将保留在当前 SAF 位置且仍可访问。\n\n新的下载将保存到 Music/SpotiFLAC 文件夹中。",
+  "@storageSwitchToAppMessage": {
+    "description": "切换到应用存储时的说明"
+  },
+  "storageSwitchExistingDownloads": "现有下载内容",
+  "@storageSwitchExistingDownloads": {
+    "description": "现有下载信息的部分标题"
+  },
+  "storageSwitchExistingDownloadsInfo": "{count} 首曲目储存于 {mode} 模式",
+  "@storageSwitchExistingDownloadsInfo": {
+    "description": "关于现有下载数量的信息",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "mode": {
+        "type": "String"
+      }
+    }
+  },
+  "storageSwitchNewDownloads": "新下载内容",
+  "@storageSwitchNewDownloads": {
+    "description": "新下载信息的部分标题"
+  },
+  "storageSwitchNewDownloadsLocation": "将保存至：{location}",
+  "@storageSwitchNewDownloadsLocation": {
+    "description": "显示新下载位置",
+    "placeholders": {
+      "location": {
+        "type": "String"
+      }
+    }
+  },
+  "storageSwitchContinue": "继续",
+  "@storageSwitchContinue": {
+    "description": "继续切换存储的按钮"
+  },
+  "storageSwitchSelectFolder": "选择 SAF 文件夹",
+  "@storageSwitchSelectFolder": {
+    "description": "选择 SAF 文件夹的按钮"
+  },
+  "storageAppStorage": "内部存储",
+  "@storageAppStorage": {
+    "description": "应用内部存储模式标签"
+  },
+  "storageSafStorage": "SAF 存储",
+  "@storageSafStorage": {
+    "description": "SAF 存储模式标签"
+  },
+  "storageModeBadge": "存储：{mode}",
+  "@storageModeBadge": {
+    "description": "显示曲目存储模式的标签",
+    "placeholders": {
+      "mode": {
+        "type": "String"
+      }
+    }
+  },
+  "storageStatsTitle": "存储统计",
+  "@storageStatsTitle": {
+    "description": "存储统计的部分标题"
+  },
+  "storageStatsAppCount": "{count} 首曲目储存在内部存储",
+  "@storageStatsAppCount": {
+    "description": "内部存储中的曲目数",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "storageStatsSafCount": "{count} 首曲目储存在 SAF 存储",
+  "@storageStatsSafCount": {
+    "description": "SAF 存储中的曲目数",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "storageModeInfo": "您的文件储存在多个位置",
+  "@storageModeInfo": {
+    "description": "当用户在两种存储模式下都有文件时的提示"
+  },
+  "tutorialWelcomeTitle": "欢迎使用 SpotiFLAC！",
+  "@tutorialWelcomeTitle": {
+    "description": "教程欢迎页面标题"
+  },
+  "tutorialWelcomeDesc": "让我们开始学习如何下载无损音质的音乐吧。这个快速教程将向您介绍基础操作。",
+  "@tutorialWelcomeDesc": {
+    "description": "教程欢迎页面描述"
+  },
+  "tutorialWelcomeTip1": "从 Spotify、Deezer 下载音乐，或直接粘贴任何支持的 URL",
+  "@tutorialWelcomeTip1": {
+    "description": "教程欢迎提示 1"
+  },
+  "tutorialWelcomeTip2": "从 Tidal、Qobuz 或 Amazon Music 获取 FLAC 音质",
+  "@tutorialWelcomeTip2": {
+    "description": "教程欢迎提示 2"
+  },
+  "tutorialWelcomeTip3": "自动嵌入元数据、封面图及歌词",
+  "@tutorialWelcomeTip3": {
+    "description": "教程欢迎提示 3"
+  },
+  "tutorialSearchTitle": "查找音乐",
+  "@tutorialSearchTitle": {
+    "description": "教程搜索页面标题"
+  },
+  "tutorialSearchDesc": "有两种简单的方法可以找到您想要下载的音乐。",
+  "@tutorialSearchDesc": {
+    "description": "教程搜索页面描述"
+  },
+  "tutorialSearchTip1": "直接在搜索框粘贴 Spotify 或 Deezer 的 URL",
+  "@tutorialSearchTip1": {
+    "description": "教程搜索提示 1"
+  },
+  "tutorialSearchTip2": "或直接输入歌曲名、歌手或专辑名进行搜索",
+  "@tutorialSearchTip2": {
+    "description": "教程搜索提示 2"
+  },
+  "tutorialSearchTip3": "支持单曲、专辑、歌单以及歌手主页",
+  "@tutorialSearchTip3": {
+    "description": "教程搜索提示 3"
+  },
+  "tutorialDownloadTitle": "下载音乐",
+  "@tutorialDownloadTitle": {
+    "description": "教程下载页面标题"
+  },
+  "tutorialDownloadDesc": "下载音乐简单又快捷。操作流程如下：",
+  "@tutorialDownloadDesc": {
+    "description": "教程下载页面描述"
+  },
+  "tutorialDownloadTip1": "点击曲目旁边的下载按钮即可开始下载",
+  "@tutorialDownloadTip1": {
+    "description": "教程下载提示 1"
+  },
+  "tutorialDownloadTip2": "选择您偏好的音质（FLAC、Hi-Res 或 MP3）",
+  "@tutorialDownloadTip2": {
+    "description": "教程下载提示 2"
+  },
+  "tutorialDownloadTip3": "支持一键下载整个专辑或歌单",
+  "@tutorialDownloadTip3": {
+    "description": "教程下载提示 3"
+  },
+  "tutorialLibraryTitle": "您的媒体库",
+  "@tutorialLibraryTitle": {
+    "description": "教程媒体库页面标题"
+  },
+  "tutorialLibraryDesc": "您下载的所有音乐都整理在“媒体库”标签页中。",
+  "@tutorialLibraryDesc": {
+    "description": "教程媒体库页面描述"
+  },
+  "tutorialLibraryTip1": "在“媒体库”中查看下载进度和队列",
+  "@tutorialLibraryTip1": {
+    "description": "教程媒体库提示 1"
+  },
+  "tutorialLibraryTip2": "点击任何曲目即可使用您的音乐播放器播放",
+  "@tutorialLibraryTip2": {
+    "description": "教程媒体库提示 2"
+  },
+  "tutorialLibraryTip3": "可在列表和网格视图间切换，浏览更顺手",
+  "@tutorialLibraryTip3": {
+    "description": "教程媒体库提示 3"
+  },
+  "tutorialExtensionsTitle": "扩展功能",
+  "@tutorialExtensionsTitle": {
+    "description": "教程扩展页面标题"
+  },
+  "tutorialExtensionsDesc": "使用社区扩展增强应用的功能。",
+  "@tutorialExtensionsDesc": {
+    "description": "教程扩展页面描述"
+  },
+  "tutorialExtensionsTip1": "在“商店”标签页发现好用的扩展",
+  "@tutorialExtensionsTip1": {
+    "description": "教程扩展提示 1"
+  },
+  "tutorialExtensionsTip2": "添加新的下载渠道或搜索来源",
+  "@tutorialExtensionsTip2": {
+    "description": "教程扩展提示 2"
+  },
+  "tutorialExtensionsTip3": "获取歌词、增强元数据及更多功能",
+  "@tutorialExtensionsTip3": {
+    "description": "教程扩展提示 3"
+  },
+  "tutorialSettingsTitle": "个性化体验",
+  "@tutorialSettingsTitle": {
+    "description": "教程设置页面标题"
+  },
+  "tutorialSettingsDesc": "在设置中根据您的偏好进行个性化调整。",
+  "@tutorialSettingsDesc": {
+    "description": "教程设置页面描述"
+  },
+  "tutorialSettingsTip1": "更改下载位置和文件夹整理方式",
+  "@tutorialSettingsTip1": {
+    "description": "教程设置提示 1"
+  },
+  "tutorialSettingsTip2": "设置默认的音频音质和格式偏好",
+  "@tutorialSettingsTip2": {
+    "description": "教程设置提示 2"
+  },
+  "tutorialSettingsTip3": "自定义应用主题和外观",
+  "@tutorialSettingsTip3": {
+    "description": "教程设置提示 3"
+  },
+  "tutorialReadyMessage": "一切准备就绪！现在就开始下载您喜欢的音乐吧。",
+  "@tutorialReadyMessage": {
+    "description": "教程完成消息"
+  },
+  "tutorialExample": "示例",
+  "@tutorialExample": {
+    "description": "教程中的示例标签"
+  },
+  "libraryForceFullScan": "强制完整扫描",
+  "@libraryForceFullScan": {
+    "description": "强制完整重新扫描媒体库的按钮"
+  },
+  "libraryForceFullScanSubtitle": "扫描所有文件，忽略缓存",
+  "@libraryForceFullScanSubtitle": {
+    "description": "强制完整扫描按钮的副标题"
+  },
+  "cleanupOrphanedDownloads": "清理孤立下载记录",
+  "@cleanupOrphanedDownloads": {
+    "description": "删除已删除文件的历史记录按钮"
+  },
+  "cleanupOrphanedDownloadsSubtitle": "移除文件已不存在的历史记录",
+  "@cleanupOrphanedDownloadsSubtitle": {
+    "description": "孤立清理按钮的副标题"
+  },
+  "cleanupOrphanedDownloadsResult": "已从历史记录中移除 {count} 条孤立条目",
+  "@cleanupOrphanedDownloadsResult": {
+    "description": "孤立清理后的提示",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cleanupOrphanedDownloadsNone": "未发现孤立条目",
+  "@cleanupOrphanedDownloadsNone": {
+    "description": "未发现孤立条目时的提示"
+  },
+  "cacheTitle": "存储与缓存",
+  "@cacheTitle": {
+    "description": "缓存管理页面标题"
+  },
+  "cacheSummaryTitle": "缓存总览",
+  "@cacheSummaryTitle": {
+    "description": "缓存摘要卡片的标题"
+  },
+  "cacheSummarySubtitle": "清理缓存不会删除已下载的音乐文件。",
+  "@cacheSummarySubtitle": {
+    "description": "缓存摘要卡片的辅助文字"
+  },
+  "cacheEstimatedTotal": "预计缓存占用：{size}",
+  "@cacheEstimatedTotal": {
+    "description": "摘要中显示的缓存总大小",
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "cacheSectionStorage": "缓存数据",
+  "@cacheSectionStorage": {
+    "description": "缓存条目的章节标题"
+  },
+  "cacheSectionMaintenance": "维护操作",
+  "@cacheSectionMaintenance": {
+    "description": "清理操作的章节标题"
+  },
+  "cacheAppDirectory": "应用缓存目录",
+  "@cacheAppDirectory": {
+    "description": "应用缓存目录项标题"
+  },
+  "cacheAppDirectoryDesc": "HTTP 响应、WebView 数据及其他临时应用数据。",
+  "@cacheAppDirectoryDesc": {
+    "description": "应用缓存目录内容的描述"
+  },
+  "cacheTempDirectory": "临时目录",
+  "@cacheTempDirectory": {
+    "description": "临时文件目录项标题"
+  },
+  "cacheTempDirectoryDesc": "来自下载和音频转换的临时文件。",
+  "@cacheTempDirectoryDesc": {
+    "description": "临时文件目录内容的描述"
+  },
+  "cacheCoverImage": "封面图缓存",
+  "@cacheCoverImage": {
+    "description": "持久封面图缓存项标题"
+  },
+  "cacheCoverImageDesc": "已下载的专辑和曲目封面。查看时将重新下载。",
+  "@cacheCoverImageDesc": {
+    "description": "封面图缓存内容的描述"
+  },
+  "cacheLibraryCover": "媒体库封面缓存",
+  "@cacheLibraryCover": {
+    "description": "本地媒体库封面图缓存项标题"
+  },
+  "cacheLibraryCoverDesc": "从本地音乐文件中提取的封面。下次扫描时将重新提取。",
+  "@cacheLibraryCoverDesc": {
+    "description": "媒体库封面缓存内容的描述"
+  },
+  "cacheExploreFeed": "发现页缓存",
+  "@cacheExploreFeed": {
+    "description": "发现首页信息流缓存项标题"
+  },
+  "cacheExploreFeedDesc": "“发现”标签页内容（新曲、热门）。下次访问时将刷新。",
+  "@cacheExploreFeedDesc": {
+    "description": "发现页缓存内容的描述"
+  },
+  "cacheTrackLookup": "曲目查询缓存",
+  "@cacheTrackLookup": {
+    "description": "曲目 ID 查询缓存项标题"
+  },
+  "cacheTrackLookupDesc": "Spotify/Deezer 曲目 ID 查询结果。清理可能会导致后续搜索变慢。",
+  "@cacheTrackLookupDesc": {
+    "description": "曲目查询缓存内容的描述"
+  },
+  "cacheCleanupUnusedDesc": "移除已删除文件对应的孤立下载历史和媒体库记录。",
+  "@cacheCleanupUnusedDesc": {
+    "description": "清理无用数据操作的描述"
+  },
+  "cacheNoData": "无缓存数据",
+  "@cacheNoData": {
+    "description": "缓存类别无数据时的标签"
+  },
+  "cacheSizeWithFiles": "{size}，共 {count} 个文件",
+  "@cacheSizeWithFiles": {
+    "description": "缓存大小和文件计数",
+    "placeholders": {
+      "size": {
+        "type": "String"
+      },
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cacheSizeOnly": "{size}",
+  "@cacheSizeOnly": {
+    "description": "仅显示缓存大小",
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "cacheEntries": "{count} 条记录",
+  "@cacheEntries": {
+    "description": "曲目缓存记录计数",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cacheClearSuccess": "已清理：{target}",
+  "@cacheClearSuccess": {
+    "description": "清理选定缓存后的提示",
+    "placeholders": {
+      "target": {
+        "type": "String"
+      }
+    }
+  },
+  "cacheClearConfirmTitle": "确定清理缓存？",
+  "@cacheClearConfirmTitle": {
+    "description": "清理单个缓存类别的对话框标题"
+  },
+  "cacheClearConfirmMessage": "这将清理 {target} 的缓存数据。已下载的音乐文件不会被删除。",
+  "@cacheClearConfirmMessage": {
+    "description": "清理选定缓存前的对话框消息",
+    "placeholders": {
+      "target": {
+        "type": "String"
+      }
+    }
+  },
+  "cacheClearAllConfirmTitle": "确定清理所有缓存？",
+  "@cacheClearAllConfirmTitle": {
+    "description": "清理所有缓存前的对话框标题"
+  },
+  "cacheClearAllConfirmMessage": "这将清理此页面上的所有缓存类别。已下载的音乐文件不会被删除。",
+  "@cacheClearAllConfirmMessage": {
+    "description": "清理所有缓存前的对话框消息"
+  },
+  "cacheClearAll": "清理所有缓存",
+  "@cacheClearAll": {
+    "description": "清理所有缓存的按钮标签"
+  },
+  "cacheCleanupUnused": "清理无用数据",
+  "@cacheCleanupUnused": {
+    "description": "清理无用条目的操作标题"
+  },
+  "cacheCleanupUnusedSubtitle": "移除孤立的下载历史和失效的媒体库记录",
+  "@cacheCleanupUnusedSubtitle": {
+    "description": "清理无用数据操作的副标题"
+  },
+  "cacheCleanupResult": "清理完成：移除 {downloadCount} 条孤立下载，{libraryCount} 条失效库记录",
+  "@cacheCleanupResult": {
+    "description": "清理无用数据后的提示",
+    "placeholders": {
+      "downloadCount": {
+        "type": "int"
+      },
+      "libraryCount": {
+        "type": "int"
+      }
+    }
+  },
+  "cacheRefreshStats": "刷新统计",
+  "@cacheRefreshStats": {
+    "description": "刷新缓存统计信息的按钮标签"
+  },
+  "trackSaveCoverArt": "保存封面图",
+  "@trackSaveCoverArt": {
+    "description": "菜单操作 - 将专辑封面存为文件"
+  },
+  "trackSaveCoverArtSubtitle": "将专辑封面保存为 .jpg 文件",
+  "@trackSaveCoverArtSubtitle": {
+    "description": "保存封面操作的副标题"
+  },
+  "trackSaveLyrics": "保存歌词 (.lrc)",
+  "@trackSaveLyrics": {
+    "description": "菜单操作 - 将歌词存为 .lrc 文件"
+  },
+  "trackSaveLyricsSubtitle": "获取歌词并存为 .lrc 文件",
+  "@trackSaveLyricsSubtitle": {
+    "description": "保存歌词操作的副标题"
+  },
+  "trackSaveLyricsProgress": "正在保存歌词...",
+  "@trackSaveLyricsProgress": {
+    "description": "正在保存歌词时的提示"
+  },
+  "trackReEnrich": "重新完善元数据",
+  "@trackReEnrich": {
+    "description": "菜单操作 - 重新将元数据嵌入音频文件"
+  },
+  "trackReEnrichSubtitle": "无需重新下载，直接重新嵌入信息",
+  "@trackReEnrichSubtitle": {
+    "description": "重新完善元数据操作的副标题"
+  },
+  "trackReEnrichOnlineSubtitle": "联网搜索元数据并嵌入文件",
+  "@trackReEnrichOnlineSubtitle": {
+    "description": "本地项目重新完善元数据操作的副标题"
+  },
+  "trackEditMetadata": "编辑元数据",
+  "@trackEditMetadata": {
+    "description": "菜单操作 - 编辑嵌入的元数据"
+  },
+  "trackCoverSaved": "封面图已保存至 {fileName}",
+  "@trackCoverSaved": {
+    "description": "封面图保存成功后的提示",
+    "placeholders": {
+      "fileName": {
+        "type": "String"
+      }
+    }
+  },
+  "trackCoverNoSource": "无可用的封面图来源",
+  "@trackCoverNoSource": {
+    "description": "无封面图 URL 或嵌入封面时的提示"
+  },
+  "trackLyricsSaved": "歌词已保存至 {fileName}",
+  "@trackLyricsSaved": {
+    "description": "歌词保存成功后的提示",
+    "placeholders": {
+      "fileName": {
+        "type": "String"
+      }
+    }
+  },
+  "trackReEnrichProgress": "正在重新完善元数据...",
+  "@trackReEnrichProgress": {
+    "description": "正在完善元数据时的提示"
+  },
+  "trackReEnrichSearching": "正在联网搜索元数据...",
+  "@trackReEnrichSearching": {
+    "description": "为本地项目联网搜索元数据时的提示"
+  },
+  "trackReEnrichSuccess": "元数据已成功重新完善",
+  "@trackReEnrichSuccess": {
+    "description": "完善元数据成功后的提示"
+  },
+  "trackReEnrichFfmpegFailed": "FFmpeg 嵌入元数据失败",
+  "@trackReEnrichFfmpegFailed": {
+    "description": "MP3/Opus 的 FFmpeg 嵌入失败时的提示"
+  },
+  "trackSaveFailed": "操作失败：{error}",
+  "@trackSaveFailed": {
+    "description": "保存操作失败时的提示",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "trackConvertFormat": "转换格式",
+  "@trackConvertFormat": {
+    "description": "菜单项 - 转换音频格式"
+  },
+  "trackConvertFormatSubtitle": "转换为 MP3 或 Opus 格式",
+  "@trackConvertFormatSubtitle": {
+    "description": "转换格式菜单项的副标题"
+  },
+  "trackConvertTitle": "音频转换",
+  "@trackConvertTitle": {
+    "description": "转换面板的标题"
+  },
+  "trackConvertTargetFormat": "目标格式",
+  "@trackConvertTargetFormat": {
+    "description": "格式选择的标签"
+  },
+  "trackConvertBitrate": "比特率",
+  "@trackConvertBitrate": {
+    "description": "比特率选择的标签"
+  },
+  "trackConvertConfirmTitle": "确认转换",
+  "@trackConvertConfirmTitle": {
+    "description": "确认对话框标题"
+  },
+  "trackConvertConfirmMessage": "确定要以 {bitrate} 将文件从 {sourceFormat} 转换为 {targetFormat} 吗？\n\n转换后原始文件将被删除。",
+  "@trackConvertConfirmMessage": {
+    "description": "确认对话框消息",
+    "placeholders": {
+      "sourceFormat": {
+        "type": "String"
+      },
+      "targetFormat": {
+        "type": "String"
+      },
+      "bitrate": {
+        "type": "String"
+      }
+    }
+  },
+  "trackConvertConverting": "正在转换音频...",
+  "@trackConvertConverting": {
+    "description": "转换中的提示"
+  },
+  "trackConvertSuccess": "已成功转换为 {format}",
+  "@trackConvertSuccess": {
+    "description": "转换成功后的提示",
+    "placeholders": {
+      "format": {
+        "type": "String"
+      }
+    }
+  },
+  "trackConvertFailed": "转换失败",
+  "@trackConvertFailed": {
+    "description": "转换失败时的提示"
+  }
+  "setupModeSelectionTitle": "选择您的模式",
+  "setupModeSelectionDescription": "您想如何使用 SpotiFLAC？您可以稍后在设置中随时更改。",
+  "setupModeDownloaderTitle": "下载器",
+  "setupModeDownloaderFeature1": "以无损 FLAC 品质下载曲目",
+  "setupModeDownloaderFeature2": "将音乐保存到设备以供离线收听",
+  "setupModeDownloaderFeature3": "管理您的本地音乐库",
+  "setupModeStreamingTitle": "流媒体",
+  "setupModeStreamingFeature1": "无需下载即可即时播放曲目",
+  "setupModeStreamingFeature2": "Smart Queue 自动为您发现新音乐",
+  "setupModeStreamingFeature3": "通过播放控件随时点播任意曲目",
+  "setupModeChangeableLater": "您可以随时在设置中切换模式。",
+  "settingsSmartQueueTitle": "Smart Queue",
+  "settingsSmartQueueSubtitle": "自动发现并将相似曲目添加到您的队列中"
+}
